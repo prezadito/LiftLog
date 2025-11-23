@@ -40,53 +40,71 @@ backend-python/
 
 ## 🚀 Quick Start
 
-### Prerequisites
+### Option 1: Docker Compose (Recommended)
 
+The easiest way to get started:
+
+```bash
+# 1. Set your OpenAI API key
+export OPENAI_API_KEY=sk-your-key-here
+
+# 2. Start all services
+docker-compose up -d
+
+# 3. View logs
+docker-compose logs -f api
+
+# 4. Stop services
+docker-compose down
+```
+
+**Services:**
+- API: http://localhost:8000
+- API Docs: http://localhost:8000/docs
+- pgAdmin: http://localhost:5050 (admin@liftlog.com / admin)
+
+### Option 2: Local Development
+
+**Prerequisites:**
 - Python 3.12+
 - PostgreSQL 14+
 - [uv](https://github.com/astral-sh/uv) package manager
 
-### Installation
+**Installation:**
 
-1. **Clone the repository:**
-
-```bash
-cd backend-python
-```
-
-2. **Install uv (if not already installed):**
+1. **Install uv:**
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-3. **Install dependencies:**
+2. **Install dependencies:**
 
 ```bash
 uv sync
 ```
 
-4. **Set up environment variables:**
+3. **Set up environment:**
 
 ```bash
-cp .env.example .env
-# Edit .env with your configuration
+cp .env.development .env
+# Edit .env with your configuration (especially OPENAI_API_KEY)
 ```
 
-5. **Create PostgreSQL databases:**
+4. **Start PostgreSQL and create databases:**
 
 ```sql
 CREATE DATABASE liftlog_user_data;
 CREATE DATABASE liftlog_rate_limit;
 ```
 
-6. **Run database migrations:**
+5. **Run migrations:**
 
 ```bash
 uv run alembic upgrade head
 ```
 
-7. **Start the development server:**
+6. **Start development server:**
 
 ```bash
 uv run uvicorn app.main:app --reload
@@ -96,13 +114,17 @@ The API will be available at `http://localhost:8000`
 
 ## 📚 API Documentation
 
+### Interactive Documentation
+
 Once the server is running, visit:
 
-- **Interactive docs (Swagger UI):** http://localhost:8000/docs
+- **Swagger UI:** http://localhost:8000/docs
 - **ReDoc:** http://localhost:8000/redoc
-- **OpenAPI schema:** http://localhost:8000/openapi.json
+- **OpenAPI Schema:** http://localhost:8000/openapi.json
 
 ### API Endpoints (v2)
+
+**Base URL:** `http://localhost:8000/v2`
 
 #### User Management
 
@@ -181,42 +203,36 @@ uv run pytest -v
 
 ## 🐳 Docker Deployment
 
-### Build and run with Docker:
+### Development with Docker Compose
 
 ```bash
-# Build image
-docker build -t liftlog-api:v2 .
+# Start all services (PostgreSQL + API + pgAdmin)
+docker-compose up -d
 
-# Run container
-docker run -p 8000:8000 --env-file .env liftlog-api:v2
+# View logs
+docker-compose logs -f api
+
+# Rebuild after code changes
+docker-compose up -d --build
+
+# Stop services
+docker-compose down
+
+# Remove volumes (reset database)
+docker-compose down -v
 ```
 
-### Docker Compose (recommended):
+### Production Docker Build
 
-```yaml
-version: '3.8'
+```bash
+# Build production image
+docker build -t liftlog-api:v2 --target base .
 
-services:
-  api:
-    build: .
-    ports:
-      - "8000:8000"
-    environment:
-      - DATABASE_URL=postgresql+asyncpg://user:pass@db:5432/liftlog_user_data
-      - RATE_LIMIT_DATABASE_URL=postgresql+asyncpg://user:pass@db:5432/liftlog_rate_limit
-    depends_on:
-      - db
-
-  db:
-    image: postgres:16-alpine
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-volumes:
-  postgres_data:
+# Run with environment variables
+docker run -p 8000:8000 \
+  -e DATABASE_URL=postgresql+asyncpg://... \
+  -e OPENAI_API_KEY=sk-... \
+  liftlog-api:v2
 ```
 
 ## 🗄️ Database Migrations

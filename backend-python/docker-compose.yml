@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:16-alpine
+    container_name: liftlog-db
+    environment:
+      POSTGRES_USER: liftlog
+      POSTGRES_PASSWORD: liftlog_dev_password
+      POSTGRES_MULTIPLE_DATABASES: liftlog_user_data,liftlog_rate_limit
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/create-multiple-databases.sh:/docker-entrypoint-initdb.d/create-multiple-databases.sh
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U liftlog"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # LiftLog API
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: liftlog-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://liftlog:liftlog_dev_password@db:5432/liftlog_user_data
+      - RATE_LIMIT_DATABASE_URL=postgresql+asyncpg://liftlog:liftlog_dev_password@db:5432/liftlog_rate_limit
+      - ENVIRONMENT=development
+      - DEBUG=true
+      - TEST_MODE=false
+      - CORS_ORIGINS=*
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=gpt-4o
+      - LOG_LEVEL=INFO
+      - RATE_LIMIT_WEB_PER_DAY=100
+      - RATE_LIMIT_MOBILE_PER_DAY=20
+      - CLEANUP_INTERVAL_MINUTES=60
+      - WEB_AUTH_SECRET_KEY=dev-secret-key-change-in-production
+    volumes:
+      - ./app:/app/app
+      - ./tests:/app/tests
+      - ./alembic:/app/alembic
+      - ./logs:/app/logs
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "
+        uv run alembic upgrade head &&
+        uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+      "
+
+  # pgAdmin (optional, for database management)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: liftlog-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@liftlog.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
+    driver: local

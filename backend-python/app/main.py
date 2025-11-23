@@ -6,9 +6,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import SQLModel
 
 from app.core.config import settings
+from app.core.logging_config import setup_logging
 from app.db.session import user_data_engine, rate_limit_engine
 from app.api.routes import users, events, follow, inbox, shared, ai_workout, health
 from app.api.websockets import ai_chat
+from app.services.scheduler import get_scheduler
+
+# Setup logging
+setup_logging()
 
 
 @asynccontextmanager
@@ -16,7 +21,7 @@ async def lifespan(app: FastAPI):
     """
     Application lifespan manager for startup and shutdown events.
 
-    Handles database initialization and cleanup.
+    Handles database initialization, background tasks, and cleanup.
     """
     # Startup: Create database tables
     async with user_data_engine.begin() as conn:
@@ -25,9 +30,14 @@ async def lifespan(app: FastAPI):
     async with rate_limit_engine.begin() as conn:
         await conn.run_sync(SQLModel.metadata.create_all)
 
+    # Start background scheduler
+    scheduler = get_scheduler()
+    scheduler.start()
+
     yield
 
-    # Shutdown: Close database connections
+    # Shutdown: Stop scheduler and close database connections
+    scheduler.shutdown()
     await user_data_engine.dispose()
     await rate_limit_engine.dispose()
 

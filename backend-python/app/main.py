@@ -7,7 +7,8 @@ from sqlmodel import SQLModel
 
 from app.core.config import settings
 from app.db.session import user_data_engine, rate_limit_engine
-from app.api.routes import users, events, follow, inbox, shared, health
+from app.api.routes import users, events, follow, inbox, shared, ai_workout, health
+from app.api.websockets import ai_chat
 
 
 @asynccontextmanager
@@ -54,7 +55,11 @@ app.include_router(events.router, prefix="/v2")
 app.include_router(follow.router, prefix="/v2")
 app.include_router(inbox.router, prefix="/v2")
 app.include_router(shared.router, prefix="/v2")
+app.include_router(ai_workout.router, prefix="/v2")
 app.include_router(health.router)
+
+# WebSocket endpoints
+app.websocket("/ai-chat")(ai_chat.ai_chat_websocket)
 
 
 @app.get("/")

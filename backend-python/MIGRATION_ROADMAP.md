@@ -1,8 +1,39 @@
 # LiftLog C# → Python/FastAPI Migration Roadmap
 
-## 🎉 MIGRATION COMPLETE! 🎉
+## 🚧 BACKEND COMPLETE - DEPLOYMENT IN PROGRESS 🚧
 
-All 5 core phases have been successfully completed. The Python/FastAPI backend now has complete feature parity with the C# backend, plus modern async patterns, better performance, and improved developer experience.
+**Core Development Status:** ✅ 100% Complete (Phases 1-5)
+**Deployment Status:** ⏳ In Progress (Phase 6)
+**Overall Migration:** 🟡 83% Complete
+
+The Python/FastAPI backend is **feature-complete** with full parity to the C# backend. All core development phases (1-5) are done. The remaining work focuses on **production deployment** and **mobile client migration**.
+
+---
+
+## 📊 Overall Progress Summary
+
+| Phase | Status | Progress | Est. Time Remaining |
+|-------|--------|----------|---------------------|
+| **Phases 1-5: Backend Development** | ✅ Complete | 100% | 0 days |
+| **Phase 6: Deployment & Migration** | ⏳ In Progress | 0% | 10-12 weeks |
+| **Overall Migration** | 🟡 In Progress | **83%** | 10-12 weeks |
+
+**What's Done:**
+- ✅ All API endpoints implemented and tested
+- ✅ Authentication & security features
+- ✅ AI integration with GPT-4o
+- ✅ Background services & cleanup tasks
+- ✅ Local development environment (Docker Compose)
+- ✅ Comprehensive test suite
+- ✅ Documentation complete
+
+**What's Remaining:**
+- ❌ CI/CD pipeline setup
+- ❌ Cloud infrastructure (Google Cloud Run)
+- ❌ Production deployment
+- ❌ Monitoring & observability
+- ❌ Mobile client migration
+- ❌ C# backend decommissioning
 
 ---
 
@@ -323,148 +354,377 @@ All 5 core phases have been successfully completed. The Python/FastAPI backend n
 
 ---
 
-## 🎯 Optional: Phase 6 - Production Deployment
+## 🚀 Phase 6: Production Deployment & Migration (IN PROGRESS)
 
-This phase is OPTIONAL and depends on your deployment target:
+### Current Status: Backend Complete, Deployment Pending
 
-### Cloud Deployment Options
-
-**Option A: Google Cloud Run**
-- [ ] Containerize with production Dockerfile
-- [ ] Cloud SQL PostgreSQL setup
-- [ ] Secret Manager for credentials
-- [ ] Load balancer with SSL
-- [ ] CI/CD with Cloud Build
-
-**Option B: AWS**
-- [ ] ECS/Fargate deployment
-- [ ] RDS PostgreSQL
-- [ ] Secrets Manager
-- [ ] Application Load Balancer
-- [ ] CodePipeline CI/CD
-
-**Option C: Kubernetes**
-- [ ] Kubernetes manifests
-- [ ] Helm charts
-- [ ] Horizontal pod autoscaling
-- [ ] Ingress configuration
-- [ ] CI/CD with ArgoCD
-
-### CI/CD Pipeline
-- [ ] GitHub Actions workflow
-- [ ] Automated testing
-- [ ] Docker image building
-- [ ] Deployment automation
-- [ ] Rollback procedures
-
-### Monitoring & Observability
-- [ ] Prometheus metrics
-- [ ] Grafana dashboards
-- [ ] Sentry error tracking
-- [ ] CloudWatch/Stackdriver logs
-- [ ] Uptime monitoring
+The Python/FastAPI backend is **feature-complete** and **production-ready**. This phase focuses on deploying it to production and migrating mobile clients.
 
 ---
 
-## 🎯 Next Steps (Choose Your Path)
+## 6.1 CI/CD Pipeline Setup (PENDING)
 
-### Path 1: Start Using the API
-The backend is **production-ready** as-is. You can:
-1. Run `docker-compose up` for local development
-2. Build Docker image for deployment
-3. Deploy to any cloud provider
-4. Start migrating mobile clients to `/v2` endpoints
+### GitHub Actions Workflows
+- [ ] **Python Backend CI Workflow**
+  - Automated testing on every push/PR
+  - Code quality checks (ruff, mypy)
+  - Test coverage reporting (>80% target)
+  - Database migration validation
 
-### Path 2: Production Hardening
-If you need enterprise-grade deployment:
-1. Set up CI/CD pipeline
-2. Configure monitoring/alerting
-3. Implement backup strategy
-4. Set up staging environment
-5. Load testing and optimization
+- [ ] **Python Backend Build Workflow**
+  - Docker image building
+  - Multi-arch support (amd64, arm64)
+  - Image scanning for vulnerabilities
+  - Push to container registry (GCR/Docker Hub)
 
-### Path 3: Feature Enhancements
-Extend beyond C# parity:
-1. Add caching layer (Redis)
-2. Implement GraphQL API
-3. Add real-time notifications
-4. Enhance AI features
-5. Add analytics/metrics
+- [ ] **Python Backend Deploy Workflow**
+  - Deploy to staging environment
+  - Deploy to production (manual approval)
+  - Automated smoke tests post-deployment
+  - Rollback procedures
+
+**Files to Create:**
+```
+.github/workflows/
+├── python-backend-ci.yml      # Test + quality checks
+├── python-backend-build.yml   # Docker image building
+└── python-backend-deploy.yml  # Deployment automation
+```
+
+**Estimated Time:** 2-3 days
 
 ---
 
-## 🎯 Current Status: READY FOR PRODUCTION
+## 6.2 Cloud Infrastructure (PENDING)
 
-The Python/FastAPI backend is **complete** and ready for deployment!
+### Google Cloud Run Deployment (Recommended)
 
-### Immediate Next Steps
+**Infrastructure Components:**
+- [ ] **Cloud SQL PostgreSQL**
+  - Create two databases: `liftlog_user_data`, `liftlog_rate_limit`
+  - Enable automatic backups (daily, 7-day retention)
+  - Configure private IP for security
+  - Set up connection pooling
 
-1. **Create purchase verification service interface**
-   - Define abstract base class
-   - Common verification response model
-   - Error handling patterns
+- [ ] **Cloud Run Service**
+  - Deploy containerized FastAPI app
+  - Configure auto-scaling (0-10 instances)
+  - Set CPU/memory limits (1 CPU, 2GB RAM)
+  - Enable HTTPS with automatic SSL
 
-2. **Implement Google Play verification**
-   - Google API client setup
-   - Receipt validation logic
-   - Token caching
+- [ ] **Secret Manager**
+  - Store OpenAI API key
+  - Store database credentials
+  - Store purchase verification secrets (Apple, Google, RevenueCat)
+  - Store web auth signing key
 
-3. **Implement Apple App Store verification**
-   - Apple receipt validation
-   - Shared secret configuration
-   - Sandbox vs production handling
+- [ ] **Cloud Load Balancer**
+  - SSL/TLS termination
+  - HTTPS redirect
+  - Health check configuration
+  - Custom domain setup (api.liftlog.com)
 
-4. **Implement RevenueCat verification**
-   - HTTP client setup
-   - API key authentication
-   - Subscription validation
+- [ ] **Cloud Armor (Optional)**
+  - DDoS protection
+  - Rate limiting at edge
+  - Geographic restrictions if needed
 
-5. **Create FastAPI authentication dependency**
-   - Extract purchase token from Authorization header
-   - Validate with appropriate service
-   - Create user claims/context
-
-6. **Implement rate limiting service**
-   - SHA256 token hashing
-   - Sliding window algorithm
-   - Per-store limit enforcement
-
-### Files to Create Next
-
+**Configuration Files to Create:**
 ```
-app/services/purchase_verification/
-├── __init__.py
-├── base.py                    # Abstract base class
-├── google_play.py             # Google Play verification
-├── apple.py                   # Apple App Store verification
-├── revenuecat.py              # RevenueCat verification
-└── web_auth.py                # Web authentication
-
-app/auth/
-├── purchase_token.py          # FastAPI dependency
-└── password.py                # Password auth helpers
-
-app/services/
-└── rate_limit.py              # Rate limiting service
-
-tests/test_services/
-├── test_purchase_verification.py
-└── test_rate_limit.py
+infrastructure/
+├── terraform/                  # Infrastructure as Code
+│   ├── main.tf                # Main configuration
+│   ├── cloudsql.tf            # Database setup
+│   ├── cloudrun.tf            # App deployment
+│   └── secrets.tf             # Secret management
+└── scripts/
+    ├── deploy.sh              # Deployment script
+    └── rollback.sh            # Rollback script
 ```
+
+**Estimated Time:** 3-4 days
+
+---
+
+## 6.3 Environment Configuration (PENDING)
+
+### Multi-Environment Setup
+- [ ] **Development Environment**
+  - Docker Compose setup (already complete ✅)
+  - Local PostgreSQL databases
+  - Hot reload enabled
+
+- [ ] **Staging Environment**
+  - Cloud Run staging instance
+  - Separate Cloud SQL database
+  - Production-like configuration
+  - Test data populated
+
+- [ ] **Production Environment**
+  - Cloud Run production instance
+  - Production Cloud SQL database
+  - All security features enabled
+  - Real purchase verification
+
+**Environment Variables per Environment:**
+```env
+# Development
+DATABASE_URL=postgresql+asyncpg://localhost/liftlog_user_data
+OPENAI_API_KEY=sk-test-key
+TEST_MODE=true
+
+# Staging
+DATABASE_URL=<Cloud SQL staging connection>
+OPENAI_API_KEY=<staging key>
+TEST_MODE=false
+
+# Production
+DATABASE_URL=<Cloud SQL production connection>
+OPENAI_API_KEY=<production key>
+TEST_MODE=false
+```
+
+**Estimated Time:** 1-2 days
+
+---
+
+## 6.4 Monitoring & Observability (PENDING)
+
+### Application Monitoring
+- [ ] **Cloud Logging**
+  - Structured JSON logs
+  - Log levels properly configured
+  - Error stack traces captured
+  - Query alerts for errors
+
+- [ ] **Cloud Monitoring (Metrics)**
+  - Request latency (p50, p95, p99)
+  - Error rates (4xx, 5xx)
+  - Database connection pool usage
+  - API endpoint usage
+
+- [ ] **Uptime Checks**
+  - `/health` endpoint monitoring
+  - Alert on downtime
+  - Multi-region checks
+
+- [ ] **Error Tracking (Optional)**
+  - Sentry integration for error tracking
+  - Automatic error grouping
+  - Email/Slack notifications
+
+**Alerting Rules:**
+- Error rate > 1% for 5 minutes
+- Response time p95 > 500ms for 10 minutes
+- Health check fails 3 times consecutively
+- Database connection pool exhaustion
+
+**Estimated Time:** 2-3 days
+
+---
+
+## 6.5 Database Migration Strategy (PENDING)
+
+### Approach: Shared Database
+
+The Python and C# backends can **share the same PostgreSQL database** since they use identical schemas.
+
+- [ ] **Pre-Migration Validation**
+  - Verify schema compatibility between C# and Python
+  - Test database connections from both backends
+  - Validate password hashing compatibility
+  - Ensure encryption/decryption works identically
+
+- [ ] **Migration Plan**
+  - No data migration needed (shared database)
+  - Deploy Python backend to production
+  - Both backends run in parallel initially
+  - Gradually route traffic to Python backend
+
+- [ ] **Rollback Plan**
+  - Keep C# backend running during migration
+  - Route all traffic back to C# if issues occur
+  - No data loss risk (shared database)
+
+**Estimated Time:** 1 day
+
+---
+
+## 6.6 Mobile Client Migration (CRITICAL)
+
+### iOS & Android Client Updates
+
+- [ ] **Update API Base URLs**
+  - Change from `/user/create` to `/v2/user/create`
+  - Keep `/ai-chat` and `/health` without `/v2` prefix
+  - See `MOBILE_MIGRATION_GUIDE.md` for details
+
+- [ ] **Feature Flag Implementation**
+  - Add `useV2API` feature flag
+  - Allow toggling between v1 (C#) and v2 (Python)
+  - Start with 0% rollout
+
+- [ ] **Testing**
+  - Full integration testing with v2 endpoints
+  - Verify authentication flows
+  - Test encryption/decryption
+  - Validate WebSocket chat
+  - Test AI workout generation
+
+- [ ] **Gradual Rollout Strategy**
+  - Week 1: Internal testing (0% users)
+  - Week 2: Beta users (10% rollout)
+  - Week 3: Expand to 25%
+  - Week 4: Expand to 50%
+  - Week 5: Expand to 75%
+  - Week 6: Full rollout (100%)
+
+- [ ] **Monitoring During Rollout**
+  - Track error rates per API version
+  - Monitor crash rates
+  - Measure response times
+  - User feedback collection
+
+**Estimated Time:** 4-6 weeks (gradual rollout)
+
+---
+
+## 6.7 Parallel Deployment (PENDING)
+
+### Running Both Backends Simultaneously
+
+- [ ] **Deploy Python Backend**
+  - Deploy to Cloud Run
+  - Configure `/v2` prefix for all endpoints
+  - Keep C# backend running at root paths
+
+- [ ] **Load Balancer Configuration**
+  - Route `/v2/*` → Python backend
+  - Route everything else → C# backend
+  - Both backends share database
+
+- [ ] **Monitoring Both Backends**
+  - Compare error rates
+  - Compare response times
+  - Compare resource usage
+  - Watch for issues
+
+- [ ] **Traffic Analysis**
+  - Track v1 vs v2 usage
+  - Identify issues with v2
+  - Validate feature parity
+
+**Estimated Time:** 1-2 weeks monitoring
+
+---
+
+## 6.8 C# Backend Decommissioning (FUTURE)
+
+### After 100% Migration
+
+- [ ] **Validation Period**
+  - Run Python backend at 100% for 2 weeks
+  - Zero critical issues
+  - Performance meets expectations
+  - User satisfaction maintained
+
+- [ ] **Decommission C# Backend**
+  - Stop C# Cloud Run service
+  - Remove v1 routes from load balancer
+  - Archive C# codebase
+  - Update documentation
+
+- [ ] **Cleanup**
+  - Remove unused infrastructure
+  - Update DNS records
+  - Remove feature flags from mobile apps
+  - Celebrate! 🎉
+
+**Estimated Time:** 1 week
+
+---
+
+## 📊 Phase 6 Progress Tracking
+
+| Task | Status | Progress | Priority |
+|------|--------|----------|----------|
+| CI/CD Pipeline | ❌ Not Started | 0% | High |
+| Cloud Infrastructure | ❌ Not Started | 0% | High |
+| Environment Setup | ❌ Not Started | 0% | High |
+| Monitoring | ❌ Not Started | 0% | Medium |
+| Database Migration | ❌ Not Started | 0% | Medium |
+| Mobile Client Updates | ❌ Not Started | 0% | Critical |
+| Parallel Deployment | ❌ Not Started | 0% | High |
+| C# Decommissioning | ❌ Not Started | 0% | Low |
+
+**Total Phase 6 Progress: 0%**
+
+---
+
+## 🎯 Immediate Next Steps (Prioritized)
+
+### Week 1-2: Infrastructure Setup
+1. **Create CI/CD workflows** (.github/workflows/)
+   - Start with python-backend-ci.yml for testing
+   - Add python-backend-build.yml for Docker builds
+   - Set up container registry
+
+2. **Set up Google Cloud infrastructure**
+   - Create Cloud SQL databases (staging + production)
+   - Create Cloud Run services (staging + production)
+   - Configure Secret Manager
+   - Set up load balancer
+
+3. **Deploy to staging environment**
+   - Test deployment process
+   - Validate all endpoints
+   - Run integration tests
+
+### Week 3-4: Monitoring & Testing
+4. **Configure monitoring and alerts**
+   - Set up Cloud Logging
+   - Configure Cloud Monitoring metrics
+   - Create alert policies
+   - Test alerting
+
+5. **Production deployment**
+   - Deploy Python backend to production
+   - Configure load balancer routing
+   - Verify both backends running
+
+### Week 5-10: Mobile Migration
+6. **Update mobile clients**
+   - Add v2 API support
+   - Implement feature flags
+   - Internal testing
+
+7. **Gradual rollout**
+   - 10% → 25% → 50% → 75% → 100%
+   - Monitor metrics at each stage
+   - Fix issues as they arise
+
+### Week 11-12: Completion
+8. **Decommission C# backend**
+   - Validate 100% migration
+   - Stop C# services
+   - Clean up infrastructure
 
 ---
 
 ## 🔍 Quality Checklist
 
-Before moving to next phase:
+Before production deployment:
 
-- [ ] All tests passing
+- [ ] All automated tests passing
 - [ ] Code coverage > 80%
-- [ ] Type hints on all functions
+- [ ] Security audit completed
+- [ ] Load testing performed (1000+ concurrent users)
+- [ ] Disaster recovery plan documented
+- [ ] Monitoring and alerts configured
+- [ ] Rollback procedure tested
 - [ ] Documentation updated
-- [ ] No security vulnerabilities
-- [ ] Performance benchmarks met
-- [ ] Code review completed
+- [ ] Team trained on new system
+- [ ] Support runbook created
 
 ---
 
@@ -480,3 +740,5 @@ Before moving to next phase:
 ---
 
 **Last Updated:** 2025-11-23
+**Migration Progress:** 83% (Backend Complete, Deployment Pending)
+**Next Milestone:** CI/CD Pipeline Setup (Week 1-2)

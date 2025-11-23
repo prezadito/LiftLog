@@ -1,0 +1,118 @@
+syntax = "proto3";
+
+package LiftLog.Ui.Models;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "Utils.proto";
+import "SessionHistoryDao/SessionHistoryDaoV2.proto";
+
+// Club definition with encrypted metadata
+message ClubDaoV1 {
+    LiftLog.Ui.Models.UuidDao id = 1;
+    bytes aes_key = 2;                          // Shared AES-128 encryption key for club
+    bytes encrypted_name = 3;                   // Encrypted with club AES key
+    optional bytes encrypted_description = 4;   // Encrypted with club AES key
+    bytes encryption_iv = 5;                    // IV for AES encryption
+    bool is_public = 6;                         // Public clubs are discoverable
+    google.protobuf.Timestamp created = 7;
+    optional bytes encrypted_profile_picture = 8;
+    ClubSettingsDaoV1 settings = 9;
+    LiftLog.Ui.Models.UuidDao owner_user_id = 10;
+}
+
+// Club settings and permissions
+message ClubSettingsDaoV1 {
+    bool members_can_post = 1;      // If false, only admins/owner can post
+    bool members_can_invite = 2;    // If false, only admins/owner can invite
+    uint32 max_members = 3;         // 0 = unlimited
+}
+
+// Club membership record
+message ClubMemberDaoV1 {
+    LiftLog.Ui.Models.UuidDao club_id = 1;
+    LiftLog.Ui.Models.UuidDao user_id = 2;
+    ClubRole role = 3;
+    google.protobuf.Timestamp joined = 4;
+    bytes encrypted_aes_key = 5;    // Club AES key encrypted with user's RSA public key
+}
+
+// Club member roles
+enum ClubRole {
+    CLUB_ROLE_OWNER = 0;    // Full control, can delete club
+    CLUB_ROLE_ADMIN = 1;    // Can manage members and settings
+    CLUB_ROLE_MEMBER = 2;   // Can post (if settings allow)
+    CLUB_ROLE_VIEWER = 3;   // Read-only access
+}
+
+// Club invite sent via encrypted inbox
+message ClubInviteDao {
+    LiftLog.Ui.Models.UuidDao club_id = 1;
+    bytes encrypted_club_name = 2;              // Encrypted with invitee's RSA public key
+    bytes encrypted_club_description = 3;       // Encrypted with invitee's RSA public key
+    optional bytes encrypted_profile_picture = 4;
+    bytes encrypted_aes_key = 5;                // Club AES key encrypted with invitee's RSA public key
+    ClubRole offered_role = 6;
+    LiftLog.Ui.Models.UuidDao from_user_id = 7; // Who sent the invite
+    optional google.protobuf.StringValue from_user_name = 8;
+}
+
+// Response to club invite
+message ClubInviteResponseDao {
+    LiftLog.Ui.Models.UuidDao club_id = 1;
+    oneof response_payload {
+        ClubInviteAcceptedDao accepted = 2;
+        ClubInviteRejectedDao rejected = 3;
+    }
+}
+
+message ClubInviteAcceptedDao {
+    // Acceptance confirmed - invitee now has club access
+}
+
+message ClubInviteRejectedDao {
+    // Invite declined
+}
+
+// Club feed item (encrypted and signed)
+message ClubFeedItemDaoV1 {
+    LiftLog.Ui.Models.UuidDao club_id = 1;
+    LiftLog.Ui.Models.UuidDao event_id = 2;
+    LiftLog.Ui.Models.UuidDao user_id = 3;      // Who posted this
+    google.protobuf.Timestamp timestamp = 4;
+    google.protobuf.Timestamp expiry = 5;
+    oneof payload {
+        LiftLog.Ui.Models.SessionHistoryDao.SessionDaoV2 session = 6;
+        ClubAnnouncementDaoV1 announcement = 7;
+    }
+}
+
+// Club announcement (admin/owner only)
+message ClubAnnouncementDaoV1 {
+    string announcement_text = 1;
+}
+
+// Join request for public clubs
+message ClubJoinRequestDao {
+    LiftLog.Ui.Models.UuidDao club_id = 1;
+    LiftLog.Ui.Models.UuidDao from_user_id = 2;
+    optional google.protobuf.StringValue from_user_name = 3;
+}
+
+// Response to join request
+message ClubJoinResponseDao {
+    LiftLog.Ui.Models.UuidDao club_id = 1;
+    oneof response_payload {
+        ClubJoinAcceptedDao accepted = 2;
+        ClubJoinRejectedDao rejected = 3;
+    }
+}
+
+message ClubJoinAcceptedDao {
+    bytes encrypted_aes_key = 1;    // Club AES key encrypted with requester's RSA public key
+    ClubRole assigned_role = 2;
+}
+
+message ClubJoinRejectedDao {
+    optional string reason = 1;
+}

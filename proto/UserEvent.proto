@@ -4,6 +4,7 @@ package LiftLog.Ui.Models;
 
 import "SessionHistoryDao/SessionHistoryDaoV2.proto";
 import "Utils.proto";
+import "ClubDao.proto";
 import "google/protobuf/wrappers.proto";
 
 message UserEventPayload {
@@ -28,9 +29,13 @@ message InboxMessageDao {
         FollowRequestDao follow_request = 2;
         FollowResponseDao follow_response = 3;
         UnFollowNotification unfollow_notification = 4;
+        ClubInviteDao club_invite = 5;
+        ClubInviteResponseDao club_invite_response = 6;
+        ClubJoinRequestDao club_join_request = 7;
+        ClubJoinResponseDao club_join_response = 8;
     }
     // The signature of the [message +from_user_id+ the to_user_id], signed with the private key of the from_user_id
-    bytes signature = 5;
+    bytes signature = 9;
 }
 
 message FollowRequestDao {

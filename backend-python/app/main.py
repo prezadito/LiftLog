@@ -8,7 +8,17 @@ from sqlmodel import SQLModel
 from app.core.config import settings
 from app.core.logging_config import setup_logging
 from app.db.session import user_data_engine, rate_limit_engine
-from app.api.routes import users, events, follow, inbox, shared, ai_workout, health, metrics
+from app.api.routes import (
+    users,
+    events,
+    follow,
+    inbox,
+    shared,
+    ai_workout,
+    health,
+    metrics,
+    clubs,
+)
 from app.api.websockets import ai_chat
 from app.services.scheduler import get_scheduler
 from app.middleware import MetricsMiddleware, RequestTrackingMiddleware
@@ -73,6 +83,7 @@ app.include_router(follow.router, prefix="/v2")
 app.include_router(inbox.router, prefix="/v2")
 app.include_router(shared.router, prefix="/v2")
 app.include_router(ai_workout.router, prefix="/v2")
+app.include_router(clubs.router, prefix="/v2")
 app.include_router(health.router)
 app.include_router(metrics.router)
 

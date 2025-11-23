@@ -8022,6 +8022,9 @@ export const LiftLog = $root.LiftLog = (() => {
                  * @property {Array.<LiftLog.Ui.Models.IInboxMessageDao>|null} [followRequests] FeedStateDaoV1 followRequests
                  * @property {Array.<LiftLog.Ui.Models.IFeedUserDaoV1>|null} [followers] FeedStateDaoV1 followers
                  * @property {Array.<LiftLog.Ui.Models.IUuidDao>|null} [unpublishedSessionIds] FeedStateDaoV1 unpublishedSessionIds
+                 * @property {Array.<LiftLog.Ui.Models.IClubDaoV1>|null} [clubs] FeedStateDaoV1 clubs
+                 * @property {Array.<LiftLog.Ui.Models.IClubMemberDaoV1>|null} [clubMemberships] FeedStateDaoV1 clubMemberships
+                 * @property {Array.<LiftLog.Ui.Models.IClubFeedItemDaoV1>|null} [clubFeedItems] FeedStateDaoV1 clubFeedItems
                  */
 
                 /**
@@ -8038,6 +8041,9 @@ export const LiftLog = $root.LiftLog = (() => {
                     this.followRequests = [];
                     this.followers = [];
                     this.unpublishedSessionIds = [];
+                    this.clubs = [];
+                    this.clubMemberships = [];
+                    this.clubFeedItems = [];
                     if (properties)
                         for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -8091,6 +8097,30 @@ export const LiftLog = $root.LiftLog = (() => {
                  * @instance
                  */
                 FeedStateDaoV1.prototype.unpublishedSessionIds = $util.emptyArray;
+
+                /**
+                 * FeedStateDaoV1 clubs.
+                 * @member {Array.<LiftLog.Ui.Models.IClubDaoV1>} clubs
+                 * @memberof LiftLog.Ui.Models.FeedStateDaoV1
+                 * @instance
+                 */
+                FeedStateDaoV1.prototype.clubs = $util.emptyArray;
+
+                /**
+                 * FeedStateDaoV1 clubMemberships.
+                 * @member {Array.<LiftLog.Ui.Models.IClubMemberDaoV1>} clubMemberships
+                 * @memberof LiftLog.Ui.Models.FeedStateDaoV1
+                 * @instance
+                 */
+                FeedStateDaoV1.prototype.clubMemberships = $util.emptyArray;
+
+                /**
+                 * FeedStateDaoV1 clubFeedItems.
+                 * @member {Array.<LiftLog.Ui.Models.IClubFeedItemDaoV1>} clubFeedItems
+                 * @memberof LiftLog.Ui.Models.FeedStateDaoV1
+                 * @instance
+                 */
+                FeedStateDaoV1.prototype.clubFeedItems = $util.emptyArray;
 
                 // OneOf field names bound to virtual getters and setters
                 let $oneOfFields;
@@ -8147,6 +8177,15 @@ export const LiftLog = $root.LiftLog = (() => {
                     if (message.unpublishedSessionIds != null && message.unpublishedSessionIds.length)
                         for (let i = 0; i < message.unpublishedSessionIds.length; ++i)
                             $root.LiftLog.Ui.Models.UuidDao.encode(message.unpublishedSessionIds[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    if (message.clubs != null && message.clubs.length)
+                        for (let i = 0; i < message.clubs.length; ++i)
+                            $root.LiftLog.Ui.Models.ClubDaoV1.encode(message.clubs[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                    if (message.clubMemberships != null && message.clubMemberships.length)
+                        for (let i = 0; i < message.clubMemberships.length; ++i)
+                            $root.LiftLog.Ui.Models.ClubMemberDaoV1.encode(message.clubMemberships[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                    if (message.clubFeedItems != null && message.clubFeedItems.length)
+                        for (let i = 0; i < message.clubFeedItems.length; ++i)
+                            $root.LiftLog.Ui.Models.ClubFeedItemDaoV1.encode(message.clubFeedItems[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                     return writer;
                 };
 
@@ -8215,6 +8254,24 @@ export const LiftLog = $root.LiftLog = (() => {
                                 if (!(message.unpublishedSessionIds && message.unpublishedSessionIds.length))
                                     message.unpublishedSessionIds = [];
                                 message.unpublishedSessionIds.push($root.LiftLog.Ui.Models.UuidDao.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 8: {
+                                if (!(message.clubs && message.clubs.length))
+                                    message.clubs = [];
+                                message.clubs.push($root.LiftLog.Ui.Models.ClubDaoV1.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 9: {
+                                if (!(message.clubMemberships && message.clubMemberships.length))
+                                    message.clubMemberships = [];
+                                message.clubMemberships.push($root.LiftLog.Ui.Models.ClubMemberDaoV1.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.clubFeedItems && message.clubFeedItems.length))
+                                    message.clubFeedItems = [];
+                                message.clubFeedItems.push($root.LiftLog.Ui.Models.ClubFeedItemDaoV1.decode(reader, reader.uint32()));
                                 break;
                             }
                         default:
@@ -8306,6 +8363,33 @@ export const LiftLog = $root.LiftLog = (() => {
                                 return "unpublishedSessionIds." + error;
                         }
                     }
+                    if (message.clubs != null && message.hasOwnProperty("clubs")) {
+                        if (!Array.isArray(message.clubs))
+                            return "clubs: array expected";
+                        for (let i = 0; i < message.clubs.length; ++i) {
+                            let error = $root.LiftLog.Ui.Models.ClubDaoV1.verify(message.clubs[i]);
+                            if (error)
+                                return "clubs." + error;
+                        }
+                    }
+                    if (message.clubMemberships != null && message.hasOwnProperty("clubMemberships")) {
+                        if (!Array.isArray(message.clubMemberships))
+                            return "clubMemberships: array expected";
+                        for (let i = 0; i < message.clubMemberships.length; ++i) {
+                            let error = $root.LiftLog.Ui.Models.ClubMemberDaoV1.verify(message.clubMemberships[i]);
+                            if (error)
+                                return "clubMemberships." + error;
+                        }
+                    }
+                    if (message.clubFeedItems != null && message.hasOwnProperty("clubFeedItems")) {
+                        if (!Array.isArray(message.clubFeedItems))
+                            return "clubFeedItems: array expected";
+                        for (let i = 0; i < message.clubFeedItems.length; ++i) {
+                            let error = $root.LiftLog.Ui.Models.ClubFeedItemDaoV1.verify(message.clubFeedItems[i]);
+                            if (error)
+                                return "clubFeedItems." + error;
+                        }
+                    }
                     return null;
                 };
 
@@ -8376,6 +8460,36 @@ export const LiftLog = $root.LiftLog = (() => {
                             message.unpublishedSessionIds[i] = $root.LiftLog.Ui.Models.UuidDao.fromObject(object.unpublishedSessionIds[i]);
                         }
                     }
+                    if (object.clubs) {
+                        if (!Array.isArray(object.clubs))
+                            throw TypeError(".LiftLog.Ui.Models.FeedStateDaoV1.clubs: array expected");
+                        message.clubs = [];
+                        for (let i = 0; i < object.clubs.length; ++i) {
+                            if (typeof object.clubs[i] !== "object")
+                                throw TypeError(".LiftLog.Ui.Models.FeedStateDaoV1.clubs: object expected");
+                            message.clubs[i] = $root.LiftLog.Ui.Models.ClubDaoV1.fromObject(object.clubs[i]);
+                        }
+                    }
+                    if (object.clubMemberships) {
+                        if (!Array.isArray(object.clubMemberships))
+                            throw TypeError(".LiftLog.Ui.Models.FeedStateDaoV1.clubMemberships: array expected");
+                        message.clubMemberships = [];
+                        for (let i = 0; i < object.clubMemberships.length; ++i) {
+                            if (typeof object.clubMemberships[i] !== "object")
+                                throw TypeError(".LiftLog.Ui.Models.FeedStateDaoV1.clubMemberships: object expected");
+                            message.clubMemberships[i] = $root.LiftLog.Ui.Models.ClubMemberDaoV1.fromObject(object.clubMemberships[i]);
+                        }
+                    }
+                    if (object.clubFeedItems) {
+                        if (!Array.isArray(object.clubFeedItems))
+                            throw TypeError(".LiftLog.Ui.Models.FeedStateDaoV1.clubFeedItems: array expected");
+                        message.clubFeedItems = [];
+                        for (let i = 0; i < object.clubFeedItems.length; ++i) {
+                            if (typeof object.clubFeedItems[i] !== "object")
+                                throw TypeError(".LiftLog.Ui.Models.FeedStateDaoV1.clubFeedItems: object expected");
+                            message.clubFeedItems[i] = $root.LiftLog.Ui.Models.ClubFeedItemDaoV1.fromObject(object.clubFeedItems[i]);
+                        }
+                    }
                     return message;
                 };
 
@@ -8398,6 +8512,9 @@ export const LiftLog = $root.LiftLog = (() => {
                         object.followRequests = [];
                         object.followers = [];
                         object.unpublishedSessionIds = [];
+                        object.clubs = [];
+                        object.clubMemberships = [];
+                        object.clubFeedItems = [];
                     }
                     if (message.feedItems && message.feedItems.length) {
                         object.feedItems = [];
@@ -8428,6 +8545,21 @@ export const LiftLog = $root.LiftLog = (() => {
                         object.unpublishedSessionIds = [];
                         for (let j = 0; j < message.unpublishedSessionIds.length; ++j)
                             object.unpublishedSessionIds[j] = $root.LiftLog.Ui.Models.UuidDao.toObject(message.unpublishedSessionIds[j], options);
+                    }
+                    if (message.clubs && message.clubs.length) {
+                        object.clubs = [];
+                        for (let j = 0; j < message.clubs.length; ++j)
+                            object.clubs[j] = $root.LiftLog.Ui.Models.ClubDaoV1.toObject(message.clubs[j], options);
+                    }
+                    if (message.clubMemberships && message.clubMemberships.length) {
+                        object.clubMemberships = [];
+                        for (let j = 0; j < message.clubMemberships.length; ++j)
+                            object.clubMemberships[j] = $root.LiftLog.Ui.Models.ClubMemberDaoV1.toObject(message.clubMemberships[j], options);
+                    }
+                    if (message.clubFeedItems && message.clubFeedItems.length) {
+                        object.clubFeedItems = [];
+                        for (let j = 0; j < message.clubFeedItems.length; ++j)
+                            object.clubFeedItems[j] = $root.LiftLog.Ui.Models.ClubFeedItemDaoV1.toObject(message.clubFeedItems[j], options);
                     }
                     return object;
                 };
@@ -9155,6 +9287,10 @@ export const LiftLog = $root.LiftLog = (() => {
                  * @property {LiftLog.Ui.Models.IFollowRequestDao|null} [followRequest] InboxMessageDao followRequest
                  * @property {LiftLog.Ui.Models.IFollowResponseDao|null} [followResponse] InboxMessageDao followResponse
                  * @property {LiftLog.Ui.Models.IUnFollowNotification|null} [unfollowNotification] InboxMessageDao unfollowNotification
+                 * @property {LiftLog.Ui.Models.IClubInviteDao|null} [clubInvite] InboxMessageDao clubInvite
+                 * @property {LiftLog.Ui.Models.IClubInviteResponseDao|null} [clubInviteResponse] InboxMessageDao clubInviteResponse
+                 * @property {LiftLog.Ui.Models.IClubJoinRequestDao|null} [clubJoinRequest] InboxMessageDao clubJoinRequest
+                 * @property {LiftLog.Ui.Models.IClubJoinResponseDao|null} [clubJoinResponse] InboxMessageDao clubJoinResponse
                  * @property {Uint8Array|null} [signature] InboxMessageDao signature
                  */
 
@@ -9206,6 +9342,38 @@ export const LiftLog = $root.LiftLog = (() => {
                 InboxMessageDao.prototype.unfollowNotification = null;
 
                 /**
+                 * InboxMessageDao clubInvite.
+                 * @member {LiftLog.Ui.Models.IClubInviteDao|null|undefined} clubInvite
+                 * @memberof LiftLog.Ui.Models.InboxMessageDao
+                 * @instance
+                 */
+                InboxMessageDao.prototype.clubInvite = null;
+
+                /**
+                 * InboxMessageDao clubInviteResponse.
+                 * @member {LiftLog.Ui.Models.IClubInviteResponseDao|null|undefined} clubInviteResponse
+                 * @memberof LiftLog.Ui.Models.InboxMessageDao
+                 * @instance
+                 */
+                InboxMessageDao.prototype.clubInviteResponse = null;
+
+                /**
+                 * InboxMessageDao clubJoinRequest.
+                 * @member {LiftLog.Ui.Models.IClubJoinRequestDao|null|undefined} clubJoinRequest
+                 * @memberof LiftLog.Ui.Models.InboxMessageDao
+                 * @instance
+                 */
+                InboxMessageDao.prototype.clubJoinRequest = null;
+
+                /**
+                 * InboxMessageDao clubJoinResponse.
+                 * @member {LiftLog.Ui.Models.IClubJoinResponseDao|null|undefined} clubJoinResponse
+                 * @memberof LiftLog.Ui.Models.InboxMessageDao
+                 * @instance
+                 */
+                InboxMessageDao.prototype.clubJoinResponse = null;
+
+                /**
                  * InboxMessageDao signature.
                  * @member {Uint8Array} signature
                  * @memberof LiftLog.Ui.Models.InboxMessageDao
@@ -9218,12 +9386,12 @@ export const LiftLog = $root.LiftLog = (() => {
 
                 /**
                  * InboxMessageDao messagePayload.
-                 * @member {"followRequest"|"followResponse"|"unfollowNotification"|undefined} messagePayload
+                 * @member {"followRequest"|"followResponse"|"unfollowNotification"|"clubInvite"|"clubInviteResponse"|"clubJoinRequest"|"clubJoinResponse"|undefined} messagePayload
                  * @memberof LiftLog.Ui.Models.InboxMessageDao
                  * @instance
                  */
                 Object.defineProperty(InboxMessageDao.prototype, "messagePayload", {
-                    get: $util.oneOfGetter($oneOfFields = ["followRequest", "followResponse", "unfollowNotification"]),
+                    get: $util.oneOfGetter($oneOfFields = ["followRequest", "followResponse", "unfollowNotification", "clubInvite", "clubInviteResponse", "clubJoinRequest", "clubJoinResponse"]),
                     set: $util.oneOfSetter($oneOfFields)
                 });
 
@@ -9259,8 +9427,16 @@ export const LiftLog = $root.LiftLog = (() => {
                         $root.LiftLog.Ui.Models.FollowResponseDao.encode(message.followResponse, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     if (message.unfollowNotification != null && Object.hasOwnProperty.call(message, "unfollowNotification"))
                         $root.LiftLog.Ui.Models.UnFollowNotification.encode(message.unfollowNotification, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.clubInvite != null && Object.hasOwnProperty.call(message, "clubInvite"))
+                        $root.LiftLog.Ui.Models.ClubInviteDao.encode(message.clubInvite, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.clubInviteResponse != null && Object.hasOwnProperty.call(message, "clubInviteResponse"))
+                        $root.LiftLog.Ui.Models.ClubInviteResponseDao.encode(message.clubInviteResponse, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    if (message.clubJoinRequest != null && Object.hasOwnProperty.call(message, "clubJoinRequest"))
+                        $root.LiftLog.Ui.Models.ClubJoinRequestDao.encode(message.clubJoinRequest, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                    if (message.clubJoinResponse != null && Object.hasOwnProperty.call(message, "clubJoinResponse"))
+                        $root.LiftLog.Ui.Models.ClubJoinResponseDao.encode(message.clubJoinResponse, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                     if (message.signature != null && Object.hasOwnProperty.call(message, "signature"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.signature);
+                        writer.uint32(/* id 9, wireType 2 =*/74).bytes(message.signature);
                     return writer;
                 };
 
@@ -9314,6 +9490,22 @@ export const LiftLog = $root.LiftLog = (() => {
                                 break;
                             }
                         case 5: {
+                                message.clubInvite = $root.LiftLog.Ui.Models.ClubInviteDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 6: {
+                                message.clubInviteResponse = $root.LiftLog.Ui.Models.ClubInviteResponseDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 7: {
+                                message.clubJoinRequest = $root.LiftLog.Ui.Models.ClubJoinRequestDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 8: {
+                                message.clubJoinResponse = $root.LiftLog.Ui.Models.ClubJoinResponseDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
                                 message.signature = reader.bytes();
                                 break;
                             }
@@ -9386,6 +9578,46 @@ export const LiftLog = $root.LiftLog = (() => {
                                 return "unfollowNotification." + error;
                         }
                     }
+                    if (message.clubInvite != null && message.hasOwnProperty("clubInvite")) {
+                        if (properties.messagePayload === 1)
+                            return "messagePayload: multiple values";
+                        properties.messagePayload = 1;
+                        {
+                            let error = $root.LiftLog.Ui.Models.ClubInviteDao.verify(message.clubInvite);
+                            if (error)
+                                return "clubInvite." + error;
+                        }
+                    }
+                    if (message.clubInviteResponse != null && message.hasOwnProperty("clubInviteResponse")) {
+                        if (properties.messagePayload === 1)
+                            return "messagePayload: multiple values";
+                        properties.messagePayload = 1;
+                        {
+                            let error = $root.LiftLog.Ui.Models.ClubInviteResponseDao.verify(message.clubInviteResponse);
+                            if (error)
+                                return "clubInviteResponse." + error;
+                        }
+                    }
+                    if (message.clubJoinRequest != null && message.hasOwnProperty("clubJoinRequest")) {
+                        if (properties.messagePayload === 1)
+                            return "messagePayload: multiple values";
+                        properties.messagePayload = 1;
+                        {
+                            let error = $root.LiftLog.Ui.Models.ClubJoinRequestDao.verify(message.clubJoinRequest);
+                            if (error)
+                                return "clubJoinRequest." + error;
+                        }
+                    }
+                    if (message.clubJoinResponse != null && message.hasOwnProperty("clubJoinResponse")) {
+                        if (properties.messagePayload === 1)
+                            return "messagePayload: multiple values";
+                        properties.messagePayload = 1;
+                        {
+                            let error = $root.LiftLog.Ui.Models.ClubJoinResponseDao.verify(message.clubJoinResponse);
+                            if (error)
+                                return "clubJoinResponse." + error;
+                        }
+                    }
                     if (message.signature != null && message.hasOwnProperty("signature"))
                         if (!(message.signature && typeof message.signature.length === "number" || $util.isString(message.signature)))
                             return "signature: buffer expected";
@@ -9423,6 +9655,26 @@ export const LiftLog = $root.LiftLog = (() => {
                         if (typeof object.unfollowNotification !== "object")
                             throw TypeError(".LiftLog.Ui.Models.InboxMessageDao.unfollowNotification: object expected");
                         message.unfollowNotification = $root.LiftLog.Ui.Models.UnFollowNotification.fromObject(object.unfollowNotification);
+                    }
+                    if (object.clubInvite != null) {
+                        if (typeof object.clubInvite !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.InboxMessageDao.clubInvite: object expected");
+                        message.clubInvite = $root.LiftLog.Ui.Models.ClubInviteDao.fromObject(object.clubInvite);
+                    }
+                    if (object.clubInviteResponse != null) {
+                        if (typeof object.clubInviteResponse !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.InboxMessageDao.clubInviteResponse: object expected");
+                        message.clubInviteResponse = $root.LiftLog.Ui.Models.ClubInviteResponseDao.fromObject(object.clubInviteResponse);
+                    }
+                    if (object.clubJoinRequest != null) {
+                        if (typeof object.clubJoinRequest !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.InboxMessageDao.clubJoinRequest: object expected");
+                        message.clubJoinRequest = $root.LiftLog.Ui.Models.ClubJoinRequestDao.fromObject(object.clubJoinRequest);
+                    }
+                    if (object.clubJoinResponse != null) {
+                        if (typeof object.clubJoinResponse !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.InboxMessageDao.clubJoinResponse: object expected");
+                        message.clubJoinResponse = $root.LiftLog.Ui.Models.ClubJoinResponseDao.fromObject(object.clubJoinResponse);
                     }
                     if (object.signature != null)
                         if (typeof object.signature === "string")
@@ -9471,6 +9723,26 @@ export const LiftLog = $root.LiftLog = (() => {
                         object.unfollowNotification = $root.LiftLog.Ui.Models.UnFollowNotification.toObject(message.unfollowNotification, options);
                         if (options.oneofs)
                             object.messagePayload = "unfollowNotification";
+                    }
+                    if (message.clubInvite != null && message.hasOwnProperty("clubInvite")) {
+                        object.clubInvite = $root.LiftLog.Ui.Models.ClubInviteDao.toObject(message.clubInvite, options);
+                        if (options.oneofs)
+                            object.messagePayload = "clubInvite";
+                    }
+                    if (message.clubInviteResponse != null && message.hasOwnProperty("clubInviteResponse")) {
+                        object.clubInviteResponse = $root.LiftLog.Ui.Models.ClubInviteResponseDao.toObject(message.clubInviteResponse, options);
+                        if (options.oneofs)
+                            object.messagePayload = "clubInviteResponse";
+                    }
+                    if (message.clubJoinRequest != null && message.hasOwnProperty("clubJoinRequest")) {
+                        object.clubJoinRequest = $root.LiftLog.Ui.Models.ClubJoinRequestDao.toObject(message.clubJoinRequest, options);
+                        if (options.oneofs)
+                            object.messagePayload = "clubJoinRequest";
+                    }
+                    if (message.clubJoinResponse != null && message.hasOwnProperty("clubJoinResponse")) {
+                        object.clubJoinResponse = $root.LiftLog.Ui.Models.ClubJoinResponseDao.toObject(message.clubJoinResponse, options);
+                        if (options.oneofs)
+                            object.messagePayload = "clubJoinResponse";
                     }
                     if (message.signature != null && message.hasOwnProperty("signature"))
                         object.signature = options.bytes === String ? $util.base64.encode(message.signature, 0, message.signature.length) : options.bytes === Array ? Array.prototype.slice.call(message.signature) : message.signature;
@@ -10617,6 +10889,3931 @@ export const LiftLog = $root.LiftLog = (() => {
                 };
 
                 return UnFollowNotification;
+            })();
+
+            Models.ClubDaoV1 = (function() {
+
+                /**
+                 * Properties of a ClubDaoV1.
+                 * @memberof LiftLog.Ui.Models
+                 * @interface IClubDaoV1
+                 * @property {LiftLog.Ui.Models.IUuidDao|null} [id] ClubDaoV1 id
+                 * @property {Uint8Array|null} [aesKey] ClubDaoV1 aesKey
+                 * @property {Uint8Array|null} [encryptedName] ClubDaoV1 encryptedName
+                 * @property {Uint8Array|null} [encryptedDescription] ClubDaoV1 encryptedDescription
+                 * @property {Uint8Array|null} [encryptionIv] ClubDaoV1 encryptionIv
+                 * @property {boolean|null} [isPublic] ClubDaoV1 isPublic
+                 * @property {google.protobuf.ITimestamp|null} [created] ClubDaoV1 created
+                 * @property {Uint8Array|null} [encryptedProfilePicture] ClubDaoV1 encryptedProfilePicture
+                 * @property {LiftLog.Ui.Models.IClubSettingsDaoV1|null} [settings] ClubDaoV1 settings
+                 * @property {LiftLog.Ui.Models.IUuidDao|null} [ownerUserId] ClubDaoV1 ownerUserId
+                 */
+
+                /**
+                 * Constructs a new ClubDaoV1.
+                 * @memberof LiftLog.Ui.Models
+                 * @classdesc Represents a ClubDaoV1.
+                 * @implements IClubDaoV1
+                 * @constructor
+                 * @param {LiftLog.Ui.Models.IClubDaoV1=} [properties] Properties to set
+                 */
+                function ClubDaoV1(properties) {
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * ClubDaoV1 id.
+                 * @member {LiftLog.Ui.Models.IUuidDao|null|undefined} id
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @instance
+                 */
+                ClubDaoV1.prototype.id = null;
+
+                /**
+                 * ClubDaoV1 aesKey.
+                 * @member {Uint8Array} aesKey
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @instance
+                 */
+                ClubDaoV1.prototype.aesKey = $util.newBuffer([]);
+
+                /**
+                 * ClubDaoV1 encryptedName.
+                 * @member {Uint8Array} encryptedName
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @instance
+                 */
+                ClubDaoV1.prototype.encryptedName = $util.newBuffer([]);
+
+                /**
+                 * ClubDaoV1 encryptedDescription.
+                 * @member {Uint8Array|null|undefined} encryptedDescription
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @instance
+                 */
+                ClubDaoV1.prototype.encryptedDescription = null;
+
+                /**
+                 * ClubDaoV1 encryptionIv.
+                 * @member {Uint8Array} encryptionIv
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @instance
+                 */
+                ClubDaoV1.prototype.encryptionIv = $util.newBuffer([]);
+
+                /**
+                 * ClubDaoV1 isPublic.
+                 * @member {boolean} isPublic
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @instance
+                 */
+                ClubDaoV1.prototype.isPublic = false;
+
+                /**
+                 * ClubDaoV1 created.
+                 * @member {google.protobuf.ITimestamp|null|undefined} created
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @instance
+                 */
+                ClubDaoV1.prototype.created = null;
+
+                /**
+                 * ClubDaoV1 encryptedProfilePicture.
+                 * @member {Uint8Array|null|undefined} encryptedProfilePicture
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @instance
+                 */
+                ClubDaoV1.prototype.encryptedProfilePicture = null;
+
+                /**
+                 * ClubDaoV1 settings.
+                 * @member {LiftLog.Ui.Models.IClubSettingsDaoV1|null|undefined} settings
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @instance
+                 */
+                ClubDaoV1.prototype.settings = null;
+
+                /**
+                 * ClubDaoV1 ownerUserId.
+                 * @member {LiftLog.Ui.Models.IUuidDao|null|undefined} ownerUserId
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @instance
+                 */
+                ClubDaoV1.prototype.ownerUserId = null;
+
+                // OneOf field names bound to virtual getters and setters
+                let $oneOfFields;
+
+                /**
+                 * ClubDaoV1 _encryptedDescription.
+                 * @member {"encryptedDescription"|undefined} _encryptedDescription
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @instance
+                 */
+                Object.defineProperty(ClubDaoV1.prototype, "_encryptedDescription", {
+                    get: $util.oneOfGetter($oneOfFields = ["encryptedDescription"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+
+                /**
+                 * ClubDaoV1 _encryptedProfilePicture.
+                 * @member {"encryptedProfilePicture"|undefined} _encryptedProfilePicture
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @instance
+                 */
+                Object.defineProperty(ClubDaoV1.prototype, "_encryptedProfilePicture", {
+                    get: $util.oneOfGetter($oneOfFields = ["encryptedProfilePicture"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+
+                /**
+                 * Creates a new ClubDaoV1 instance using the specified properties.
+                 * @function create
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubDaoV1=} [properties] Properties to set
+                 * @returns {LiftLog.Ui.Models.ClubDaoV1} ClubDaoV1 instance
+                 */
+                ClubDaoV1.create = function create(properties) {
+                    return new ClubDaoV1(properties);
+                };
+
+                /**
+                 * Encodes the specified ClubDaoV1 message. Does not implicitly {@link LiftLog.Ui.Models.ClubDaoV1.verify|verify} messages.
+                 * @function encode
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubDaoV1} message ClubDaoV1 message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubDaoV1.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                        $root.LiftLog.Ui.Models.UuidDao.encode(message.id, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.aesKey != null && Object.hasOwnProperty.call(message, "aesKey"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.aesKey);
+                    if (message.encryptedName != null && Object.hasOwnProperty.call(message, "encryptedName"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.encryptedName);
+                    if (message.encryptedDescription != null && Object.hasOwnProperty.call(message, "encryptedDescription"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.encryptedDescription);
+                    if (message.encryptionIv != null && Object.hasOwnProperty.call(message, "encryptionIv"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.encryptionIv);
+                    if (message.isPublic != null && Object.hasOwnProperty.call(message, "isPublic"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).bool(message.isPublic);
+                    if (message.created != null && Object.hasOwnProperty.call(message, "created"))
+                        $root.google.protobuf.Timestamp.encode(message.created, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                    if (message.encryptedProfilePicture != null && Object.hasOwnProperty.call(message, "encryptedProfilePicture"))
+                        writer.uint32(/* id 8, wireType 2 =*/66).bytes(message.encryptedProfilePicture);
+                    if (message.settings != null && Object.hasOwnProperty.call(message, "settings"))
+                        $root.LiftLog.Ui.Models.ClubSettingsDaoV1.encode(message.settings, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                    if (message.ownerUserId != null && Object.hasOwnProperty.call(message, "ownerUserId"))
+                        $root.LiftLog.Ui.Models.UuidDao.encode(message.ownerUserId, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ClubDaoV1 message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubDaoV1.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubDaoV1} message ClubDaoV1 message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubDaoV1.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ClubDaoV1 message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {LiftLog.Ui.Models.ClubDaoV1} ClubDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubDaoV1.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.LiftLog.Ui.Models.ClubDaoV1();
+                    while (reader.pos < end) {
+                        let tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.id = $root.LiftLog.Ui.Models.UuidDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.aesKey = reader.bytes();
+                                break;
+                            }
+                        case 3: {
+                                message.encryptedName = reader.bytes();
+                                break;
+                            }
+                        case 4: {
+                                message.encryptedDescription = reader.bytes();
+                                break;
+                            }
+                        case 5: {
+                                message.encryptionIv = reader.bytes();
+                                break;
+                            }
+                        case 6: {
+                                message.isPublic = reader.bool();
+                                break;
+                            }
+                        case 7: {
+                                message.created = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 8: {
+                                message.encryptedProfilePicture = reader.bytes();
+                                break;
+                            }
+                        case 9: {
+                                message.settings = $root.LiftLog.Ui.Models.ClubSettingsDaoV1.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 10: {
+                                message.ownerUserId = $root.LiftLog.Ui.Models.UuidDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ClubDaoV1 message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {LiftLog.Ui.Models.ClubDaoV1} ClubDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubDaoV1.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ClubDaoV1 message.
+                 * @function verify
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ClubDaoV1.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    let properties = {};
+                    if (message.id != null && message.hasOwnProperty("id")) {
+                        let error = $root.LiftLog.Ui.Models.UuidDao.verify(message.id);
+                        if (error)
+                            return "id." + error;
+                    }
+                    if (message.aesKey != null && message.hasOwnProperty("aesKey"))
+                        if (!(message.aesKey && typeof message.aesKey.length === "number" || $util.isString(message.aesKey)))
+                            return "aesKey: buffer expected";
+                    if (message.encryptedName != null && message.hasOwnProperty("encryptedName"))
+                        if (!(message.encryptedName && typeof message.encryptedName.length === "number" || $util.isString(message.encryptedName)))
+                            return "encryptedName: buffer expected";
+                    if (message.encryptedDescription != null && message.hasOwnProperty("encryptedDescription")) {
+                        properties._encryptedDescription = 1;
+                        if (!(message.encryptedDescription && typeof message.encryptedDescription.length === "number" || $util.isString(message.encryptedDescription)))
+                            return "encryptedDescription: buffer expected";
+                    }
+                    if (message.encryptionIv != null && message.hasOwnProperty("encryptionIv"))
+                        if (!(message.encryptionIv && typeof message.encryptionIv.length === "number" || $util.isString(message.encryptionIv)))
+                            return "encryptionIv: buffer expected";
+                    if (message.isPublic != null && message.hasOwnProperty("isPublic"))
+                        if (typeof message.isPublic !== "boolean")
+                            return "isPublic: boolean expected";
+                    if (message.created != null && message.hasOwnProperty("created")) {
+                        let error = $root.google.protobuf.Timestamp.verify(message.created);
+                        if (error)
+                            return "created." + error;
+                    }
+                    if (message.encryptedProfilePicture != null && message.hasOwnProperty("encryptedProfilePicture")) {
+                        properties._encryptedProfilePicture = 1;
+                        if (!(message.encryptedProfilePicture && typeof message.encryptedProfilePicture.length === "number" || $util.isString(message.encryptedProfilePicture)))
+                            return "encryptedProfilePicture: buffer expected";
+                    }
+                    if (message.settings != null && message.hasOwnProperty("settings")) {
+                        let error = $root.LiftLog.Ui.Models.ClubSettingsDaoV1.verify(message.settings);
+                        if (error)
+                            return "settings." + error;
+                    }
+                    if (message.ownerUserId != null && message.hasOwnProperty("ownerUserId")) {
+                        let error = $root.LiftLog.Ui.Models.UuidDao.verify(message.ownerUserId);
+                        if (error)
+                            return "ownerUserId." + error;
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates a ClubDaoV1 message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {LiftLog.Ui.Models.ClubDaoV1} ClubDaoV1
+                 */
+                ClubDaoV1.fromObject = function fromObject(object) {
+                    if (object instanceof $root.LiftLog.Ui.Models.ClubDaoV1)
+                        return object;
+                    let message = new $root.LiftLog.Ui.Models.ClubDaoV1();
+                    if (object.id != null) {
+                        if (typeof object.id !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubDaoV1.id: object expected");
+                        message.id = $root.LiftLog.Ui.Models.UuidDao.fromObject(object.id);
+                    }
+                    if (object.aesKey != null)
+                        if (typeof object.aesKey === "string")
+                            $util.base64.decode(object.aesKey, message.aesKey = $util.newBuffer($util.base64.length(object.aesKey)), 0);
+                        else if (object.aesKey.length >= 0)
+                            message.aesKey = object.aesKey;
+                    if (object.encryptedName != null)
+                        if (typeof object.encryptedName === "string")
+                            $util.base64.decode(object.encryptedName, message.encryptedName = $util.newBuffer($util.base64.length(object.encryptedName)), 0);
+                        else if (object.encryptedName.length >= 0)
+                            message.encryptedName = object.encryptedName;
+                    if (object.encryptedDescription != null)
+                        if (typeof object.encryptedDescription === "string")
+                            $util.base64.decode(object.encryptedDescription, message.encryptedDescription = $util.newBuffer($util.base64.length(object.encryptedDescription)), 0);
+                        else if (object.encryptedDescription.length >= 0)
+                            message.encryptedDescription = object.encryptedDescription;
+                    if (object.encryptionIv != null)
+                        if (typeof object.encryptionIv === "string")
+                            $util.base64.decode(object.encryptionIv, message.encryptionIv = $util.newBuffer($util.base64.length(object.encryptionIv)), 0);
+                        else if (object.encryptionIv.length >= 0)
+                            message.encryptionIv = object.encryptionIv;
+                    if (object.isPublic != null)
+                        message.isPublic = Boolean(object.isPublic);
+                    if (object.created != null) {
+                        if (typeof object.created !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubDaoV1.created: object expected");
+                        message.created = $root.google.protobuf.Timestamp.fromObject(object.created);
+                    }
+                    if (object.encryptedProfilePicture != null)
+                        if (typeof object.encryptedProfilePicture === "string")
+                            $util.base64.decode(object.encryptedProfilePicture, message.encryptedProfilePicture = $util.newBuffer($util.base64.length(object.encryptedProfilePicture)), 0);
+                        else if (object.encryptedProfilePicture.length >= 0)
+                            message.encryptedProfilePicture = object.encryptedProfilePicture;
+                    if (object.settings != null) {
+                        if (typeof object.settings !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubDaoV1.settings: object expected");
+                        message.settings = $root.LiftLog.Ui.Models.ClubSettingsDaoV1.fromObject(object.settings);
+                    }
+                    if (object.ownerUserId != null) {
+                        if (typeof object.ownerUserId !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubDaoV1.ownerUserId: object expected");
+                        message.ownerUserId = $root.LiftLog.Ui.Models.UuidDao.fromObject(object.ownerUserId);
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a ClubDaoV1 message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.ClubDaoV1} message ClubDaoV1
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ClubDaoV1.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    let object = {};
+                    if (options.defaults) {
+                        object.id = null;
+                        if (options.bytes === String)
+                            object.aesKey = "";
+                        else {
+                            object.aesKey = [];
+                            if (options.bytes !== Array)
+                                object.aesKey = $util.newBuffer(object.aesKey);
+                        }
+                        if (options.bytes === String)
+                            object.encryptedName = "";
+                        else {
+                            object.encryptedName = [];
+                            if (options.bytes !== Array)
+                                object.encryptedName = $util.newBuffer(object.encryptedName);
+                        }
+                        if (options.bytes === String)
+                            object.encryptionIv = "";
+                        else {
+                            object.encryptionIv = [];
+                            if (options.bytes !== Array)
+                                object.encryptionIv = $util.newBuffer(object.encryptionIv);
+                        }
+                        object.isPublic = false;
+                        object.created = null;
+                        object.settings = null;
+                        object.ownerUserId = null;
+                    }
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = $root.LiftLog.Ui.Models.UuidDao.toObject(message.id, options);
+                    if (message.aesKey != null && message.hasOwnProperty("aesKey"))
+                        object.aesKey = options.bytes === String ? $util.base64.encode(message.aesKey, 0, message.aesKey.length) : options.bytes === Array ? Array.prototype.slice.call(message.aesKey) : message.aesKey;
+                    if (message.encryptedName != null && message.hasOwnProperty("encryptedName"))
+                        object.encryptedName = options.bytes === String ? $util.base64.encode(message.encryptedName, 0, message.encryptedName.length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptedName) : message.encryptedName;
+                    if (message.encryptedDescription != null && message.hasOwnProperty("encryptedDescription")) {
+                        object.encryptedDescription = options.bytes === String ? $util.base64.encode(message.encryptedDescription, 0, message.encryptedDescription.length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptedDescription) : message.encryptedDescription;
+                        if (options.oneofs)
+                            object._encryptedDescription = "encryptedDescription";
+                    }
+                    if (message.encryptionIv != null && message.hasOwnProperty("encryptionIv"))
+                        object.encryptionIv = options.bytes === String ? $util.base64.encode(message.encryptionIv, 0, message.encryptionIv.length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptionIv) : message.encryptionIv;
+                    if (message.isPublic != null && message.hasOwnProperty("isPublic"))
+                        object.isPublic = message.isPublic;
+                    if (message.created != null && message.hasOwnProperty("created"))
+                        object.created = $root.google.protobuf.Timestamp.toObject(message.created, options);
+                    if (message.encryptedProfilePicture != null && message.hasOwnProperty("encryptedProfilePicture")) {
+                        object.encryptedProfilePicture = options.bytes === String ? $util.base64.encode(message.encryptedProfilePicture, 0, message.encryptedProfilePicture.length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptedProfilePicture) : message.encryptedProfilePicture;
+                        if (options.oneofs)
+                            object._encryptedProfilePicture = "encryptedProfilePicture";
+                    }
+                    if (message.settings != null && message.hasOwnProperty("settings"))
+                        object.settings = $root.LiftLog.Ui.Models.ClubSettingsDaoV1.toObject(message.settings, options);
+                    if (message.ownerUserId != null && message.hasOwnProperty("ownerUserId"))
+                        object.ownerUserId = $root.LiftLog.Ui.Models.UuidDao.toObject(message.ownerUserId, options);
+                    return object;
+                };
+
+                /**
+                 * Converts this ClubDaoV1 to JSON.
+                 * @function toJSON
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ClubDaoV1.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Gets the default type url for ClubDaoV1
+                 * @function getTypeUrl
+                 * @memberof LiftLog.Ui.Models.ClubDaoV1
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ClubDaoV1.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/LiftLog.Ui.Models.ClubDaoV1";
+                };
+
+                return ClubDaoV1;
+            })();
+
+            Models.ClubSettingsDaoV1 = (function() {
+
+                /**
+                 * Properties of a ClubSettingsDaoV1.
+                 * @memberof LiftLog.Ui.Models
+                 * @interface IClubSettingsDaoV1
+                 * @property {boolean|null} [membersCanPost] ClubSettingsDaoV1 membersCanPost
+                 * @property {boolean|null} [membersCanInvite] ClubSettingsDaoV1 membersCanInvite
+                 * @property {number|null} [maxMembers] ClubSettingsDaoV1 maxMembers
+                 */
+
+                /**
+                 * Constructs a new ClubSettingsDaoV1.
+                 * @memberof LiftLog.Ui.Models
+                 * @classdesc Represents a ClubSettingsDaoV1.
+                 * @implements IClubSettingsDaoV1
+                 * @constructor
+                 * @param {LiftLog.Ui.Models.IClubSettingsDaoV1=} [properties] Properties to set
+                 */
+                function ClubSettingsDaoV1(properties) {
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * ClubSettingsDaoV1 membersCanPost.
+                 * @member {boolean} membersCanPost
+                 * @memberof LiftLog.Ui.Models.ClubSettingsDaoV1
+                 * @instance
+                 */
+                ClubSettingsDaoV1.prototype.membersCanPost = false;
+
+                /**
+                 * ClubSettingsDaoV1 membersCanInvite.
+                 * @member {boolean} membersCanInvite
+                 * @memberof LiftLog.Ui.Models.ClubSettingsDaoV1
+                 * @instance
+                 */
+                ClubSettingsDaoV1.prototype.membersCanInvite = false;
+
+                /**
+                 * ClubSettingsDaoV1 maxMembers.
+                 * @member {number} maxMembers
+                 * @memberof LiftLog.Ui.Models.ClubSettingsDaoV1
+                 * @instance
+                 */
+                ClubSettingsDaoV1.prototype.maxMembers = 0;
+
+                /**
+                 * Creates a new ClubSettingsDaoV1 instance using the specified properties.
+                 * @function create
+                 * @memberof LiftLog.Ui.Models.ClubSettingsDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubSettingsDaoV1=} [properties] Properties to set
+                 * @returns {LiftLog.Ui.Models.ClubSettingsDaoV1} ClubSettingsDaoV1 instance
+                 */
+                ClubSettingsDaoV1.create = function create(properties) {
+                    return new ClubSettingsDaoV1(properties);
+                };
+
+                /**
+                 * Encodes the specified ClubSettingsDaoV1 message. Does not implicitly {@link LiftLog.Ui.Models.ClubSettingsDaoV1.verify|verify} messages.
+                 * @function encode
+                 * @memberof LiftLog.Ui.Models.ClubSettingsDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubSettingsDaoV1} message ClubSettingsDaoV1 message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubSettingsDaoV1.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.membersCanPost != null && Object.hasOwnProperty.call(message, "membersCanPost"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.membersCanPost);
+                    if (message.membersCanInvite != null && Object.hasOwnProperty.call(message, "membersCanInvite"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.membersCanInvite);
+                    if (message.maxMembers != null && Object.hasOwnProperty.call(message, "maxMembers"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.maxMembers);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ClubSettingsDaoV1 message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubSettingsDaoV1.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubSettingsDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubSettingsDaoV1} message ClubSettingsDaoV1 message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubSettingsDaoV1.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ClubSettingsDaoV1 message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof LiftLog.Ui.Models.ClubSettingsDaoV1
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {LiftLog.Ui.Models.ClubSettingsDaoV1} ClubSettingsDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubSettingsDaoV1.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.LiftLog.Ui.Models.ClubSettingsDaoV1();
+                    while (reader.pos < end) {
+                        let tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.membersCanPost = reader.bool();
+                                break;
+                            }
+                        case 2: {
+                                message.membersCanInvite = reader.bool();
+                                break;
+                            }
+                        case 3: {
+                                message.maxMembers = reader.uint32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ClubSettingsDaoV1 message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubSettingsDaoV1
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {LiftLog.Ui.Models.ClubSettingsDaoV1} ClubSettingsDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubSettingsDaoV1.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ClubSettingsDaoV1 message.
+                 * @function verify
+                 * @memberof LiftLog.Ui.Models.ClubSettingsDaoV1
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ClubSettingsDaoV1.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.membersCanPost != null && message.hasOwnProperty("membersCanPost"))
+                        if (typeof message.membersCanPost !== "boolean")
+                            return "membersCanPost: boolean expected";
+                    if (message.membersCanInvite != null && message.hasOwnProperty("membersCanInvite"))
+                        if (typeof message.membersCanInvite !== "boolean")
+                            return "membersCanInvite: boolean expected";
+                    if (message.maxMembers != null && message.hasOwnProperty("maxMembers"))
+                        if (!$util.isInteger(message.maxMembers))
+                            return "maxMembers: integer expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a ClubSettingsDaoV1 message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof LiftLog.Ui.Models.ClubSettingsDaoV1
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {LiftLog.Ui.Models.ClubSettingsDaoV1} ClubSettingsDaoV1
+                 */
+                ClubSettingsDaoV1.fromObject = function fromObject(object) {
+                    if (object instanceof $root.LiftLog.Ui.Models.ClubSettingsDaoV1)
+                        return object;
+                    let message = new $root.LiftLog.Ui.Models.ClubSettingsDaoV1();
+                    if (object.membersCanPost != null)
+                        message.membersCanPost = Boolean(object.membersCanPost);
+                    if (object.membersCanInvite != null)
+                        message.membersCanInvite = Boolean(object.membersCanInvite);
+                    if (object.maxMembers != null)
+                        message.maxMembers = object.maxMembers >>> 0;
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a ClubSettingsDaoV1 message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof LiftLog.Ui.Models.ClubSettingsDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.ClubSettingsDaoV1} message ClubSettingsDaoV1
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ClubSettingsDaoV1.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    let object = {};
+                    if (options.defaults) {
+                        object.membersCanPost = false;
+                        object.membersCanInvite = false;
+                        object.maxMembers = 0;
+                    }
+                    if (message.membersCanPost != null && message.hasOwnProperty("membersCanPost"))
+                        object.membersCanPost = message.membersCanPost;
+                    if (message.membersCanInvite != null && message.hasOwnProperty("membersCanInvite"))
+                        object.membersCanInvite = message.membersCanInvite;
+                    if (message.maxMembers != null && message.hasOwnProperty("maxMembers"))
+                        object.maxMembers = message.maxMembers;
+                    return object;
+                };
+
+                /**
+                 * Converts this ClubSettingsDaoV1 to JSON.
+                 * @function toJSON
+                 * @memberof LiftLog.Ui.Models.ClubSettingsDaoV1
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ClubSettingsDaoV1.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Gets the default type url for ClubSettingsDaoV1
+                 * @function getTypeUrl
+                 * @memberof LiftLog.Ui.Models.ClubSettingsDaoV1
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ClubSettingsDaoV1.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/LiftLog.Ui.Models.ClubSettingsDaoV1";
+                };
+
+                return ClubSettingsDaoV1;
+            })();
+
+            Models.ClubMemberDaoV1 = (function() {
+
+                /**
+                 * Properties of a ClubMemberDaoV1.
+                 * @memberof LiftLog.Ui.Models
+                 * @interface IClubMemberDaoV1
+                 * @property {LiftLog.Ui.Models.IUuidDao|null} [clubId] ClubMemberDaoV1 clubId
+                 * @property {LiftLog.Ui.Models.IUuidDao|null} [userId] ClubMemberDaoV1 userId
+                 * @property {LiftLog.Ui.Models.ClubRole|null} [role] ClubMemberDaoV1 role
+                 * @property {google.protobuf.ITimestamp|null} [joined] ClubMemberDaoV1 joined
+                 * @property {Uint8Array|null} [encryptedAesKey] ClubMemberDaoV1 encryptedAesKey
+                 */
+
+                /**
+                 * Constructs a new ClubMemberDaoV1.
+                 * @memberof LiftLog.Ui.Models
+                 * @classdesc Represents a ClubMemberDaoV1.
+                 * @implements IClubMemberDaoV1
+                 * @constructor
+                 * @param {LiftLog.Ui.Models.IClubMemberDaoV1=} [properties] Properties to set
+                 */
+                function ClubMemberDaoV1(properties) {
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * ClubMemberDaoV1 clubId.
+                 * @member {LiftLog.Ui.Models.IUuidDao|null|undefined} clubId
+                 * @memberof LiftLog.Ui.Models.ClubMemberDaoV1
+                 * @instance
+                 */
+                ClubMemberDaoV1.prototype.clubId = null;
+
+                /**
+                 * ClubMemberDaoV1 userId.
+                 * @member {LiftLog.Ui.Models.IUuidDao|null|undefined} userId
+                 * @memberof LiftLog.Ui.Models.ClubMemberDaoV1
+                 * @instance
+                 */
+                ClubMemberDaoV1.prototype.userId = null;
+
+                /**
+                 * ClubMemberDaoV1 role.
+                 * @member {LiftLog.Ui.Models.ClubRole} role
+                 * @memberof LiftLog.Ui.Models.ClubMemberDaoV1
+                 * @instance
+                 */
+                ClubMemberDaoV1.prototype.role = 0;
+
+                /**
+                 * ClubMemberDaoV1 joined.
+                 * @member {google.protobuf.ITimestamp|null|undefined} joined
+                 * @memberof LiftLog.Ui.Models.ClubMemberDaoV1
+                 * @instance
+                 */
+                ClubMemberDaoV1.prototype.joined = null;
+
+                /**
+                 * ClubMemberDaoV1 encryptedAesKey.
+                 * @member {Uint8Array} encryptedAesKey
+                 * @memberof LiftLog.Ui.Models.ClubMemberDaoV1
+                 * @instance
+                 */
+                ClubMemberDaoV1.prototype.encryptedAesKey = $util.newBuffer([]);
+
+                /**
+                 * Creates a new ClubMemberDaoV1 instance using the specified properties.
+                 * @function create
+                 * @memberof LiftLog.Ui.Models.ClubMemberDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubMemberDaoV1=} [properties] Properties to set
+                 * @returns {LiftLog.Ui.Models.ClubMemberDaoV1} ClubMemberDaoV1 instance
+                 */
+                ClubMemberDaoV1.create = function create(properties) {
+                    return new ClubMemberDaoV1(properties);
+                };
+
+                /**
+                 * Encodes the specified ClubMemberDaoV1 message. Does not implicitly {@link LiftLog.Ui.Models.ClubMemberDaoV1.verify|verify} messages.
+                 * @function encode
+                 * @memberof LiftLog.Ui.Models.ClubMemberDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubMemberDaoV1} message ClubMemberDaoV1 message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubMemberDaoV1.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.clubId != null && Object.hasOwnProperty.call(message, "clubId"))
+                        $root.LiftLog.Ui.Models.UuidDao.encode(message.clubId, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.userId != null && Object.hasOwnProperty.call(message, "userId"))
+                        $root.LiftLog.Ui.Models.UuidDao.encode(message.userId, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.role != null && Object.hasOwnProperty.call(message, "role"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.role);
+                    if (message.joined != null && Object.hasOwnProperty.call(message, "joined"))
+                        $root.google.protobuf.Timestamp.encode(message.joined, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.encryptedAesKey != null && Object.hasOwnProperty.call(message, "encryptedAesKey"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.encryptedAesKey);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ClubMemberDaoV1 message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubMemberDaoV1.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubMemberDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubMemberDaoV1} message ClubMemberDaoV1 message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubMemberDaoV1.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ClubMemberDaoV1 message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof LiftLog.Ui.Models.ClubMemberDaoV1
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {LiftLog.Ui.Models.ClubMemberDaoV1} ClubMemberDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubMemberDaoV1.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.LiftLog.Ui.Models.ClubMemberDaoV1();
+                    while (reader.pos < end) {
+                        let tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.clubId = $root.LiftLog.Ui.Models.UuidDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.userId = $root.LiftLog.Ui.Models.UuidDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.role = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.joined = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.encryptedAesKey = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ClubMemberDaoV1 message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubMemberDaoV1
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {LiftLog.Ui.Models.ClubMemberDaoV1} ClubMemberDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubMemberDaoV1.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ClubMemberDaoV1 message.
+                 * @function verify
+                 * @memberof LiftLog.Ui.Models.ClubMemberDaoV1
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ClubMemberDaoV1.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.clubId != null && message.hasOwnProperty("clubId")) {
+                        let error = $root.LiftLog.Ui.Models.UuidDao.verify(message.clubId);
+                        if (error)
+                            return "clubId." + error;
+                    }
+                    if (message.userId != null && message.hasOwnProperty("userId")) {
+                        let error = $root.LiftLog.Ui.Models.UuidDao.verify(message.userId);
+                        if (error)
+                            return "userId." + error;
+                    }
+                    if (message.role != null && message.hasOwnProperty("role"))
+                        switch (message.role) {
+                        default:
+                            return "role: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    if (message.joined != null && message.hasOwnProperty("joined")) {
+                        let error = $root.google.protobuf.Timestamp.verify(message.joined);
+                        if (error)
+                            return "joined." + error;
+                    }
+                    if (message.encryptedAesKey != null && message.hasOwnProperty("encryptedAesKey"))
+                        if (!(message.encryptedAesKey && typeof message.encryptedAesKey.length === "number" || $util.isString(message.encryptedAesKey)))
+                            return "encryptedAesKey: buffer expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a ClubMemberDaoV1 message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof LiftLog.Ui.Models.ClubMemberDaoV1
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {LiftLog.Ui.Models.ClubMemberDaoV1} ClubMemberDaoV1
+                 */
+                ClubMemberDaoV1.fromObject = function fromObject(object) {
+                    if (object instanceof $root.LiftLog.Ui.Models.ClubMemberDaoV1)
+                        return object;
+                    let message = new $root.LiftLog.Ui.Models.ClubMemberDaoV1();
+                    if (object.clubId != null) {
+                        if (typeof object.clubId !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubMemberDaoV1.clubId: object expected");
+                        message.clubId = $root.LiftLog.Ui.Models.UuidDao.fromObject(object.clubId);
+                    }
+                    if (object.userId != null) {
+                        if (typeof object.userId !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubMemberDaoV1.userId: object expected");
+                        message.userId = $root.LiftLog.Ui.Models.UuidDao.fromObject(object.userId);
+                    }
+                    switch (object.role) {
+                    default:
+                        if (typeof object.role === "number") {
+                            message.role = object.role;
+                            break;
+                        }
+                        break;
+                    case "CLUB_ROLE_OWNER":
+                    case 0:
+                        message.role = 0;
+                        break;
+                    case "CLUB_ROLE_ADMIN":
+                    case 1:
+                        message.role = 1;
+                        break;
+                    case "CLUB_ROLE_MEMBER":
+                    case 2:
+                        message.role = 2;
+                        break;
+                    case "CLUB_ROLE_VIEWER":
+                    case 3:
+                        message.role = 3;
+                        break;
+                    }
+                    if (object.joined != null) {
+                        if (typeof object.joined !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubMemberDaoV1.joined: object expected");
+                        message.joined = $root.google.protobuf.Timestamp.fromObject(object.joined);
+                    }
+                    if (object.encryptedAesKey != null)
+                        if (typeof object.encryptedAesKey === "string")
+                            $util.base64.decode(object.encryptedAesKey, message.encryptedAesKey = $util.newBuffer($util.base64.length(object.encryptedAesKey)), 0);
+                        else if (object.encryptedAesKey.length >= 0)
+                            message.encryptedAesKey = object.encryptedAesKey;
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a ClubMemberDaoV1 message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof LiftLog.Ui.Models.ClubMemberDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.ClubMemberDaoV1} message ClubMemberDaoV1
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ClubMemberDaoV1.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    let object = {};
+                    if (options.defaults) {
+                        object.clubId = null;
+                        object.userId = null;
+                        object.role = options.enums === String ? "CLUB_ROLE_OWNER" : 0;
+                        object.joined = null;
+                        if (options.bytes === String)
+                            object.encryptedAesKey = "";
+                        else {
+                            object.encryptedAesKey = [];
+                            if (options.bytes !== Array)
+                                object.encryptedAesKey = $util.newBuffer(object.encryptedAesKey);
+                        }
+                    }
+                    if (message.clubId != null && message.hasOwnProperty("clubId"))
+                        object.clubId = $root.LiftLog.Ui.Models.UuidDao.toObject(message.clubId, options);
+                    if (message.userId != null && message.hasOwnProperty("userId"))
+                        object.userId = $root.LiftLog.Ui.Models.UuidDao.toObject(message.userId, options);
+                    if (message.role != null && message.hasOwnProperty("role"))
+                        object.role = options.enums === String ? $root.LiftLog.Ui.Models.ClubRole[message.role] === undefined ? message.role : $root.LiftLog.Ui.Models.ClubRole[message.role] : message.role;
+                    if (message.joined != null && message.hasOwnProperty("joined"))
+                        object.joined = $root.google.protobuf.Timestamp.toObject(message.joined, options);
+                    if (message.encryptedAesKey != null && message.hasOwnProperty("encryptedAesKey"))
+                        object.encryptedAesKey = options.bytes === String ? $util.base64.encode(message.encryptedAesKey, 0, message.encryptedAesKey.length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptedAesKey) : message.encryptedAesKey;
+                    return object;
+                };
+
+                /**
+                 * Converts this ClubMemberDaoV1 to JSON.
+                 * @function toJSON
+                 * @memberof LiftLog.Ui.Models.ClubMemberDaoV1
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ClubMemberDaoV1.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Gets the default type url for ClubMemberDaoV1
+                 * @function getTypeUrl
+                 * @memberof LiftLog.Ui.Models.ClubMemberDaoV1
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ClubMemberDaoV1.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/LiftLog.Ui.Models.ClubMemberDaoV1";
+                };
+
+                return ClubMemberDaoV1;
+            })();
+
+            /**
+             * ClubRole enum.
+             * @name LiftLog.Ui.Models.ClubRole
+             * @enum {number}
+             * @property {number} CLUB_ROLE_OWNER=0 CLUB_ROLE_OWNER value
+             * @property {number} CLUB_ROLE_ADMIN=1 CLUB_ROLE_ADMIN value
+             * @property {number} CLUB_ROLE_MEMBER=2 CLUB_ROLE_MEMBER value
+             * @property {number} CLUB_ROLE_VIEWER=3 CLUB_ROLE_VIEWER value
+             */
+            Models.ClubRole = (function() {
+                const valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "CLUB_ROLE_OWNER"] = 0;
+                values[valuesById[1] = "CLUB_ROLE_ADMIN"] = 1;
+                values[valuesById[2] = "CLUB_ROLE_MEMBER"] = 2;
+                values[valuesById[3] = "CLUB_ROLE_VIEWER"] = 3;
+                return values;
+            })();
+
+            Models.ClubInviteDao = (function() {
+
+                /**
+                 * Properties of a ClubInviteDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @interface IClubInviteDao
+                 * @property {LiftLog.Ui.Models.IUuidDao|null} [clubId] ClubInviteDao clubId
+                 * @property {Uint8Array|null} [encryptedClubName] ClubInviteDao encryptedClubName
+                 * @property {Uint8Array|null} [encryptedClubDescription] ClubInviteDao encryptedClubDescription
+                 * @property {Uint8Array|null} [encryptedProfilePicture] ClubInviteDao encryptedProfilePicture
+                 * @property {Uint8Array|null} [encryptedAesKey] ClubInviteDao encryptedAesKey
+                 * @property {LiftLog.Ui.Models.ClubRole|null} [offeredRole] ClubInviteDao offeredRole
+                 * @property {LiftLog.Ui.Models.IUuidDao|null} [fromUserId] ClubInviteDao fromUserId
+                 * @property {google.protobuf.IStringValue|null} [fromUserName] ClubInviteDao fromUserName
+                 */
+
+                /**
+                 * Constructs a new ClubInviteDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @classdesc Represents a ClubInviteDao.
+                 * @implements IClubInviteDao
+                 * @constructor
+                 * @param {LiftLog.Ui.Models.IClubInviteDao=} [properties] Properties to set
+                 */
+                function ClubInviteDao(properties) {
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * ClubInviteDao clubId.
+                 * @member {LiftLog.Ui.Models.IUuidDao|null|undefined} clubId
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @instance
+                 */
+                ClubInviteDao.prototype.clubId = null;
+
+                /**
+                 * ClubInviteDao encryptedClubName.
+                 * @member {Uint8Array} encryptedClubName
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @instance
+                 */
+                ClubInviteDao.prototype.encryptedClubName = $util.newBuffer([]);
+
+                /**
+                 * ClubInviteDao encryptedClubDescription.
+                 * @member {Uint8Array} encryptedClubDescription
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @instance
+                 */
+                ClubInviteDao.prototype.encryptedClubDescription = $util.newBuffer([]);
+
+                /**
+                 * ClubInviteDao encryptedProfilePicture.
+                 * @member {Uint8Array|null|undefined} encryptedProfilePicture
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @instance
+                 */
+                ClubInviteDao.prototype.encryptedProfilePicture = null;
+
+                /**
+                 * ClubInviteDao encryptedAesKey.
+                 * @member {Uint8Array} encryptedAesKey
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @instance
+                 */
+                ClubInviteDao.prototype.encryptedAesKey = $util.newBuffer([]);
+
+                /**
+                 * ClubInviteDao offeredRole.
+                 * @member {LiftLog.Ui.Models.ClubRole} offeredRole
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @instance
+                 */
+                ClubInviteDao.prototype.offeredRole = 0;
+
+                /**
+                 * ClubInviteDao fromUserId.
+                 * @member {LiftLog.Ui.Models.IUuidDao|null|undefined} fromUserId
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @instance
+                 */
+                ClubInviteDao.prototype.fromUserId = null;
+
+                /**
+                 * ClubInviteDao fromUserName.
+                 * @member {google.protobuf.IStringValue|null|undefined} fromUserName
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @instance
+                 */
+                ClubInviteDao.prototype.fromUserName = null;
+
+                // OneOf field names bound to virtual getters and setters
+                let $oneOfFields;
+
+                /**
+                 * ClubInviteDao _encryptedProfilePicture.
+                 * @member {"encryptedProfilePicture"|undefined} _encryptedProfilePicture
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @instance
+                 */
+                Object.defineProperty(ClubInviteDao.prototype, "_encryptedProfilePicture", {
+                    get: $util.oneOfGetter($oneOfFields = ["encryptedProfilePicture"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+
+                /**
+                 * ClubInviteDao _fromUserName.
+                 * @member {"fromUserName"|undefined} _fromUserName
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @instance
+                 */
+                Object.defineProperty(ClubInviteDao.prototype, "_fromUserName", {
+                    get: $util.oneOfGetter($oneOfFields = ["fromUserName"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+
+                /**
+                 * Creates a new ClubInviteDao instance using the specified properties.
+                 * @function create
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubInviteDao=} [properties] Properties to set
+                 * @returns {LiftLog.Ui.Models.ClubInviteDao} ClubInviteDao instance
+                 */
+                ClubInviteDao.create = function create(properties) {
+                    return new ClubInviteDao(properties);
+                };
+
+                /**
+                 * Encodes the specified ClubInviteDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteDao.verify|verify} messages.
+                 * @function encode
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubInviteDao} message ClubInviteDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubInviteDao.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.clubId != null && Object.hasOwnProperty.call(message, "clubId"))
+                        $root.LiftLog.Ui.Models.UuidDao.encode(message.clubId, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.encryptedClubName != null && Object.hasOwnProperty.call(message, "encryptedClubName"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.encryptedClubName);
+                    if (message.encryptedClubDescription != null && Object.hasOwnProperty.call(message, "encryptedClubDescription"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.encryptedClubDescription);
+                    if (message.encryptedProfilePicture != null && Object.hasOwnProperty.call(message, "encryptedProfilePicture"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.encryptedProfilePicture);
+                    if (message.encryptedAesKey != null && Object.hasOwnProperty.call(message, "encryptedAesKey"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.encryptedAesKey);
+                    if (message.offeredRole != null && Object.hasOwnProperty.call(message, "offeredRole"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.offeredRole);
+                    if (message.fromUserId != null && Object.hasOwnProperty.call(message, "fromUserId"))
+                        $root.LiftLog.Ui.Models.UuidDao.encode(message.fromUserId, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                    if (message.fromUserName != null && Object.hasOwnProperty.call(message, "fromUserName"))
+                        $root.google.protobuf.StringValue.encode(message.fromUserName, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ClubInviteDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteDao.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubInviteDao} message ClubInviteDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubInviteDao.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ClubInviteDao message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {LiftLog.Ui.Models.ClubInviteDao} ClubInviteDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubInviteDao.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.LiftLog.Ui.Models.ClubInviteDao();
+                    while (reader.pos < end) {
+                        let tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.clubId = $root.LiftLog.Ui.Models.UuidDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.encryptedClubName = reader.bytes();
+                                break;
+                            }
+                        case 3: {
+                                message.encryptedClubDescription = reader.bytes();
+                                break;
+                            }
+                        case 4: {
+                                message.encryptedProfilePicture = reader.bytes();
+                                break;
+                            }
+                        case 5: {
+                                message.encryptedAesKey = reader.bytes();
+                                break;
+                            }
+                        case 6: {
+                                message.offeredRole = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.fromUserId = $root.LiftLog.Ui.Models.UuidDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 8: {
+                                message.fromUserName = $root.google.protobuf.StringValue.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ClubInviteDao message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {LiftLog.Ui.Models.ClubInviteDao} ClubInviteDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubInviteDao.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ClubInviteDao message.
+                 * @function verify
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ClubInviteDao.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    let properties = {};
+                    if (message.clubId != null && message.hasOwnProperty("clubId")) {
+                        let error = $root.LiftLog.Ui.Models.UuidDao.verify(message.clubId);
+                        if (error)
+                            return "clubId." + error;
+                    }
+                    if (message.encryptedClubName != null && message.hasOwnProperty("encryptedClubName"))
+                        if (!(message.encryptedClubName && typeof message.encryptedClubName.length === "number" || $util.isString(message.encryptedClubName)))
+                            return "encryptedClubName: buffer expected";
+                    if (message.encryptedClubDescription != null && message.hasOwnProperty("encryptedClubDescription"))
+                        if (!(message.encryptedClubDescription && typeof message.encryptedClubDescription.length === "number" || $util.isString(message.encryptedClubDescription)))
+                            return "encryptedClubDescription: buffer expected";
+                    if (message.encryptedProfilePicture != null && message.hasOwnProperty("encryptedProfilePicture")) {
+                        properties._encryptedProfilePicture = 1;
+                        if (!(message.encryptedProfilePicture && typeof message.encryptedProfilePicture.length === "number" || $util.isString(message.encryptedProfilePicture)))
+                            return "encryptedProfilePicture: buffer expected";
+                    }
+                    if (message.encryptedAesKey != null && message.hasOwnProperty("encryptedAesKey"))
+                        if (!(message.encryptedAesKey && typeof message.encryptedAesKey.length === "number" || $util.isString(message.encryptedAesKey)))
+                            return "encryptedAesKey: buffer expected";
+                    if (message.offeredRole != null && message.hasOwnProperty("offeredRole"))
+                        switch (message.offeredRole) {
+                        default:
+                            return "offeredRole: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    if (message.fromUserId != null && message.hasOwnProperty("fromUserId")) {
+                        let error = $root.LiftLog.Ui.Models.UuidDao.verify(message.fromUserId);
+                        if (error)
+                            return "fromUserId." + error;
+                    }
+                    if (message.fromUserName != null && message.hasOwnProperty("fromUserName")) {
+                        properties._fromUserName = 1;
+                        {
+                            let error = $root.google.protobuf.StringValue.verify(message.fromUserName);
+                            if (error)
+                                return "fromUserName." + error;
+                        }
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates a ClubInviteDao message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {LiftLog.Ui.Models.ClubInviteDao} ClubInviteDao
+                 */
+                ClubInviteDao.fromObject = function fromObject(object) {
+                    if (object instanceof $root.LiftLog.Ui.Models.ClubInviteDao)
+                        return object;
+                    let message = new $root.LiftLog.Ui.Models.ClubInviteDao();
+                    if (object.clubId != null) {
+                        if (typeof object.clubId !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubInviteDao.clubId: object expected");
+                        message.clubId = $root.LiftLog.Ui.Models.UuidDao.fromObject(object.clubId);
+                    }
+                    if (object.encryptedClubName != null)
+                        if (typeof object.encryptedClubName === "string")
+                            $util.base64.decode(object.encryptedClubName, message.encryptedClubName = $util.newBuffer($util.base64.length(object.encryptedClubName)), 0);
+                        else if (object.encryptedClubName.length >= 0)
+                            message.encryptedClubName = object.encryptedClubName;
+                    if (object.encryptedClubDescription != null)
+                        if (typeof object.encryptedClubDescription === "string")
+                            $util.base64.decode(object.encryptedClubDescription, message.encryptedClubDescription = $util.newBuffer($util.base64.length(object.encryptedClubDescription)), 0);
+                        else if (object.encryptedClubDescription.length >= 0)
+                            message.encryptedClubDescription = object.encryptedClubDescription;
+                    if (object.encryptedProfilePicture != null)
+                        if (typeof object.encryptedProfilePicture === "string")
+                            $util.base64.decode(object.encryptedProfilePicture, message.encryptedProfilePicture = $util.newBuffer($util.base64.length(object.encryptedProfilePicture)), 0);
+                        else if (object.encryptedProfilePicture.length >= 0)
+                            message.encryptedProfilePicture = object.encryptedProfilePicture;
+                    if (object.encryptedAesKey != null)
+                        if (typeof object.encryptedAesKey === "string")
+                            $util.base64.decode(object.encryptedAesKey, message.encryptedAesKey = $util.newBuffer($util.base64.length(object.encryptedAesKey)), 0);
+                        else if (object.encryptedAesKey.length >= 0)
+                            message.encryptedAesKey = object.encryptedAesKey;
+                    switch (object.offeredRole) {
+                    default:
+                        if (typeof object.offeredRole === "number") {
+                            message.offeredRole = object.offeredRole;
+                            break;
+                        }
+                        break;
+                    case "CLUB_ROLE_OWNER":
+                    case 0:
+                        message.offeredRole = 0;
+                        break;
+                    case "CLUB_ROLE_ADMIN":
+                    case 1:
+                        message.offeredRole = 1;
+                        break;
+                    case "CLUB_ROLE_MEMBER":
+                    case 2:
+                        message.offeredRole = 2;
+                        break;
+                    case "CLUB_ROLE_VIEWER":
+                    case 3:
+                        message.offeredRole = 3;
+                        break;
+                    }
+                    if (object.fromUserId != null) {
+                        if (typeof object.fromUserId !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubInviteDao.fromUserId: object expected");
+                        message.fromUserId = $root.LiftLog.Ui.Models.UuidDao.fromObject(object.fromUserId);
+                    }
+                    if (object.fromUserName != null) {
+                        if (typeof object.fromUserName !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubInviteDao.fromUserName: object expected");
+                        message.fromUserName = $root.google.protobuf.StringValue.fromObject(object.fromUserName);
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a ClubInviteDao message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.ClubInviteDao} message ClubInviteDao
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ClubInviteDao.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    let object = {};
+                    if (options.defaults) {
+                        object.clubId = null;
+                        if (options.bytes === String)
+                            object.encryptedClubName = "";
+                        else {
+                            object.encryptedClubName = [];
+                            if (options.bytes !== Array)
+                                object.encryptedClubName = $util.newBuffer(object.encryptedClubName);
+                        }
+                        if (options.bytes === String)
+                            object.encryptedClubDescription = "";
+                        else {
+                            object.encryptedClubDescription = [];
+                            if (options.bytes !== Array)
+                                object.encryptedClubDescription = $util.newBuffer(object.encryptedClubDescription);
+                        }
+                        if (options.bytes === String)
+                            object.encryptedAesKey = "";
+                        else {
+                            object.encryptedAesKey = [];
+                            if (options.bytes !== Array)
+                                object.encryptedAesKey = $util.newBuffer(object.encryptedAesKey);
+                        }
+                        object.offeredRole = options.enums === String ? "CLUB_ROLE_OWNER" : 0;
+                        object.fromUserId = null;
+                    }
+                    if (message.clubId != null && message.hasOwnProperty("clubId"))
+                        object.clubId = $root.LiftLog.Ui.Models.UuidDao.toObject(message.clubId, options);
+                    if (message.encryptedClubName != null && message.hasOwnProperty("encryptedClubName"))
+                        object.encryptedClubName = options.bytes === String ? $util.base64.encode(message.encryptedClubName, 0, message.encryptedClubName.length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptedClubName) : message.encryptedClubName;
+                    if (message.encryptedClubDescription != null && message.hasOwnProperty("encryptedClubDescription"))
+                        object.encryptedClubDescription = options.bytes === String ? $util.base64.encode(message.encryptedClubDescription, 0, message.encryptedClubDescription.length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptedClubDescription) : message.encryptedClubDescription;
+                    if (message.encryptedProfilePicture != null && message.hasOwnProperty("encryptedProfilePicture")) {
+                        object.encryptedProfilePicture = options.bytes === String ? $util.base64.encode(message.encryptedProfilePicture, 0, message.encryptedProfilePicture.length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptedProfilePicture) : message.encryptedProfilePicture;
+                        if (options.oneofs)
+                            object._encryptedProfilePicture = "encryptedProfilePicture";
+                    }
+                    if (message.encryptedAesKey != null && message.hasOwnProperty("encryptedAesKey"))
+                        object.encryptedAesKey = options.bytes === String ? $util.base64.encode(message.encryptedAesKey, 0, message.encryptedAesKey.length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptedAesKey) : message.encryptedAesKey;
+                    if (message.offeredRole != null && message.hasOwnProperty("offeredRole"))
+                        object.offeredRole = options.enums === String ? $root.LiftLog.Ui.Models.ClubRole[message.offeredRole] === undefined ? message.offeredRole : $root.LiftLog.Ui.Models.ClubRole[message.offeredRole] : message.offeredRole;
+                    if (message.fromUserId != null && message.hasOwnProperty("fromUserId"))
+                        object.fromUserId = $root.LiftLog.Ui.Models.UuidDao.toObject(message.fromUserId, options);
+                    if (message.fromUserName != null && message.hasOwnProperty("fromUserName")) {
+                        object.fromUserName = $root.google.protobuf.StringValue.toObject(message.fromUserName, options);
+                        if (options.oneofs)
+                            object._fromUserName = "fromUserName";
+                    }
+                    return object;
+                };
+
+                /**
+                 * Converts this ClubInviteDao to JSON.
+                 * @function toJSON
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ClubInviteDao.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Gets the default type url for ClubInviteDao
+                 * @function getTypeUrl
+                 * @memberof LiftLog.Ui.Models.ClubInviteDao
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ClubInviteDao.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/LiftLog.Ui.Models.ClubInviteDao";
+                };
+
+                return ClubInviteDao;
+            })();
+
+            Models.ClubInviteResponseDao = (function() {
+
+                /**
+                 * Properties of a ClubInviteResponseDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @interface IClubInviteResponseDao
+                 * @property {LiftLog.Ui.Models.IUuidDao|null} [clubId] ClubInviteResponseDao clubId
+                 * @property {LiftLog.Ui.Models.IClubInviteAcceptedDao|null} [accepted] ClubInviteResponseDao accepted
+                 * @property {LiftLog.Ui.Models.IClubInviteRejectedDao|null} [rejected] ClubInviteResponseDao rejected
+                 */
+
+                /**
+                 * Constructs a new ClubInviteResponseDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @classdesc Represents a ClubInviteResponseDao.
+                 * @implements IClubInviteResponseDao
+                 * @constructor
+                 * @param {LiftLog.Ui.Models.IClubInviteResponseDao=} [properties] Properties to set
+                 */
+                function ClubInviteResponseDao(properties) {
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * ClubInviteResponseDao clubId.
+                 * @member {LiftLog.Ui.Models.IUuidDao|null|undefined} clubId
+                 * @memberof LiftLog.Ui.Models.ClubInviteResponseDao
+                 * @instance
+                 */
+                ClubInviteResponseDao.prototype.clubId = null;
+
+                /**
+                 * ClubInviteResponseDao accepted.
+                 * @member {LiftLog.Ui.Models.IClubInviteAcceptedDao|null|undefined} accepted
+                 * @memberof LiftLog.Ui.Models.ClubInviteResponseDao
+                 * @instance
+                 */
+                ClubInviteResponseDao.prototype.accepted = null;
+
+                /**
+                 * ClubInviteResponseDao rejected.
+                 * @member {LiftLog.Ui.Models.IClubInviteRejectedDao|null|undefined} rejected
+                 * @memberof LiftLog.Ui.Models.ClubInviteResponseDao
+                 * @instance
+                 */
+                ClubInviteResponseDao.prototype.rejected = null;
+
+                // OneOf field names bound to virtual getters and setters
+                let $oneOfFields;
+
+                /**
+                 * ClubInviteResponseDao responsePayload.
+                 * @member {"accepted"|"rejected"|undefined} responsePayload
+                 * @memberof LiftLog.Ui.Models.ClubInviteResponseDao
+                 * @instance
+                 */
+                Object.defineProperty(ClubInviteResponseDao.prototype, "responsePayload", {
+                    get: $util.oneOfGetter($oneOfFields = ["accepted", "rejected"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+
+                /**
+                 * Creates a new ClubInviteResponseDao instance using the specified properties.
+                 * @function create
+                 * @memberof LiftLog.Ui.Models.ClubInviteResponseDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubInviteResponseDao=} [properties] Properties to set
+                 * @returns {LiftLog.Ui.Models.ClubInviteResponseDao} ClubInviteResponseDao instance
+                 */
+                ClubInviteResponseDao.create = function create(properties) {
+                    return new ClubInviteResponseDao(properties);
+                };
+
+                /**
+                 * Encodes the specified ClubInviteResponseDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteResponseDao.verify|verify} messages.
+                 * @function encode
+                 * @memberof LiftLog.Ui.Models.ClubInviteResponseDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubInviteResponseDao} message ClubInviteResponseDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubInviteResponseDao.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.clubId != null && Object.hasOwnProperty.call(message, "clubId"))
+                        $root.LiftLog.Ui.Models.UuidDao.encode(message.clubId, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.accepted != null && Object.hasOwnProperty.call(message, "accepted"))
+                        $root.LiftLog.Ui.Models.ClubInviteAcceptedDao.encode(message.accepted, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.rejected != null && Object.hasOwnProperty.call(message, "rejected"))
+                        $root.LiftLog.Ui.Models.ClubInviteRejectedDao.encode(message.rejected, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ClubInviteResponseDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteResponseDao.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubInviteResponseDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubInviteResponseDao} message ClubInviteResponseDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubInviteResponseDao.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ClubInviteResponseDao message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof LiftLog.Ui.Models.ClubInviteResponseDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {LiftLog.Ui.Models.ClubInviteResponseDao} ClubInviteResponseDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubInviteResponseDao.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.LiftLog.Ui.Models.ClubInviteResponseDao();
+                    while (reader.pos < end) {
+                        let tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.clubId = $root.LiftLog.Ui.Models.UuidDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.accepted = $root.LiftLog.Ui.Models.ClubInviteAcceptedDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.rejected = $root.LiftLog.Ui.Models.ClubInviteRejectedDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ClubInviteResponseDao message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubInviteResponseDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {LiftLog.Ui.Models.ClubInviteResponseDao} ClubInviteResponseDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubInviteResponseDao.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ClubInviteResponseDao message.
+                 * @function verify
+                 * @memberof LiftLog.Ui.Models.ClubInviteResponseDao
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ClubInviteResponseDao.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    let properties = {};
+                    if (message.clubId != null && message.hasOwnProperty("clubId")) {
+                        let error = $root.LiftLog.Ui.Models.UuidDao.verify(message.clubId);
+                        if (error)
+                            return "clubId." + error;
+                    }
+                    if (message.accepted != null && message.hasOwnProperty("accepted")) {
+                        properties.responsePayload = 1;
+                        {
+                            let error = $root.LiftLog.Ui.Models.ClubInviteAcceptedDao.verify(message.accepted);
+                            if (error)
+                                return "accepted." + error;
+                        }
+                    }
+                    if (message.rejected != null && message.hasOwnProperty("rejected")) {
+                        if (properties.responsePayload === 1)
+                            return "responsePayload: multiple values";
+                        properties.responsePayload = 1;
+                        {
+                            let error = $root.LiftLog.Ui.Models.ClubInviteRejectedDao.verify(message.rejected);
+                            if (error)
+                                return "rejected." + error;
+                        }
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates a ClubInviteResponseDao message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof LiftLog.Ui.Models.ClubInviteResponseDao
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {LiftLog.Ui.Models.ClubInviteResponseDao} ClubInviteResponseDao
+                 */
+                ClubInviteResponseDao.fromObject = function fromObject(object) {
+                    if (object instanceof $root.LiftLog.Ui.Models.ClubInviteResponseDao)
+                        return object;
+                    let message = new $root.LiftLog.Ui.Models.ClubInviteResponseDao();
+                    if (object.clubId != null) {
+                        if (typeof object.clubId !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubInviteResponseDao.clubId: object expected");
+                        message.clubId = $root.LiftLog.Ui.Models.UuidDao.fromObject(object.clubId);
+                    }
+                    if (object.accepted != null) {
+                        if (typeof object.accepted !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubInviteResponseDao.accepted: object expected");
+                        message.accepted = $root.LiftLog.Ui.Models.ClubInviteAcceptedDao.fromObject(object.accepted);
+                    }
+                    if (object.rejected != null) {
+                        if (typeof object.rejected !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubInviteResponseDao.rejected: object expected");
+                        message.rejected = $root.LiftLog.Ui.Models.ClubInviteRejectedDao.fromObject(object.rejected);
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a ClubInviteResponseDao message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof LiftLog.Ui.Models.ClubInviteResponseDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.ClubInviteResponseDao} message ClubInviteResponseDao
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ClubInviteResponseDao.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    let object = {};
+                    if (options.defaults)
+                        object.clubId = null;
+                    if (message.clubId != null && message.hasOwnProperty("clubId"))
+                        object.clubId = $root.LiftLog.Ui.Models.UuidDao.toObject(message.clubId, options);
+                    if (message.accepted != null && message.hasOwnProperty("accepted")) {
+                        object.accepted = $root.LiftLog.Ui.Models.ClubInviteAcceptedDao.toObject(message.accepted, options);
+                        if (options.oneofs)
+                            object.responsePayload = "accepted";
+                    }
+                    if (message.rejected != null && message.hasOwnProperty("rejected")) {
+                        object.rejected = $root.LiftLog.Ui.Models.ClubInviteRejectedDao.toObject(message.rejected, options);
+                        if (options.oneofs)
+                            object.responsePayload = "rejected";
+                    }
+                    return object;
+                };
+
+                /**
+                 * Converts this ClubInviteResponseDao to JSON.
+                 * @function toJSON
+                 * @memberof LiftLog.Ui.Models.ClubInviteResponseDao
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ClubInviteResponseDao.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Gets the default type url for ClubInviteResponseDao
+                 * @function getTypeUrl
+                 * @memberof LiftLog.Ui.Models.ClubInviteResponseDao
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ClubInviteResponseDao.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/LiftLog.Ui.Models.ClubInviteResponseDao";
+                };
+
+                return ClubInviteResponseDao;
+            })();
+
+            Models.ClubInviteAcceptedDao = (function() {
+
+                /**
+                 * Properties of a ClubInviteAcceptedDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @interface IClubInviteAcceptedDao
+                 */
+
+                /**
+                 * Constructs a new ClubInviteAcceptedDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @classdesc Represents a ClubInviteAcceptedDao.
+                 * @implements IClubInviteAcceptedDao
+                 * @constructor
+                 * @param {LiftLog.Ui.Models.IClubInviteAcceptedDao=} [properties] Properties to set
+                 */
+                function ClubInviteAcceptedDao(properties) {
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * Creates a new ClubInviteAcceptedDao instance using the specified properties.
+                 * @function create
+                 * @memberof LiftLog.Ui.Models.ClubInviteAcceptedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubInviteAcceptedDao=} [properties] Properties to set
+                 * @returns {LiftLog.Ui.Models.ClubInviteAcceptedDao} ClubInviteAcceptedDao instance
+                 */
+                ClubInviteAcceptedDao.create = function create(properties) {
+                    return new ClubInviteAcceptedDao(properties);
+                };
+
+                /**
+                 * Encodes the specified ClubInviteAcceptedDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteAcceptedDao.verify|verify} messages.
+                 * @function encode
+                 * @memberof LiftLog.Ui.Models.ClubInviteAcceptedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubInviteAcceptedDao} message ClubInviteAcceptedDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubInviteAcceptedDao.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ClubInviteAcceptedDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteAcceptedDao.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubInviteAcceptedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubInviteAcceptedDao} message ClubInviteAcceptedDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubInviteAcceptedDao.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ClubInviteAcceptedDao message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof LiftLog.Ui.Models.ClubInviteAcceptedDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {LiftLog.Ui.Models.ClubInviteAcceptedDao} ClubInviteAcceptedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubInviteAcceptedDao.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.LiftLog.Ui.Models.ClubInviteAcceptedDao();
+                    while (reader.pos < end) {
+                        let tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ClubInviteAcceptedDao message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubInviteAcceptedDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {LiftLog.Ui.Models.ClubInviteAcceptedDao} ClubInviteAcceptedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubInviteAcceptedDao.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ClubInviteAcceptedDao message.
+                 * @function verify
+                 * @memberof LiftLog.Ui.Models.ClubInviteAcceptedDao
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ClubInviteAcceptedDao.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a ClubInviteAcceptedDao message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof LiftLog.Ui.Models.ClubInviteAcceptedDao
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {LiftLog.Ui.Models.ClubInviteAcceptedDao} ClubInviteAcceptedDao
+                 */
+                ClubInviteAcceptedDao.fromObject = function fromObject(object) {
+                    if (object instanceof $root.LiftLog.Ui.Models.ClubInviteAcceptedDao)
+                        return object;
+                    return new $root.LiftLog.Ui.Models.ClubInviteAcceptedDao();
+                };
+
+                /**
+                 * Creates a plain object from a ClubInviteAcceptedDao message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof LiftLog.Ui.Models.ClubInviteAcceptedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.ClubInviteAcceptedDao} message ClubInviteAcceptedDao
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ClubInviteAcceptedDao.toObject = function toObject() {
+                    return {};
+                };
+
+                /**
+                 * Converts this ClubInviteAcceptedDao to JSON.
+                 * @function toJSON
+                 * @memberof LiftLog.Ui.Models.ClubInviteAcceptedDao
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ClubInviteAcceptedDao.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Gets the default type url for ClubInviteAcceptedDao
+                 * @function getTypeUrl
+                 * @memberof LiftLog.Ui.Models.ClubInviteAcceptedDao
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ClubInviteAcceptedDao.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/LiftLog.Ui.Models.ClubInviteAcceptedDao";
+                };
+
+                return ClubInviteAcceptedDao;
+            })();
+
+            Models.ClubInviteRejectedDao = (function() {
+
+                /**
+                 * Properties of a ClubInviteRejectedDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @interface IClubInviteRejectedDao
+                 */
+
+                /**
+                 * Constructs a new ClubInviteRejectedDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @classdesc Represents a ClubInviteRejectedDao.
+                 * @implements IClubInviteRejectedDao
+                 * @constructor
+                 * @param {LiftLog.Ui.Models.IClubInviteRejectedDao=} [properties] Properties to set
+                 */
+                function ClubInviteRejectedDao(properties) {
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * Creates a new ClubInviteRejectedDao instance using the specified properties.
+                 * @function create
+                 * @memberof LiftLog.Ui.Models.ClubInviteRejectedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubInviteRejectedDao=} [properties] Properties to set
+                 * @returns {LiftLog.Ui.Models.ClubInviteRejectedDao} ClubInviteRejectedDao instance
+                 */
+                ClubInviteRejectedDao.create = function create(properties) {
+                    return new ClubInviteRejectedDao(properties);
+                };
+
+                /**
+                 * Encodes the specified ClubInviteRejectedDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteRejectedDao.verify|verify} messages.
+                 * @function encode
+                 * @memberof LiftLog.Ui.Models.ClubInviteRejectedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubInviteRejectedDao} message ClubInviteRejectedDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubInviteRejectedDao.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ClubInviteRejectedDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteRejectedDao.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubInviteRejectedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubInviteRejectedDao} message ClubInviteRejectedDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubInviteRejectedDao.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ClubInviteRejectedDao message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof LiftLog.Ui.Models.ClubInviteRejectedDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {LiftLog.Ui.Models.ClubInviteRejectedDao} ClubInviteRejectedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubInviteRejectedDao.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.LiftLog.Ui.Models.ClubInviteRejectedDao();
+                    while (reader.pos < end) {
+                        let tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ClubInviteRejectedDao message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubInviteRejectedDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {LiftLog.Ui.Models.ClubInviteRejectedDao} ClubInviteRejectedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubInviteRejectedDao.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ClubInviteRejectedDao message.
+                 * @function verify
+                 * @memberof LiftLog.Ui.Models.ClubInviteRejectedDao
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ClubInviteRejectedDao.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a ClubInviteRejectedDao message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof LiftLog.Ui.Models.ClubInviteRejectedDao
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {LiftLog.Ui.Models.ClubInviteRejectedDao} ClubInviteRejectedDao
+                 */
+                ClubInviteRejectedDao.fromObject = function fromObject(object) {
+                    if (object instanceof $root.LiftLog.Ui.Models.ClubInviteRejectedDao)
+                        return object;
+                    return new $root.LiftLog.Ui.Models.ClubInviteRejectedDao();
+                };
+
+                /**
+                 * Creates a plain object from a ClubInviteRejectedDao message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof LiftLog.Ui.Models.ClubInviteRejectedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.ClubInviteRejectedDao} message ClubInviteRejectedDao
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ClubInviteRejectedDao.toObject = function toObject() {
+                    return {};
+                };
+
+                /**
+                 * Converts this ClubInviteRejectedDao to JSON.
+                 * @function toJSON
+                 * @memberof LiftLog.Ui.Models.ClubInviteRejectedDao
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ClubInviteRejectedDao.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Gets the default type url for ClubInviteRejectedDao
+                 * @function getTypeUrl
+                 * @memberof LiftLog.Ui.Models.ClubInviteRejectedDao
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ClubInviteRejectedDao.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/LiftLog.Ui.Models.ClubInviteRejectedDao";
+                };
+
+                return ClubInviteRejectedDao;
+            })();
+
+            Models.ClubFeedItemDaoV1 = (function() {
+
+                /**
+                 * Properties of a ClubFeedItemDaoV1.
+                 * @memberof LiftLog.Ui.Models
+                 * @interface IClubFeedItemDaoV1
+                 * @property {LiftLog.Ui.Models.IUuidDao|null} [clubId] ClubFeedItemDaoV1 clubId
+                 * @property {LiftLog.Ui.Models.IUuidDao|null} [eventId] ClubFeedItemDaoV1 eventId
+                 * @property {LiftLog.Ui.Models.IUuidDao|null} [userId] ClubFeedItemDaoV1 userId
+                 * @property {google.protobuf.ITimestamp|null} [timestamp] ClubFeedItemDaoV1 timestamp
+                 * @property {google.protobuf.ITimestamp|null} [expiry] ClubFeedItemDaoV1 expiry
+                 * @property {LiftLog.Ui.Models.SessionHistoryDao.ISessionDaoV2|null} [session] ClubFeedItemDaoV1 session
+                 * @property {LiftLog.Ui.Models.IClubAnnouncementDaoV1|null} [announcement] ClubFeedItemDaoV1 announcement
+                 */
+
+                /**
+                 * Constructs a new ClubFeedItemDaoV1.
+                 * @memberof LiftLog.Ui.Models
+                 * @classdesc Represents a ClubFeedItemDaoV1.
+                 * @implements IClubFeedItemDaoV1
+                 * @constructor
+                 * @param {LiftLog.Ui.Models.IClubFeedItemDaoV1=} [properties] Properties to set
+                 */
+                function ClubFeedItemDaoV1(properties) {
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * ClubFeedItemDaoV1 clubId.
+                 * @member {LiftLog.Ui.Models.IUuidDao|null|undefined} clubId
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @instance
+                 */
+                ClubFeedItemDaoV1.prototype.clubId = null;
+
+                /**
+                 * ClubFeedItemDaoV1 eventId.
+                 * @member {LiftLog.Ui.Models.IUuidDao|null|undefined} eventId
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @instance
+                 */
+                ClubFeedItemDaoV1.prototype.eventId = null;
+
+                /**
+                 * ClubFeedItemDaoV1 userId.
+                 * @member {LiftLog.Ui.Models.IUuidDao|null|undefined} userId
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @instance
+                 */
+                ClubFeedItemDaoV1.prototype.userId = null;
+
+                /**
+                 * ClubFeedItemDaoV1 timestamp.
+                 * @member {google.protobuf.ITimestamp|null|undefined} timestamp
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @instance
+                 */
+                ClubFeedItemDaoV1.prototype.timestamp = null;
+
+                /**
+                 * ClubFeedItemDaoV1 expiry.
+                 * @member {google.protobuf.ITimestamp|null|undefined} expiry
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @instance
+                 */
+                ClubFeedItemDaoV1.prototype.expiry = null;
+
+                /**
+                 * ClubFeedItemDaoV1 session.
+                 * @member {LiftLog.Ui.Models.SessionHistoryDao.ISessionDaoV2|null|undefined} session
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @instance
+                 */
+                ClubFeedItemDaoV1.prototype.session = null;
+
+                /**
+                 * ClubFeedItemDaoV1 announcement.
+                 * @member {LiftLog.Ui.Models.IClubAnnouncementDaoV1|null|undefined} announcement
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @instance
+                 */
+                ClubFeedItemDaoV1.prototype.announcement = null;
+
+                // OneOf field names bound to virtual getters and setters
+                let $oneOfFields;
+
+                /**
+                 * ClubFeedItemDaoV1 payload.
+                 * @member {"session"|"announcement"|undefined} payload
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @instance
+                 */
+                Object.defineProperty(ClubFeedItemDaoV1.prototype, "payload", {
+                    get: $util.oneOfGetter($oneOfFields = ["session", "announcement"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+
+                /**
+                 * Creates a new ClubFeedItemDaoV1 instance using the specified properties.
+                 * @function create
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubFeedItemDaoV1=} [properties] Properties to set
+                 * @returns {LiftLog.Ui.Models.ClubFeedItemDaoV1} ClubFeedItemDaoV1 instance
+                 */
+                ClubFeedItemDaoV1.create = function create(properties) {
+                    return new ClubFeedItemDaoV1(properties);
+                };
+
+                /**
+                 * Encodes the specified ClubFeedItemDaoV1 message. Does not implicitly {@link LiftLog.Ui.Models.ClubFeedItemDaoV1.verify|verify} messages.
+                 * @function encode
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubFeedItemDaoV1} message ClubFeedItemDaoV1 message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubFeedItemDaoV1.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.clubId != null && Object.hasOwnProperty.call(message, "clubId"))
+                        $root.LiftLog.Ui.Models.UuidDao.encode(message.clubId, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.eventId != null && Object.hasOwnProperty.call(message, "eventId"))
+                        $root.LiftLog.Ui.Models.UuidDao.encode(message.eventId, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.userId != null && Object.hasOwnProperty.call(message, "userId"))
+                        $root.LiftLog.Ui.Models.UuidDao.encode(message.userId, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.timestamp != null && Object.hasOwnProperty.call(message, "timestamp"))
+                        $root.google.protobuf.Timestamp.encode(message.timestamp, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.expiry != null && Object.hasOwnProperty.call(message, "expiry"))
+                        $root.google.protobuf.Timestamp.encode(message.expiry, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.session != null && Object.hasOwnProperty.call(message, "session"))
+                        $root.LiftLog.Ui.Models.SessionHistoryDao.SessionDaoV2.encode(message.session, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    if (message.announcement != null && Object.hasOwnProperty.call(message, "announcement"))
+                        $root.LiftLog.Ui.Models.ClubAnnouncementDaoV1.encode(message.announcement, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ClubFeedItemDaoV1 message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubFeedItemDaoV1.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubFeedItemDaoV1} message ClubFeedItemDaoV1 message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubFeedItemDaoV1.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ClubFeedItemDaoV1 message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {LiftLog.Ui.Models.ClubFeedItemDaoV1} ClubFeedItemDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubFeedItemDaoV1.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.LiftLog.Ui.Models.ClubFeedItemDaoV1();
+                    while (reader.pos < end) {
+                        let tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.clubId = $root.LiftLog.Ui.Models.UuidDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.eventId = $root.LiftLog.Ui.Models.UuidDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.userId = $root.LiftLog.Ui.Models.UuidDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 4: {
+                                message.timestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.expiry = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 6: {
+                                message.session = $root.LiftLog.Ui.Models.SessionHistoryDao.SessionDaoV2.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 7: {
+                                message.announcement = $root.LiftLog.Ui.Models.ClubAnnouncementDaoV1.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ClubFeedItemDaoV1 message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {LiftLog.Ui.Models.ClubFeedItemDaoV1} ClubFeedItemDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubFeedItemDaoV1.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ClubFeedItemDaoV1 message.
+                 * @function verify
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ClubFeedItemDaoV1.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    let properties = {};
+                    if (message.clubId != null && message.hasOwnProperty("clubId")) {
+                        let error = $root.LiftLog.Ui.Models.UuidDao.verify(message.clubId);
+                        if (error)
+                            return "clubId." + error;
+                    }
+                    if (message.eventId != null && message.hasOwnProperty("eventId")) {
+                        let error = $root.LiftLog.Ui.Models.UuidDao.verify(message.eventId);
+                        if (error)
+                            return "eventId." + error;
+                    }
+                    if (message.userId != null && message.hasOwnProperty("userId")) {
+                        let error = $root.LiftLog.Ui.Models.UuidDao.verify(message.userId);
+                        if (error)
+                            return "userId." + error;
+                    }
+                    if (message.timestamp != null && message.hasOwnProperty("timestamp")) {
+                        let error = $root.google.protobuf.Timestamp.verify(message.timestamp);
+                        if (error)
+                            return "timestamp." + error;
+                    }
+                    if (message.expiry != null && message.hasOwnProperty("expiry")) {
+                        let error = $root.google.protobuf.Timestamp.verify(message.expiry);
+                        if (error)
+                            return "expiry." + error;
+                    }
+                    if (message.session != null && message.hasOwnProperty("session")) {
+                        properties.payload = 1;
+                        {
+                            let error = $root.LiftLog.Ui.Models.SessionHistoryDao.SessionDaoV2.verify(message.session);
+                            if (error)
+                                return "session." + error;
+                        }
+                    }
+                    if (message.announcement != null && message.hasOwnProperty("announcement")) {
+                        if (properties.payload === 1)
+                            return "payload: multiple values";
+                        properties.payload = 1;
+                        {
+                            let error = $root.LiftLog.Ui.Models.ClubAnnouncementDaoV1.verify(message.announcement);
+                            if (error)
+                                return "announcement." + error;
+                        }
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates a ClubFeedItemDaoV1 message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {LiftLog.Ui.Models.ClubFeedItemDaoV1} ClubFeedItemDaoV1
+                 */
+                ClubFeedItemDaoV1.fromObject = function fromObject(object) {
+                    if (object instanceof $root.LiftLog.Ui.Models.ClubFeedItemDaoV1)
+                        return object;
+                    let message = new $root.LiftLog.Ui.Models.ClubFeedItemDaoV1();
+                    if (object.clubId != null) {
+                        if (typeof object.clubId !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubFeedItemDaoV1.clubId: object expected");
+                        message.clubId = $root.LiftLog.Ui.Models.UuidDao.fromObject(object.clubId);
+                    }
+                    if (object.eventId != null) {
+                        if (typeof object.eventId !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubFeedItemDaoV1.eventId: object expected");
+                        message.eventId = $root.LiftLog.Ui.Models.UuidDao.fromObject(object.eventId);
+                    }
+                    if (object.userId != null) {
+                        if (typeof object.userId !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubFeedItemDaoV1.userId: object expected");
+                        message.userId = $root.LiftLog.Ui.Models.UuidDao.fromObject(object.userId);
+                    }
+                    if (object.timestamp != null) {
+                        if (typeof object.timestamp !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubFeedItemDaoV1.timestamp: object expected");
+                        message.timestamp = $root.google.protobuf.Timestamp.fromObject(object.timestamp);
+                    }
+                    if (object.expiry != null) {
+                        if (typeof object.expiry !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubFeedItemDaoV1.expiry: object expected");
+                        message.expiry = $root.google.protobuf.Timestamp.fromObject(object.expiry);
+                    }
+                    if (object.session != null) {
+                        if (typeof object.session !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubFeedItemDaoV1.session: object expected");
+                        message.session = $root.LiftLog.Ui.Models.SessionHistoryDao.SessionDaoV2.fromObject(object.session);
+                    }
+                    if (object.announcement != null) {
+                        if (typeof object.announcement !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubFeedItemDaoV1.announcement: object expected");
+                        message.announcement = $root.LiftLog.Ui.Models.ClubAnnouncementDaoV1.fromObject(object.announcement);
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a ClubFeedItemDaoV1 message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.ClubFeedItemDaoV1} message ClubFeedItemDaoV1
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ClubFeedItemDaoV1.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    let object = {};
+                    if (options.defaults) {
+                        object.clubId = null;
+                        object.eventId = null;
+                        object.userId = null;
+                        object.timestamp = null;
+                        object.expiry = null;
+                    }
+                    if (message.clubId != null && message.hasOwnProperty("clubId"))
+                        object.clubId = $root.LiftLog.Ui.Models.UuidDao.toObject(message.clubId, options);
+                    if (message.eventId != null && message.hasOwnProperty("eventId"))
+                        object.eventId = $root.LiftLog.Ui.Models.UuidDao.toObject(message.eventId, options);
+                    if (message.userId != null && message.hasOwnProperty("userId"))
+                        object.userId = $root.LiftLog.Ui.Models.UuidDao.toObject(message.userId, options);
+                    if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                        object.timestamp = $root.google.protobuf.Timestamp.toObject(message.timestamp, options);
+                    if (message.expiry != null && message.hasOwnProperty("expiry"))
+                        object.expiry = $root.google.protobuf.Timestamp.toObject(message.expiry, options);
+                    if (message.session != null && message.hasOwnProperty("session")) {
+                        object.session = $root.LiftLog.Ui.Models.SessionHistoryDao.SessionDaoV2.toObject(message.session, options);
+                        if (options.oneofs)
+                            object.payload = "session";
+                    }
+                    if (message.announcement != null && message.hasOwnProperty("announcement")) {
+                        object.announcement = $root.LiftLog.Ui.Models.ClubAnnouncementDaoV1.toObject(message.announcement, options);
+                        if (options.oneofs)
+                            object.payload = "announcement";
+                    }
+                    return object;
+                };
+
+                /**
+                 * Converts this ClubFeedItemDaoV1 to JSON.
+                 * @function toJSON
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ClubFeedItemDaoV1.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Gets the default type url for ClubFeedItemDaoV1
+                 * @function getTypeUrl
+                 * @memberof LiftLog.Ui.Models.ClubFeedItemDaoV1
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ClubFeedItemDaoV1.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/LiftLog.Ui.Models.ClubFeedItemDaoV1";
+                };
+
+                return ClubFeedItemDaoV1;
+            })();
+
+            Models.ClubAnnouncementDaoV1 = (function() {
+
+                /**
+                 * Properties of a ClubAnnouncementDaoV1.
+                 * @memberof LiftLog.Ui.Models
+                 * @interface IClubAnnouncementDaoV1
+                 * @property {string|null} [announcementText] ClubAnnouncementDaoV1 announcementText
+                 */
+
+                /**
+                 * Constructs a new ClubAnnouncementDaoV1.
+                 * @memberof LiftLog.Ui.Models
+                 * @classdesc Represents a ClubAnnouncementDaoV1.
+                 * @implements IClubAnnouncementDaoV1
+                 * @constructor
+                 * @param {LiftLog.Ui.Models.IClubAnnouncementDaoV1=} [properties] Properties to set
+                 */
+                function ClubAnnouncementDaoV1(properties) {
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * ClubAnnouncementDaoV1 announcementText.
+                 * @member {string} announcementText
+                 * @memberof LiftLog.Ui.Models.ClubAnnouncementDaoV1
+                 * @instance
+                 */
+                ClubAnnouncementDaoV1.prototype.announcementText = "";
+
+                /**
+                 * Creates a new ClubAnnouncementDaoV1 instance using the specified properties.
+                 * @function create
+                 * @memberof LiftLog.Ui.Models.ClubAnnouncementDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubAnnouncementDaoV1=} [properties] Properties to set
+                 * @returns {LiftLog.Ui.Models.ClubAnnouncementDaoV1} ClubAnnouncementDaoV1 instance
+                 */
+                ClubAnnouncementDaoV1.create = function create(properties) {
+                    return new ClubAnnouncementDaoV1(properties);
+                };
+
+                /**
+                 * Encodes the specified ClubAnnouncementDaoV1 message. Does not implicitly {@link LiftLog.Ui.Models.ClubAnnouncementDaoV1.verify|verify} messages.
+                 * @function encode
+                 * @memberof LiftLog.Ui.Models.ClubAnnouncementDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubAnnouncementDaoV1} message ClubAnnouncementDaoV1 message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubAnnouncementDaoV1.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.announcementText != null && Object.hasOwnProperty.call(message, "announcementText"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.announcementText);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ClubAnnouncementDaoV1 message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubAnnouncementDaoV1.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubAnnouncementDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubAnnouncementDaoV1} message ClubAnnouncementDaoV1 message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubAnnouncementDaoV1.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ClubAnnouncementDaoV1 message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof LiftLog.Ui.Models.ClubAnnouncementDaoV1
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {LiftLog.Ui.Models.ClubAnnouncementDaoV1} ClubAnnouncementDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubAnnouncementDaoV1.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.LiftLog.Ui.Models.ClubAnnouncementDaoV1();
+                    while (reader.pos < end) {
+                        let tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.announcementText = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ClubAnnouncementDaoV1 message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubAnnouncementDaoV1
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {LiftLog.Ui.Models.ClubAnnouncementDaoV1} ClubAnnouncementDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubAnnouncementDaoV1.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ClubAnnouncementDaoV1 message.
+                 * @function verify
+                 * @memberof LiftLog.Ui.Models.ClubAnnouncementDaoV1
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ClubAnnouncementDaoV1.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.announcementText != null && message.hasOwnProperty("announcementText"))
+                        if (!$util.isString(message.announcementText))
+                            return "announcementText: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a ClubAnnouncementDaoV1 message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof LiftLog.Ui.Models.ClubAnnouncementDaoV1
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {LiftLog.Ui.Models.ClubAnnouncementDaoV1} ClubAnnouncementDaoV1
+                 */
+                ClubAnnouncementDaoV1.fromObject = function fromObject(object) {
+                    if (object instanceof $root.LiftLog.Ui.Models.ClubAnnouncementDaoV1)
+                        return object;
+                    let message = new $root.LiftLog.Ui.Models.ClubAnnouncementDaoV1();
+                    if (object.announcementText != null)
+                        message.announcementText = String(object.announcementText);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a ClubAnnouncementDaoV1 message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof LiftLog.Ui.Models.ClubAnnouncementDaoV1
+                 * @static
+                 * @param {LiftLog.Ui.Models.ClubAnnouncementDaoV1} message ClubAnnouncementDaoV1
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ClubAnnouncementDaoV1.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    let object = {};
+                    if (options.defaults)
+                        object.announcementText = "";
+                    if (message.announcementText != null && message.hasOwnProperty("announcementText"))
+                        object.announcementText = message.announcementText;
+                    return object;
+                };
+
+                /**
+                 * Converts this ClubAnnouncementDaoV1 to JSON.
+                 * @function toJSON
+                 * @memberof LiftLog.Ui.Models.ClubAnnouncementDaoV1
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ClubAnnouncementDaoV1.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Gets the default type url for ClubAnnouncementDaoV1
+                 * @function getTypeUrl
+                 * @memberof LiftLog.Ui.Models.ClubAnnouncementDaoV1
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ClubAnnouncementDaoV1.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/LiftLog.Ui.Models.ClubAnnouncementDaoV1";
+                };
+
+                return ClubAnnouncementDaoV1;
+            })();
+
+            Models.ClubJoinRequestDao = (function() {
+
+                /**
+                 * Properties of a ClubJoinRequestDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @interface IClubJoinRequestDao
+                 * @property {LiftLog.Ui.Models.IUuidDao|null} [clubId] ClubJoinRequestDao clubId
+                 * @property {LiftLog.Ui.Models.IUuidDao|null} [fromUserId] ClubJoinRequestDao fromUserId
+                 * @property {google.protobuf.IStringValue|null} [fromUserName] ClubJoinRequestDao fromUserName
+                 */
+
+                /**
+                 * Constructs a new ClubJoinRequestDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @classdesc Represents a ClubJoinRequestDao.
+                 * @implements IClubJoinRequestDao
+                 * @constructor
+                 * @param {LiftLog.Ui.Models.IClubJoinRequestDao=} [properties] Properties to set
+                 */
+                function ClubJoinRequestDao(properties) {
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * ClubJoinRequestDao clubId.
+                 * @member {LiftLog.Ui.Models.IUuidDao|null|undefined} clubId
+                 * @memberof LiftLog.Ui.Models.ClubJoinRequestDao
+                 * @instance
+                 */
+                ClubJoinRequestDao.prototype.clubId = null;
+
+                /**
+                 * ClubJoinRequestDao fromUserId.
+                 * @member {LiftLog.Ui.Models.IUuidDao|null|undefined} fromUserId
+                 * @memberof LiftLog.Ui.Models.ClubJoinRequestDao
+                 * @instance
+                 */
+                ClubJoinRequestDao.prototype.fromUserId = null;
+
+                /**
+                 * ClubJoinRequestDao fromUserName.
+                 * @member {google.protobuf.IStringValue|null|undefined} fromUserName
+                 * @memberof LiftLog.Ui.Models.ClubJoinRequestDao
+                 * @instance
+                 */
+                ClubJoinRequestDao.prototype.fromUserName = null;
+
+                // OneOf field names bound to virtual getters and setters
+                let $oneOfFields;
+
+                /**
+                 * ClubJoinRequestDao _fromUserName.
+                 * @member {"fromUserName"|undefined} _fromUserName
+                 * @memberof LiftLog.Ui.Models.ClubJoinRequestDao
+                 * @instance
+                 */
+                Object.defineProperty(ClubJoinRequestDao.prototype, "_fromUserName", {
+                    get: $util.oneOfGetter($oneOfFields = ["fromUserName"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+
+                /**
+                 * Creates a new ClubJoinRequestDao instance using the specified properties.
+                 * @function create
+                 * @memberof LiftLog.Ui.Models.ClubJoinRequestDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubJoinRequestDao=} [properties] Properties to set
+                 * @returns {LiftLog.Ui.Models.ClubJoinRequestDao} ClubJoinRequestDao instance
+                 */
+                ClubJoinRequestDao.create = function create(properties) {
+                    return new ClubJoinRequestDao(properties);
+                };
+
+                /**
+                 * Encodes the specified ClubJoinRequestDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinRequestDao.verify|verify} messages.
+                 * @function encode
+                 * @memberof LiftLog.Ui.Models.ClubJoinRequestDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubJoinRequestDao} message ClubJoinRequestDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubJoinRequestDao.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.clubId != null && Object.hasOwnProperty.call(message, "clubId"))
+                        $root.LiftLog.Ui.Models.UuidDao.encode(message.clubId, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.fromUserId != null && Object.hasOwnProperty.call(message, "fromUserId"))
+                        $root.LiftLog.Ui.Models.UuidDao.encode(message.fromUserId, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.fromUserName != null && Object.hasOwnProperty.call(message, "fromUserName"))
+                        $root.google.protobuf.StringValue.encode(message.fromUserName, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ClubJoinRequestDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinRequestDao.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubJoinRequestDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubJoinRequestDao} message ClubJoinRequestDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubJoinRequestDao.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ClubJoinRequestDao message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof LiftLog.Ui.Models.ClubJoinRequestDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {LiftLog.Ui.Models.ClubJoinRequestDao} ClubJoinRequestDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubJoinRequestDao.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.LiftLog.Ui.Models.ClubJoinRequestDao();
+                    while (reader.pos < end) {
+                        let tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.clubId = $root.LiftLog.Ui.Models.UuidDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.fromUserId = $root.LiftLog.Ui.Models.UuidDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.fromUserName = $root.google.protobuf.StringValue.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ClubJoinRequestDao message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubJoinRequestDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {LiftLog.Ui.Models.ClubJoinRequestDao} ClubJoinRequestDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubJoinRequestDao.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ClubJoinRequestDao message.
+                 * @function verify
+                 * @memberof LiftLog.Ui.Models.ClubJoinRequestDao
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ClubJoinRequestDao.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    let properties = {};
+                    if (message.clubId != null && message.hasOwnProperty("clubId")) {
+                        let error = $root.LiftLog.Ui.Models.UuidDao.verify(message.clubId);
+                        if (error)
+                            return "clubId." + error;
+                    }
+                    if (message.fromUserId != null && message.hasOwnProperty("fromUserId")) {
+                        let error = $root.LiftLog.Ui.Models.UuidDao.verify(message.fromUserId);
+                        if (error)
+                            return "fromUserId." + error;
+                    }
+                    if (message.fromUserName != null && message.hasOwnProperty("fromUserName")) {
+                        properties._fromUserName = 1;
+                        {
+                            let error = $root.google.protobuf.StringValue.verify(message.fromUserName);
+                            if (error)
+                                return "fromUserName." + error;
+                        }
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates a ClubJoinRequestDao message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof LiftLog.Ui.Models.ClubJoinRequestDao
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {LiftLog.Ui.Models.ClubJoinRequestDao} ClubJoinRequestDao
+                 */
+                ClubJoinRequestDao.fromObject = function fromObject(object) {
+                    if (object instanceof $root.LiftLog.Ui.Models.ClubJoinRequestDao)
+                        return object;
+                    let message = new $root.LiftLog.Ui.Models.ClubJoinRequestDao();
+                    if (object.clubId != null) {
+                        if (typeof object.clubId !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubJoinRequestDao.clubId: object expected");
+                        message.clubId = $root.LiftLog.Ui.Models.UuidDao.fromObject(object.clubId);
+                    }
+                    if (object.fromUserId != null) {
+                        if (typeof object.fromUserId !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubJoinRequestDao.fromUserId: object expected");
+                        message.fromUserId = $root.LiftLog.Ui.Models.UuidDao.fromObject(object.fromUserId);
+                    }
+                    if (object.fromUserName != null) {
+                        if (typeof object.fromUserName !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubJoinRequestDao.fromUserName: object expected");
+                        message.fromUserName = $root.google.protobuf.StringValue.fromObject(object.fromUserName);
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a ClubJoinRequestDao message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof LiftLog.Ui.Models.ClubJoinRequestDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.ClubJoinRequestDao} message ClubJoinRequestDao
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ClubJoinRequestDao.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    let object = {};
+                    if (options.defaults) {
+                        object.clubId = null;
+                        object.fromUserId = null;
+                    }
+                    if (message.clubId != null && message.hasOwnProperty("clubId"))
+                        object.clubId = $root.LiftLog.Ui.Models.UuidDao.toObject(message.clubId, options);
+                    if (message.fromUserId != null && message.hasOwnProperty("fromUserId"))
+                        object.fromUserId = $root.LiftLog.Ui.Models.UuidDao.toObject(message.fromUserId, options);
+                    if (message.fromUserName != null && message.hasOwnProperty("fromUserName")) {
+                        object.fromUserName = $root.google.protobuf.StringValue.toObject(message.fromUserName, options);
+                        if (options.oneofs)
+                            object._fromUserName = "fromUserName";
+                    }
+                    return object;
+                };
+
+                /**
+                 * Converts this ClubJoinRequestDao to JSON.
+                 * @function toJSON
+                 * @memberof LiftLog.Ui.Models.ClubJoinRequestDao
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ClubJoinRequestDao.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Gets the default type url for ClubJoinRequestDao
+                 * @function getTypeUrl
+                 * @memberof LiftLog.Ui.Models.ClubJoinRequestDao
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ClubJoinRequestDao.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/LiftLog.Ui.Models.ClubJoinRequestDao";
+                };
+
+                return ClubJoinRequestDao;
+            })();
+
+            Models.ClubJoinResponseDao = (function() {
+
+                /**
+                 * Properties of a ClubJoinResponseDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @interface IClubJoinResponseDao
+                 * @property {LiftLog.Ui.Models.IUuidDao|null} [clubId] ClubJoinResponseDao clubId
+                 * @property {LiftLog.Ui.Models.IClubJoinAcceptedDao|null} [accepted] ClubJoinResponseDao accepted
+                 * @property {LiftLog.Ui.Models.IClubJoinRejectedDao|null} [rejected] ClubJoinResponseDao rejected
+                 */
+
+                /**
+                 * Constructs a new ClubJoinResponseDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @classdesc Represents a ClubJoinResponseDao.
+                 * @implements IClubJoinResponseDao
+                 * @constructor
+                 * @param {LiftLog.Ui.Models.IClubJoinResponseDao=} [properties] Properties to set
+                 */
+                function ClubJoinResponseDao(properties) {
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * ClubJoinResponseDao clubId.
+                 * @member {LiftLog.Ui.Models.IUuidDao|null|undefined} clubId
+                 * @memberof LiftLog.Ui.Models.ClubJoinResponseDao
+                 * @instance
+                 */
+                ClubJoinResponseDao.prototype.clubId = null;
+
+                /**
+                 * ClubJoinResponseDao accepted.
+                 * @member {LiftLog.Ui.Models.IClubJoinAcceptedDao|null|undefined} accepted
+                 * @memberof LiftLog.Ui.Models.ClubJoinResponseDao
+                 * @instance
+                 */
+                ClubJoinResponseDao.prototype.accepted = null;
+
+                /**
+                 * ClubJoinResponseDao rejected.
+                 * @member {LiftLog.Ui.Models.IClubJoinRejectedDao|null|undefined} rejected
+                 * @memberof LiftLog.Ui.Models.ClubJoinResponseDao
+                 * @instance
+                 */
+                ClubJoinResponseDao.prototype.rejected = null;
+
+                // OneOf field names bound to virtual getters and setters
+                let $oneOfFields;
+
+                /**
+                 * ClubJoinResponseDao responsePayload.
+                 * @member {"accepted"|"rejected"|undefined} responsePayload
+                 * @memberof LiftLog.Ui.Models.ClubJoinResponseDao
+                 * @instance
+                 */
+                Object.defineProperty(ClubJoinResponseDao.prototype, "responsePayload", {
+                    get: $util.oneOfGetter($oneOfFields = ["accepted", "rejected"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+
+                /**
+                 * Creates a new ClubJoinResponseDao instance using the specified properties.
+                 * @function create
+                 * @memberof LiftLog.Ui.Models.ClubJoinResponseDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubJoinResponseDao=} [properties] Properties to set
+                 * @returns {LiftLog.Ui.Models.ClubJoinResponseDao} ClubJoinResponseDao instance
+                 */
+                ClubJoinResponseDao.create = function create(properties) {
+                    return new ClubJoinResponseDao(properties);
+                };
+
+                /**
+                 * Encodes the specified ClubJoinResponseDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinResponseDao.verify|verify} messages.
+                 * @function encode
+                 * @memberof LiftLog.Ui.Models.ClubJoinResponseDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubJoinResponseDao} message ClubJoinResponseDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubJoinResponseDao.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.clubId != null && Object.hasOwnProperty.call(message, "clubId"))
+                        $root.LiftLog.Ui.Models.UuidDao.encode(message.clubId, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.accepted != null && Object.hasOwnProperty.call(message, "accepted"))
+                        $root.LiftLog.Ui.Models.ClubJoinAcceptedDao.encode(message.accepted, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.rejected != null && Object.hasOwnProperty.call(message, "rejected"))
+                        $root.LiftLog.Ui.Models.ClubJoinRejectedDao.encode(message.rejected, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ClubJoinResponseDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinResponseDao.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubJoinResponseDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubJoinResponseDao} message ClubJoinResponseDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubJoinResponseDao.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ClubJoinResponseDao message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof LiftLog.Ui.Models.ClubJoinResponseDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {LiftLog.Ui.Models.ClubJoinResponseDao} ClubJoinResponseDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubJoinResponseDao.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.LiftLog.Ui.Models.ClubJoinResponseDao();
+                    while (reader.pos < end) {
+                        let tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.clubId = $root.LiftLog.Ui.Models.UuidDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.accepted = $root.LiftLog.Ui.Models.ClubJoinAcceptedDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.rejected = $root.LiftLog.Ui.Models.ClubJoinRejectedDao.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ClubJoinResponseDao message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubJoinResponseDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {LiftLog.Ui.Models.ClubJoinResponseDao} ClubJoinResponseDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubJoinResponseDao.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ClubJoinResponseDao message.
+                 * @function verify
+                 * @memberof LiftLog.Ui.Models.ClubJoinResponseDao
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ClubJoinResponseDao.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    let properties = {};
+                    if (message.clubId != null && message.hasOwnProperty("clubId")) {
+                        let error = $root.LiftLog.Ui.Models.UuidDao.verify(message.clubId);
+                        if (error)
+                            return "clubId." + error;
+                    }
+                    if (message.accepted != null && message.hasOwnProperty("accepted")) {
+                        properties.responsePayload = 1;
+                        {
+                            let error = $root.LiftLog.Ui.Models.ClubJoinAcceptedDao.verify(message.accepted);
+                            if (error)
+                                return "accepted." + error;
+                        }
+                    }
+                    if (message.rejected != null && message.hasOwnProperty("rejected")) {
+                        if (properties.responsePayload === 1)
+                            return "responsePayload: multiple values";
+                        properties.responsePayload = 1;
+                        {
+                            let error = $root.LiftLog.Ui.Models.ClubJoinRejectedDao.verify(message.rejected);
+                            if (error)
+                                return "rejected." + error;
+                        }
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates a ClubJoinResponseDao message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof LiftLog.Ui.Models.ClubJoinResponseDao
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {LiftLog.Ui.Models.ClubJoinResponseDao} ClubJoinResponseDao
+                 */
+                ClubJoinResponseDao.fromObject = function fromObject(object) {
+                    if (object instanceof $root.LiftLog.Ui.Models.ClubJoinResponseDao)
+                        return object;
+                    let message = new $root.LiftLog.Ui.Models.ClubJoinResponseDao();
+                    if (object.clubId != null) {
+                        if (typeof object.clubId !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubJoinResponseDao.clubId: object expected");
+                        message.clubId = $root.LiftLog.Ui.Models.UuidDao.fromObject(object.clubId);
+                    }
+                    if (object.accepted != null) {
+                        if (typeof object.accepted !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubJoinResponseDao.accepted: object expected");
+                        message.accepted = $root.LiftLog.Ui.Models.ClubJoinAcceptedDao.fromObject(object.accepted);
+                    }
+                    if (object.rejected != null) {
+                        if (typeof object.rejected !== "object")
+                            throw TypeError(".LiftLog.Ui.Models.ClubJoinResponseDao.rejected: object expected");
+                        message.rejected = $root.LiftLog.Ui.Models.ClubJoinRejectedDao.fromObject(object.rejected);
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a ClubJoinResponseDao message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof LiftLog.Ui.Models.ClubJoinResponseDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.ClubJoinResponseDao} message ClubJoinResponseDao
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ClubJoinResponseDao.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    let object = {};
+                    if (options.defaults)
+                        object.clubId = null;
+                    if (message.clubId != null && message.hasOwnProperty("clubId"))
+                        object.clubId = $root.LiftLog.Ui.Models.UuidDao.toObject(message.clubId, options);
+                    if (message.accepted != null && message.hasOwnProperty("accepted")) {
+                        object.accepted = $root.LiftLog.Ui.Models.ClubJoinAcceptedDao.toObject(message.accepted, options);
+                        if (options.oneofs)
+                            object.responsePayload = "accepted";
+                    }
+                    if (message.rejected != null && message.hasOwnProperty("rejected")) {
+                        object.rejected = $root.LiftLog.Ui.Models.ClubJoinRejectedDao.toObject(message.rejected, options);
+                        if (options.oneofs)
+                            object.responsePayload = "rejected";
+                    }
+                    return object;
+                };
+
+                /**
+                 * Converts this ClubJoinResponseDao to JSON.
+                 * @function toJSON
+                 * @memberof LiftLog.Ui.Models.ClubJoinResponseDao
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ClubJoinResponseDao.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Gets the default type url for ClubJoinResponseDao
+                 * @function getTypeUrl
+                 * @memberof LiftLog.Ui.Models.ClubJoinResponseDao
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ClubJoinResponseDao.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/LiftLog.Ui.Models.ClubJoinResponseDao";
+                };
+
+                return ClubJoinResponseDao;
+            })();
+
+            Models.ClubJoinAcceptedDao = (function() {
+
+                /**
+                 * Properties of a ClubJoinAcceptedDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @interface IClubJoinAcceptedDao
+                 * @property {Uint8Array|null} [encryptedAesKey] ClubJoinAcceptedDao encryptedAesKey
+                 * @property {LiftLog.Ui.Models.ClubRole|null} [assignedRole] ClubJoinAcceptedDao assignedRole
+                 */
+
+                /**
+                 * Constructs a new ClubJoinAcceptedDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @classdesc Represents a ClubJoinAcceptedDao.
+                 * @implements IClubJoinAcceptedDao
+                 * @constructor
+                 * @param {LiftLog.Ui.Models.IClubJoinAcceptedDao=} [properties] Properties to set
+                 */
+                function ClubJoinAcceptedDao(properties) {
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * ClubJoinAcceptedDao encryptedAesKey.
+                 * @member {Uint8Array} encryptedAesKey
+                 * @memberof LiftLog.Ui.Models.ClubJoinAcceptedDao
+                 * @instance
+                 */
+                ClubJoinAcceptedDao.prototype.encryptedAesKey = $util.newBuffer([]);
+
+                /**
+                 * ClubJoinAcceptedDao assignedRole.
+                 * @member {LiftLog.Ui.Models.ClubRole} assignedRole
+                 * @memberof LiftLog.Ui.Models.ClubJoinAcceptedDao
+                 * @instance
+                 */
+                ClubJoinAcceptedDao.prototype.assignedRole = 0;
+
+                /**
+                 * Creates a new ClubJoinAcceptedDao instance using the specified properties.
+                 * @function create
+                 * @memberof LiftLog.Ui.Models.ClubJoinAcceptedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubJoinAcceptedDao=} [properties] Properties to set
+                 * @returns {LiftLog.Ui.Models.ClubJoinAcceptedDao} ClubJoinAcceptedDao instance
+                 */
+                ClubJoinAcceptedDao.create = function create(properties) {
+                    return new ClubJoinAcceptedDao(properties);
+                };
+
+                /**
+                 * Encodes the specified ClubJoinAcceptedDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinAcceptedDao.verify|verify} messages.
+                 * @function encode
+                 * @memberof LiftLog.Ui.Models.ClubJoinAcceptedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubJoinAcceptedDao} message ClubJoinAcceptedDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubJoinAcceptedDao.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.encryptedAesKey != null && Object.hasOwnProperty.call(message, "encryptedAesKey"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.encryptedAesKey);
+                    if (message.assignedRole != null && Object.hasOwnProperty.call(message, "assignedRole"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.assignedRole);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ClubJoinAcceptedDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinAcceptedDao.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubJoinAcceptedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubJoinAcceptedDao} message ClubJoinAcceptedDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubJoinAcceptedDao.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ClubJoinAcceptedDao message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof LiftLog.Ui.Models.ClubJoinAcceptedDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {LiftLog.Ui.Models.ClubJoinAcceptedDao} ClubJoinAcceptedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubJoinAcceptedDao.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.LiftLog.Ui.Models.ClubJoinAcceptedDao();
+                    while (reader.pos < end) {
+                        let tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.encryptedAesKey = reader.bytes();
+                                break;
+                            }
+                        case 2: {
+                                message.assignedRole = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ClubJoinAcceptedDao message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubJoinAcceptedDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {LiftLog.Ui.Models.ClubJoinAcceptedDao} ClubJoinAcceptedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubJoinAcceptedDao.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ClubJoinAcceptedDao message.
+                 * @function verify
+                 * @memberof LiftLog.Ui.Models.ClubJoinAcceptedDao
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ClubJoinAcceptedDao.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.encryptedAesKey != null && message.hasOwnProperty("encryptedAesKey"))
+                        if (!(message.encryptedAesKey && typeof message.encryptedAesKey.length === "number" || $util.isString(message.encryptedAesKey)))
+                            return "encryptedAesKey: buffer expected";
+                    if (message.assignedRole != null && message.hasOwnProperty("assignedRole"))
+                        switch (message.assignedRole) {
+                        default:
+                            return "assignedRole: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    return null;
+                };
+
+                /**
+                 * Creates a ClubJoinAcceptedDao message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof LiftLog.Ui.Models.ClubJoinAcceptedDao
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {LiftLog.Ui.Models.ClubJoinAcceptedDao} ClubJoinAcceptedDao
+                 */
+                ClubJoinAcceptedDao.fromObject = function fromObject(object) {
+                    if (object instanceof $root.LiftLog.Ui.Models.ClubJoinAcceptedDao)
+                        return object;
+                    let message = new $root.LiftLog.Ui.Models.ClubJoinAcceptedDao();
+                    if (object.encryptedAesKey != null)
+                        if (typeof object.encryptedAesKey === "string")
+                            $util.base64.decode(object.encryptedAesKey, message.encryptedAesKey = $util.newBuffer($util.base64.length(object.encryptedAesKey)), 0);
+                        else if (object.encryptedAesKey.length >= 0)
+                            message.encryptedAesKey = object.encryptedAesKey;
+                    switch (object.assignedRole) {
+                    default:
+                        if (typeof object.assignedRole === "number") {
+                            message.assignedRole = object.assignedRole;
+                            break;
+                        }
+                        break;
+                    case "CLUB_ROLE_OWNER":
+                    case 0:
+                        message.assignedRole = 0;
+                        break;
+                    case "CLUB_ROLE_ADMIN":
+                    case 1:
+                        message.assignedRole = 1;
+                        break;
+                    case "CLUB_ROLE_MEMBER":
+                    case 2:
+                        message.assignedRole = 2;
+                        break;
+                    case "CLUB_ROLE_VIEWER":
+                    case 3:
+                        message.assignedRole = 3;
+                        break;
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a ClubJoinAcceptedDao message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof LiftLog.Ui.Models.ClubJoinAcceptedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.ClubJoinAcceptedDao} message ClubJoinAcceptedDao
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ClubJoinAcceptedDao.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    let object = {};
+                    if (options.defaults) {
+                        if (options.bytes === String)
+                            object.encryptedAesKey = "";
+                        else {
+                            object.encryptedAesKey = [];
+                            if (options.bytes !== Array)
+                                object.encryptedAesKey = $util.newBuffer(object.encryptedAesKey);
+                        }
+                        object.assignedRole = options.enums === String ? "CLUB_ROLE_OWNER" : 0;
+                    }
+                    if (message.encryptedAesKey != null && message.hasOwnProperty("encryptedAesKey"))
+                        object.encryptedAesKey = options.bytes === String ? $util.base64.encode(message.encryptedAesKey, 0, message.encryptedAesKey.length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptedAesKey) : message.encryptedAesKey;
+                    if (message.assignedRole != null && message.hasOwnProperty("assignedRole"))
+                        object.assignedRole = options.enums === String ? $root.LiftLog.Ui.Models.ClubRole[message.assignedRole] === undefined ? message.assignedRole : $root.LiftLog.Ui.Models.ClubRole[message.assignedRole] : message.assignedRole;
+                    return object;
+                };
+
+                /**
+                 * Converts this ClubJoinAcceptedDao to JSON.
+                 * @function toJSON
+                 * @memberof LiftLog.Ui.Models.ClubJoinAcceptedDao
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ClubJoinAcceptedDao.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Gets the default type url for ClubJoinAcceptedDao
+                 * @function getTypeUrl
+                 * @memberof LiftLog.Ui.Models.ClubJoinAcceptedDao
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ClubJoinAcceptedDao.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/LiftLog.Ui.Models.ClubJoinAcceptedDao";
+                };
+
+                return ClubJoinAcceptedDao;
+            })();
+
+            Models.ClubJoinRejectedDao = (function() {
+
+                /**
+                 * Properties of a ClubJoinRejectedDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @interface IClubJoinRejectedDao
+                 * @property {string|null} [reason] ClubJoinRejectedDao reason
+                 */
+
+                /**
+                 * Constructs a new ClubJoinRejectedDao.
+                 * @memberof LiftLog.Ui.Models
+                 * @classdesc Represents a ClubJoinRejectedDao.
+                 * @implements IClubJoinRejectedDao
+                 * @constructor
+                 * @param {LiftLog.Ui.Models.IClubJoinRejectedDao=} [properties] Properties to set
+                 */
+                function ClubJoinRejectedDao(properties) {
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * ClubJoinRejectedDao reason.
+                 * @member {string|null|undefined} reason
+                 * @memberof LiftLog.Ui.Models.ClubJoinRejectedDao
+                 * @instance
+                 */
+                ClubJoinRejectedDao.prototype.reason = null;
+
+                // OneOf field names bound to virtual getters and setters
+                let $oneOfFields;
+
+                /**
+                 * ClubJoinRejectedDao _reason.
+                 * @member {"reason"|undefined} _reason
+                 * @memberof LiftLog.Ui.Models.ClubJoinRejectedDao
+                 * @instance
+                 */
+                Object.defineProperty(ClubJoinRejectedDao.prototype, "_reason", {
+                    get: $util.oneOfGetter($oneOfFields = ["reason"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+
+                /**
+                 * Creates a new ClubJoinRejectedDao instance using the specified properties.
+                 * @function create
+                 * @memberof LiftLog.Ui.Models.ClubJoinRejectedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubJoinRejectedDao=} [properties] Properties to set
+                 * @returns {LiftLog.Ui.Models.ClubJoinRejectedDao} ClubJoinRejectedDao instance
+                 */
+                ClubJoinRejectedDao.create = function create(properties) {
+                    return new ClubJoinRejectedDao(properties);
+                };
+
+                /**
+                 * Encodes the specified ClubJoinRejectedDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinRejectedDao.verify|verify} messages.
+                 * @function encode
+                 * @memberof LiftLog.Ui.Models.ClubJoinRejectedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubJoinRejectedDao} message ClubJoinRejectedDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubJoinRejectedDao.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.reason != null && Object.hasOwnProperty.call(message, "reason"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.reason);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ClubJoinRejectedDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinRejectedDao.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubJoinRejectedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.IClubJoinRejectedDao} message ClubJoinRejectedDao message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ClubJoinRejectedDao.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ClubJoinRejectedDao message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof LiftLog.Ui.Models.ClubJoinRejectedDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {LiftLog.Ui.Models.ClubJoinRejectedDao} ClubJoinRejectedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubJoinRejectedDao.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    let end = length === undefined ? reader.len : reader.pos + length, message = new $root.LiftLog.Ui.Models.ClubJoinRejectedDao();
+                    while (reader.pos < end) {
+                        let tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.reason = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ClubJoinRejectedDao message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof LiftLog.Ui.Models.ClubJoinRejectedDao
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {LiftLog.Ui.Models.ClubJoinRejectedDao} ClubJoinRejectedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ClubJoinRejectedDao.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ClubJoinRejectedDao message.
+                 * @function verify
+                 * @memberof LiftLog.Ui.Models.ClubJoinRejectedDao
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ClubJoinRejectedDao.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    let properties = {};
+                    if (message.reason != null && message.hasOwnProperty("reason")) {
+                        properties._reason = 1;
+                        if (!$util.isString(message.reason))
+                            return "reason: string expected";
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates a ClubJoinRejectedDao message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof LiftLog.Ui.Models.ClubJoinRejectedDao
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {LiftLog.Ui.Models.ClubJoinRejectedDao} ClubJoinRejectedDao
+                 */
+                ClubJoinRejectedDao.fromObject = function fromObject(object) {
+                    if (object instanceof $root.LiftLog.Ui.Models.ClubJoinRejectedDao)
+                        return object;
+                    let message = new $root.LiftLog.Ui.Models.ClubJoinRejectedDao();
+                    if (object.reason != null)
+                        message.reason = String(object.reason);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a ClubJoinRejectedDao message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof LiftLog.Ui.Models.ClubJoinRejectedDao
+                 * @static
+                 * @param {LiftLog.Ui.Models.ClubJoinRejectedDao} message ClubJoinRejectedDao
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ClubJoinRejectedDao.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    let object = {};
+                    if (message.reason != null && message.hasOwnProperty("reason")) {
+                        object.reason = message.reason;
+                        if (options.oneofs)
+                            object._reason = "reason";
+                    }
+                    return object;
+                };
+
+                /**
+                 * Converts this ClubJoinRejectedDao to JSON.
+                 * @function toJSON
+                 * @memberof LiftLog.Ui.Models.ClubJoinRejectedDao
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ClubJoinRejectedDao.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Gets the default type url for ClubJoinRejectedDao
+                 * @function getTypeUrl
+                 * @memberof LiftLog.Ui.Models.ClubJoinRejectedDao
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ClubJoinRejectedDao.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/LiftLog.Ui.Models.ClubJoinRejectedDao";
+                };
+
+                return ClubJoinRejectedDao;
             })();
 
             Models.SharedItemPayload = (function() {

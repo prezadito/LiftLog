@@ -25,8 +25,7 @@ class UserInboxItem(SQLModel, table=True):
 
     # Encrypted message chunks (array of byte arrays)
     encrypted_message: list[bytes] = Field(
-        sa_column=Column(ARRAY(LargeBinary)),
-        nullable=False,
+        sa_column=Column(ARRAY(LargeBinary), nullable=False)
     )
 
     created: datetime = Field(default_factory=datetime.utcnow, nullable=False)

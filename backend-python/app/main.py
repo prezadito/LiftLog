@@ -8,9 +8,10 @@ from sqlmodel import SQLModel
 from app.core.config import settings
 from app.core.logging_config import setup_logging
 from app.db.session import user_data_engine, rate_limit_engine
-from app.api.routes import users, events, follow, inbox, shared, ai_workout, health
+from app.api.routes import users, events, follow, inbox, shared, ai_workout, health, metrics
 from app.api.websockets import ai_chat
 from app.services.scheduler import get_scheduler
+from app.middleware import MetricsMiddleware, RequestTrackingMiddleware
 
 # Setup logging
 setup_logging()
@@ -59,14 +60,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Add monitoring middleware
+app.add_middleware(RequestTrackingMiddleware)
+app.add_middleware(MetricsMiddleware)
+
 # Include API routers
 app.include_router(users.router, prefix="/v2")
+app.include_router(users.users_router, prefix="/v2")  # Batch operations
 app.include_router(events.router, prefix="/v2")
+app.include_router(events.events_router, prefix="/v2")  # Batch operations
 app.include_router(follow.router, prefix="/v2")
 app.include_router(inbox.router, prefix="/v2")
 app.include_router(shared.router, prefix="/v2")
 app.include_router(ai_workout.router, prefix="/v2")
 app.include_router(health.router)
+app.include_router(metrics.router)
 
 # WebSocket endpoints
 app.websocket("/ai-chat")(ai_chat.ai_chat_websocket)

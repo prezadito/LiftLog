@@ -153,7 +153,3 @@ async def get_events(
         events=events,
         invalid_follow_secrets=invalid_follow_secrets,
     )
-
-
-# Include both routers
-router.include_router(events_router)

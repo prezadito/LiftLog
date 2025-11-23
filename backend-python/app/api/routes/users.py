@@ -217,7 +217,3 @@ async def get_users(
     users_dict = {user.id: GetUserResponse.model_validate(user) for user in users}
 
     return GetUsersResponse(users=users_dict)
-
-
-# Include both routers
-router.include_router(users_router)

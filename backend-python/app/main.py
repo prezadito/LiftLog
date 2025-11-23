@@ -66,7 +66,9 @@ app.add_middleware(MetricsMiddleware)
 
 # Include API routers
 app.include_router(users.router, prefix="/v2")
+app.include_router(users.users_router, prefix="/v2")  # Batch operations
 app.include_router(events.router, prefix="/v2")
+app.include_router(events.events_router, prefix="/v2")  # Batch operations
 app.include_router(follow.router, prefix="/v2")
 app.include_router(inbox.router, prefix="/v2")
 app.include_router(shared.router, prefix="/v2")

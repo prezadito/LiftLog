@@ -32,6 +32,7 @@ dependencies = [
 
     # Purchase Verification
     "google-api-python-client>=2.154.0",
+    "google-auth>=2.36.0",
     "httpx>=0.28.1",
 
     # Utilities

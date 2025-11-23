@@ -10,6 +10,8 @@ if TYPE_CHECKING:
     from app.models.database.user_follow_secret import UserFollowSecret
     from app.models.database.user_inbox_item import UserInboxItem
     from app.models.database.shared_item import SharedItem
+    from app.models.database.club import Club
+    from app.models.database.club_member import ClubMember
 
 
 class User(SQLModel, table=True):
@@ -54,4 +56,16 @@ class User(SQLModel, table=True):
     shared_items: list["SharedItem"] = Relationship(
         back_populates="user",
         sa_relationship_kwargs={"cascade": "all, delete-orphan"},
+    )
+    owned_clubs: list["Club"] = Relationship(
+        sa_relationship_kwargs={
+            "cascade": "all, delete-orphan",
+            "foreign_keys": "[Club.owner_user_id]",
+        },
+    )
+    club_memberships: list["ClubMember"] = Relationship(
+        sa_relationship_kwargs={
+            "cascade": "all, delete-orphan",
+            "foreign_keys": "[ClubMember.user_id]",
+        },
     )

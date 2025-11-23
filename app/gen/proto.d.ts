@@ -2939,6 +2939,15 @@ export namespace LiftLog {
 
                 /** FeedStateDaoV1 unpublishedSessionIds */
                 unpublishedSessionIds?: (LiftLog.Ui.Models.IUuidDao[]|null);
+
+                /** FeedStateDaoV1 clubs */
+                clubs?: (LiftLog.Ui.Models.IClubDaoV1[]|null);
+
+                /** FeedStateDaoV1 clubMemberships */
+                clubMemberships?: (LiftLog.Ui.Models.IClubMemberDaoV1[]|null);
+
+                /** FeedStateDaoV1 clubFeedItems */
+                clubFeedItems?: (LiftLog.Ui.Models.IClubFeedItemDaoV1[]|null);
             }
 
             /** Represents a FeedStateDaoV1. */
@@ -2967,6 +2976,15 @@ export namespace LiftLog {
 
                 /** FeedStateDaoV1 unpublishedSessionIds. */
                 public unpublishedSessionIds: LiftLog.Ui.Models.IUuidDao[];
+
+                /** FeedStateDaoV1 clubs. */
+                public clubs: LiftLog.Ui.Models.IClubDaoV1[];
+
+                /** FeedStateDaoV1 clubMemberships. */
+                public clubMemberships: LiftLog.Ui.Models.IClubMemberDaoV1[];
+
+                /** FeedStateDaoV1 clubFeedItems. */
+                public clubFeedItems: LiftLog.Ui.Models.IClubFeedItemDaoV1[];
 
                 /** FeedStateDaoV1 _identity. */
                 public _identity?: "identity";
@@ -3364,6 +3382,18 @@ export namespace LiftLog {
                 /** InboxMessageDao unfollowNotification */
                 unfollowNotification?: (LiftLog.Ui.Models.IUnFollowNotification|null);
 
+                /** InboxMessageDao clubInvite */
+                clubInvite?: (LiftLog.Ui.Models.IClubInviteDao|null);
+
+                /** InboxMessageDao clubInviteResponse */
+                clubInviteResponse?: (LiftLog.Ui.Models.IClubInviteResponseDao|null);
+
+                /** InboxMessageDao clubJoinRequest */
+                clubJoinRequest?: (LiftLog.Ui.Models.IClubJoinRequestDao|null);
+
+                /** InboxMessageDao clubJoinResponse */
+                clubJoinResponse?: (LiftLog.Ui.Models.IClubJoinResponseDao|null);
+
                 /** InboxMessageDao signature */
                 signature?: (Uint8Array|null);
             }
@@ -3389,11 +3419,23 @@ export namespace LiftLog {
                 /** InboxMessageDao unfollowNotification. */
                 public unfollowNotification?: (LiftLog.Ui.Models.IUnFollowNotification|null);
 
+                /** InboxMessageDao clubInvite. */
+                public clubInvite?: (LiftLog.Ui.Models.IClubInviteDao|null);
+
+                /** InboxMessageDao clubInviteResponse. */
+                public clubInviteResponse?: (LiftLog.Ui.Models.IClubInviteResponseDao|null);
+
+                /** InboxMessageDao clubJoinRequest. */
+                public clubJoinRequest?: (LiftLog.Ui.Models.IClubJoinRequestDao|null);
+
+                /** InboxMessageDao clubJoinResponse. */
+                public clubJoinResponse?: (LiftLog.Ui.Models.IClubJoinResponseDao|null);
+
                 /** InboxMessageDao signature. */
                 public signature: Uint8Array;
 
                 /** InboxMessageDao messagePayload. */
-                public messagePayload?: ("followRequest"|"followResponse"|"unfollowNotification");
+                public messagePayload?: ("followRequest"|"followResponse"|"unfollowNotification"|"clubInvite"|"clubInviteResponse"|"clubJoinRequest"|"clubJoinResponse");
 
                 /**
                  * Creates a new InboxMessageDao instance using the specified properties.
@@ -3964,6 +4006,1500 @@ export namespace LiftLog {
 
                 /**
                  * Gets the default type url for UnFollowNotification
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ClubDaoV1. */
+            interface IClubDaoV1 {
+
+                /** ClubDaoV1 id */
+                id?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubDaoV1 aesKey */
+                aesKey?: (Uint8Array|null);
+
+                /** ClubDaoV1 encryptedName */
+                encryptedName?: (Uint8Array|null);
+
+                /** ClubDaoV1 encryptedDescription */
+                encryptedDescription?: (Uint8Array|null);
+
+                /** ClubDaoV1 encryptionIv */
+                encryptionIv?: (Uint8Array|null);
+
+                /** ClubDaoV1 isPublic */
+                isPublic?: (boolean|null);
+
+                /** ClubDaoV1 created */
+                created?: (google.protobuf.ITimestamp|null);
+
+                /** ClubDaoV1 encryptedProfilePicture */
+                encryptedProfilePicture?: (Uint8Array|null);
+
+                /** ClubDaoV1 settings */
+                settings?: (LiftLog.Ui.Models.IClubSettingsDaoV1|null);
+
+                /** ClubDaoV1 ownerUserId */
+                ownerUserId?: (LiftLog.Ui.Models.IUuidDao|null);
+            }
+
+            /** Represents a ClubDaoV1. */
+            class ClubDaoV1 implements IClubDaoV1 {
+
+                /**
+                 * Constructs a new ClubDaoV1.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: LiftLog.Ui.Models.IClubDaoV1);
+
+                /** ClubDaoV1 id. */
+                public id?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubDaoV1 aesKey. */
+                public aesKey: Uint8Array;
+
+                /** ClubDaoV1 encryptedName. */
+                public encryptedName: Uint8Array;
+
+                /** ClubDaoV1 encryptedDescription. */
+                public encryptedDescription?: (Uint8Array|null);
+
+                /** ClubDaoV1 encryptionIv. */
+                public encryptionIv: Uint8Array;
+
+                /** ClubDaoV1 isPublic. */
+                public isPublic: boolean;
+
+                /** ClubDaoV1 created. */
+                public created?: (google.protobuf.ITimestamp|null);
+
+                /** ClubDaoV1 encryptedProfilePicture. */
+                public encryptedProfilePicture?: (Uint8Array|null);
+
+                /** ClubDaoV1 settings. */
+                public settings?: (LiftLog.Ui.Models.IClubSettingsDaoV1|null);
+
+                /** ClubDaoV1 ownerUserId. */
+                public ownerUserId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubDaoV1 _encryptedDescription. */
+                public _encryptedDescription?: "encryptedDescription";
+
+                /** ClubDaoV1 _encryptedProfilePicture. */
+                public _encryptedProfilePicture?: "encryptedProfilePicture";
+
+                /**
+                 * Creates a new ClubDaoV1 instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ClubDaoV1 instance
+                 */
+                public static create(properties?: LiftLog.Ui.Models.IClubDaoV1): LiftLog.Ui.Models.ClubDaoV1;
+
+                /**
+                 * Encodes the specified ClubDaoV1 message. Does not implicitly {@link LiftLog.Ui.Models.ClubDaoV1.verify|verify} messages.
+                 * @param message ClubDaoV1 message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: LiftLog.Ui.Models.IClubDaoV1, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ClubDaoV1 message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubDaoV1.verify|verify} messages.
+                 * @param message ClubDaoV1 message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: LiftLog.Ui.Models.IClubDaoV1, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ClubDaoV1 message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ClubDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): LiftLog.Ui.Models.ClubDaoV1;
+
+                /**
+                 * Decodes a ClubDaoV1 message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ClubDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): LiftLog.Ui.Models.ClubDaoV1;
+
+                /**
+                 * Verifies a ClubDaoV1 message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ClubDaoV1 message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ClubDaoV1
+                 */
+                public static fromObject(object: { [k: string]: any }): LiftLog.Ui.Models.ClubDaoV1;
+
+                /**
+                 * Creates a plain object from a ClubDaoV1 message. Also converts values to other types if specified.
+                 * @param message ClubDaoV1
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: LiftLog.Ui.Models.ClubDaoV1, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ClubDaoV1 to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ClubDaoV1
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ClubSettingsDaoV1. */
+            interface IClubSettingsDaoV1 {
+
+                /** ClubSettingsDaoV1 membersCanPost */
+                membersCanPost?: (boolean|null);
+
+                /** ClubSettingsDaoV1 membersCanInvite */
+                membersCanInvite?: (boolean|null);
+
+                /** ClubSettingsDaoV1 maxMembers */
+                maxMembers?: (number|null);
+            }
+
+            /** Represents a ClubSettingsDaoV1. */
+            class ClubSettingsDaoV1 implements IClubSettingsDaoV1 {
+
+                /**
+                 * Constructs a new ClubSettingsDaoV1.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: LiftLog.Ui.Models.IClubSettingsDaoV1);
+
+                /** ClubSettingsDaoV1 membersCanPost. */
+                public membersCanPost: boolean;
+
+                /** ClubSettingsDaoV1 membersCanInvite. */
+                public membersCanInvite: boolean;
+
+                /** ClubSettingsDaoV1 maxMembers. */
+                public maxMembers: number;
+
+                /**
+                 * Creates a new ClubSettingsDaoV1 instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ClubSettingsDaoV1 instance
+                 */
+                public static create(properties?: LiftLog.Ui.Models.IClubSettingsDaoV1): LiftLog.Ui.Models.ClubSettingsDaoV1;
+
+                /**
+                 * Encodes the specified ClubSettingsDaoV1 message. Does not implicitly {@link LiftLog.Ui.Models.ClubSettingsDaoV1.verify|verify} messages.
+                 * @param message ClubSettingsDaoV1 message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: LiftLog.Ui.Models.IClubSettingsDaoV1, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ClubSettingsDaoV1 message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubSettingsDaoV1.verify|verify} messages.
+                 * @param message ClubSettingsDaoV1 message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: LiftLog.Ui.Models.IClubSettingsDaoV1, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ClubSettingsDaoV1 message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ClubSettingsDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): LiftLog.Ui.Models.ClubSettingsDaoV1;
+
+                /**
+                 * Decodes a ClubSettingsDaoV1 message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ClubSettingsDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): LiftLog.Ui.Models.ClubSettingsDaoV1;
+
+                /**
+                 * Verifies a ClubSettingsDaoV1 message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ClubSettingsDaoV1 message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ClubSettingsDaoV1
+                 */
+                public static fromObject(object: { [k: string]: any }): LiftLog.Ui.Models.ClubSettingsDaoV1;
+
+                /**
+                 * Creates a plain object from a ClubSettingsDaoV1 message. Also converts values to other types if specified.
+                 * @param message ClubSettingsDaoV1
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: LiftLog.Ui.Models.ClubSettingsDaoV1, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ClubSettingsDaoV1 to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ClubSettingsDaoV1
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ClubMemberDaoV1. */
+            interface IClubMemberDaoV1 {
+
+                /** ClubMemberDaoV1 clubId */
+                clubId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubMemberDaoV1 userId */
+                userId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubMemberDaoV1 role */
+                role?: (LiftLog.Ui.Models.ClubRole|null);
+
+                /** ClubMemberDaoV1 joined */
+                joined?: (google.protobuf.ITimestamp|null);
+
+                /** ClubMemberDaoV1 encryptedAesKey */
+                encryptedAesKey?: (Uint8Array|null);
+            }
+
+            /** Represents a ClubMemberDaoV1. */
+            class ClubMemberDaoV1 implements IClubMemberDaoV1 {
+
+                /**
+                 * Constructs a new ClubMemberDaoV1.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: LiftLog.Ui.Models.IClubMemberDaoV1);
+
+                /** ClubMemberDaoV1 clubId. */
+                public clubId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubMemberDaoV1 userId. */
+                public userId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubMemberDaoV1 role. */
+                public role: LiftLog.Ui.Models.ClubRole;
+
+                /** ClubMemberDaoV1 joined. */
+                public joined?: (google.protobuf.ITimestamp|null);
+
+                /** ClubMemberDaoV1 encryptedAesKey. */
+                public encryptedAesKey: Uint8Array;
+
+                /**
+                 * Creates a new ClubMemberDaoV1 instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ClubMemberDaoV1 instance
+                 */
+                public static create(properties?: LiftLog.Ui.Models.IClubMemberDaoV1): LiftLog.Ui.Models.ClubMemberDaoV1;
+
+                /**
+                 * Encodes the specified ClubMemberDaoV1 message. Does not implicitly {@link LiftLog.Ui.Models.ClubMemberDaoV1.verify|verify} messages.
+                 * @param message ClubMemberDaoV1 message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: LiftLog.Ui.Models.IClubMemberDaoV1, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ClubMemberDaoV1 message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubMemberDaoV1.verify|verify} messages.
+                 * @param message ClubMemberDaoV1 message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: LiftLog.Ui.Models.IClubMemberDaoV1, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ClubMemberDaoV1 message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ClubMemberDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): LiftLog.Ui.Models.ClubMemberDaoV1;
+
+                /**
+                 * Decodes a ClubMemberDaoV1 message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ClubMemberDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): LiftLog.Ui.Models.ClubMemberDaoV1;
+
+                /**
+                 * Verifies a ClubMemberDaoV1 message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ClubMemberDaoV1 message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ClubMemberDaoV1
+                 */
+                public static fromObject(object: { [k: string]: any }): LiftLog.Ui.Models.ClubMemberDaoV1;
+
+                /**
+                 * Creates a plain object from a ClubMemberDaoV1 message. Also converts values to other types if specified.
+                 * @param message ClubMemberDaoV1
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: LiftLog.Ui.Models.ClubMemberDaoV1, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ClubMemberDaoV1 to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ClubMemberDaoV1
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** ClubRole enum. */
+            enum ClubRole {
+                CLUB_ROLE_OWNER = 0,
+                CLUB_ROLE_ADMIN = 1,
+                CLUB_ROLE_MEMBER = 2,
+                CLUB_ROLE_VIEWER = 3
+            }
+
+            /** Properties of a ClubInviteDao. */
+            interface IClubInviteDao {
+
+                /** ClubInviteDao clubId */
+                clubId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubInviteDao encryptedClubName */
+                encryptedClubName?: (Uint8Array|null);
+
+                /** ClubInviteDao encryptedClubDescription */
+                encryptedClubDescription?: (Uint8Array|null);
+
+                /** ClubInviteDao encryptedProfilePicture */
+                encryptedProfilePicture?: (Uint8Array|null);
+
+                /** ClubInviteDao encryptedAesKey */
+                encryptedAesKey?: (Uint8Array|null);
+
+                /** ClubInviteDao offeredRole */
+                offeredRole?: (LiftLog.Ui.Models.ClubRole|null);
+
+                /** ClubInviteDao fromUserId */
+                fromUserId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubInviteDao fromUserName */
+                fromUserName?: (google.protobuf.IStringValue|null);
+            }
+
+            /** Represents a ClubInviteDao. */
+            class ClubInviteDao implements IClubInviteDao {
+
+                /**
+                 * Constructs a new ClubInviteDao.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: LiftLog.Ui.Models.IClubInviteDao);
+
+                /** ClubInviteDao clubId. */
+                public clubId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubInviteDao encryptedClubName. */
+                public encryptedClubName: Uint8Array;
+
+                /** ClubInviteDao encryptedClubDescription. */
+                public encryptedClubDescription: Uint8Array;
+
+                /** ClubInviteDao encryptedProfilePicture. */
+                public encryptedProfilePicture?: (Uint8Array|null);
+
+                /** ClubInviteDao encryptedAesKey. */
+                public encryptedAesKey: Uint8Array;
+
+                /** ClubInviteDao offeredRole. */
+                public offeredRole: LiftLog.Ui.Models.ClubRole;
+
+                /** ClubInviteDao fromUserId. */
+                public fromUserId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubInviteDao fromUserName. */
+                public fromUserName?: (google.protobuf.IStringValue|null);
+
+                /** ClubInviteDao _encryptedProfilePicture. */
+                public _encryptedProfilePicture?: "encryptedProfilePicture";
+
+                /** ClubInviteDao _fromUserName. */
+                public _fromUserName?: "fromUserName";
+
+                /**
+                 * Creates a new ClubInviteDao instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ClubInviteDao instance
+                 */
+                public static create(properties?: LiftLog.Ui.Models.IClubInviteDao): LiftLog.Ui.Models.ClubInviteDao;
+
+                /**
+                 * Encodes the specified ClubInviteDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteDao.verify|verify} messages.
+                 * @param message ClubInviteDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: LiftLog.Ui.Models.IClubInviteDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ClubInviteDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteDao.verify|verify} messages.
+                 * @param message ClubInviteDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: LiftLog.Ui.Models.IClubInviteDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ClubInviteDao message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ClubInviteDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): LiftLog.Ui.Models.ClubInviteDao;
+
+                /**
+                 * Decodes a ClubInviteDao message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ClubInviteDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): LiftLog.Ui.Models.ClubInviteDao;
+
+                /**
+                 * Verifies a ClubInviteDao message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ClubInviteDao message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ClubInviteDao
+                 */
+                public static fromObject(object: { [k: string]: any }): LiftLog.Ui.Models.ClubInviteDao;
+
+                /**
+                 * Creates a plain object from a ClubInviteDao message. Also converts values to other types if specified.
+                 * @param message ClubInviteDao
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: LiftLog.Ui.Models.ClubInviteDao, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ClubInviteDao to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ClubInviteDao
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ClubInviteResponseDao. */
+            interface IClubInviteResponseDao {
+
+                /** ClubInviteResponseDao clubId */
+                clubId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubInviteResponseDao accepted */
+                accepted?: (LiftLog.Ui.Models.IClubInviteAcceptedDao|null);
+
+                /** ClubInviteResponseDao rejected */
+                rejected?: (LiftLog.Ui.Models.IClubInviteRejectedDao|null);
+            }
+
+            /** Represents a ClubInviteResponseDao. */
+            class ClubInviteResponseDao implements IClubInviteResponseDao {
+
+                /**
+                 * Constructs a new ClubInviteResponseDao.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: LiftLog.Ui.Models.IClubInviteResponseDao);
+
+                /** ClubInviteResponseDao clubId. */
+                public clubId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubInviteResponseDao accepted. */
+                public accepted?: (LiftLog.Ui.Models.IClubInviteAcceptedDao|null);
+
+                /** ClubInviteResponseDao rejected. */
+                public rejected?: (LiftLog.Ui.Models.IClubInviteRejectedDao|null);
+
+                /** ClubInviteResponseDao responsePayload. */
+                public responsePayload?: ("accepted"|"rejected");
+
+                /**
+                 * Creates a new ClubInviteResponseDao instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ClubInviteResponseDao instance
+                 */
+                public static create(properties?: LiftLog.Ui.Models.IClubInviteResponseDao): LiftLog.Ui.Models.ClubInviteResponseDao;
+
+                /**
+                 * Encodes the specified ClubInviteResponseDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteResponseDao.verify|verify} messages.
+                 * @param message ClubInviteResponseDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: LiftLog.Ui.Models.IClubInviteResponseDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ClubInviteResponseDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteResponseDao.verify|verify} messages.
+                 * @param message ClubInviteResponseDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: LiftLog.Ui.Models.IClubInviteResponseDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ClubInviteResponseDao message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ClubInviteResponseDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): LiftLog.Ui.Models.ClubInviteResponseDao;
+
+                /**
+                 * Decodes a ClubInviteResponseDao message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ClubInviteResponseDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): LiftLog.Ui.Models.ClubInviteResponseDao;
+
+                /**
+                 * Verifies a ClubInviteResponseDao message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ClubInviteResponseDao message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ClubInviteResponseDao
+                 */
+                public static fromObject(object: { [k: string]: any }): LiftLog.Ui.Models.ClubInviteResponseDao;
+
+                /**
+                 * Creates a plain object from a ClubInviteResponseDao message. Also converts values to other types if specified.
+                 * @param message ClubInviteResponseDao
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: LiftLog.Ui.Models.ClubInviteResponseDao, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ClubInviteResponseDao to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ClubInviteResponseDao
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ClubInviteAcceptedDao. */
+            interface IClubInviteAcceptedDao {
+            }
+
+            /** Represents a ClubInviteAcceptedDao. */
+            class ClubInviteAcceptedDao implements IClubInviteAcceptedDao {
+
+                /**
+                 * Constructs a new ClubInviteAcceptedDao.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: LiftLog.Ui.Models.IClubInviteAcceptedDao);
+
+                /**
+                 * Creates a new ClubInviteAcceptedDao instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ClubInviteAcceptedDao instance
+                 */
+                public static create(properties?: LiftLog.Ui.Models.IClubInviteAcceptedDao): LiftLog.Ui.Models.ClubInviteAcceptedDao;
+
+                /**
+                 * Encodes the specified ClubInviteAcceptedDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteAcceptedDao.verify|verify} messages.
+                 * @param message ClubInviteAcceptedDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: LiftLog.Ui.Models.IClubInviteAcceptedDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ClubInviteAcceptedDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteAcceptedDao.verify|verify} messages.
+                 * @param message ClubInviteAcceptedDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: LiftLog.Ui.Models.IClubInviteAcceptedDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ClubInviteAcceptedDao message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ClubInviteAcceptedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): LiftLog.Ui.Models.ClubInviteAcceptedDao;
+
+                /**
+                 * Decodes a ClubInviteAcceptedDao message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ClubInviteAcceptedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): LiftLog.Ui.Models.ClubInviteAcceptedDao;
+
+                /**
+                 * Verifies a ClubInviteAcceptedDao message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ClubInviteAcceptedDao message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ClubInviteAcceptedDao
+                 */
+                public static fromObject(object: { [k: string]: any }): LiftLog.Ui.Models.ClubInviteAcceptedDao;
+
+                /**
+                 * Creates a plain object from a ClubInviteAcceptedDao message. Also converts values to other types if specified.
+                 * @param message ClubInviteAcceptedDao
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: LiftLog.Ui.Models.ClubInviteAcceptedDao, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ClubInviteAcceptedDao to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ClubInviteAcceptedDao
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ClubInviteRejectedDao. */
+            interface IClubInviteRejectedDao {
+            }
+
+            /** Represents a ClubInviteRejectedDao. */
+            class ClubInviteRejectedDao implements IClubInviteRejectedDao {
+
+                /**
+                 * Constructs a new ClubInviteRejectedDao.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: LiftLog.Ui.Models.IClubInviteRejectedDao);
+
+                /**
+                 * Creates a new ClubInviteRejectedDao instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ClubInviteRejectedDao instance
+                 */
+                public static create(properties?: LiftLog.Ui.Models.IClubInviteRejectedDao): LiftLog.Ui.Models.ClubInviteRejectedDao;
+
+                /**
+                 * Encodes the specified ClubInviteRejectedDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteRejectedDao.verify|verify} messages.
+                 * @param message ClubInviteRejectedDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: LiftLog.Ui.Models.IClubInviteRejectedDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ClubInviteRejectedDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubInviteRejectedDao.verify|verify} messages.
+                 * @param message ClubInviteRejectedDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: LiftLog.Ui.Models.IClubInviteRejectedDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ClubInviteRejectedDao message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ClubInviteRejectedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): LiftLog.Ui.Models.ClubInviteRejectedDao;
+
+                /**
+                 * Decodes a ClubInviteRejectedDao message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ClubInviteRejectedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): LiftLog.Ui.Models.ClubInviteRejectedDao;
+
+                /**
+                 * Verifies a ClubInviteRejectedDao message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ClubInviteRejectedDao message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ClubInviteRejectedDao
+                 */
+                public static fromObject(object: { [k: string]: any }): LiftLog.Ui.Models.ClubInviteRejectedDao;
+
+                /**
+                 * Creates a plain object from a ClubInviteRejectedDao message. Also converts values to other types if specified.
+                 * @param message ClubInviteRejectedDao
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: LiftLog.Ui.Models.ClubInviteRejectedDao, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ClubInviteRejectedDao to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ClubInviteRejectedDao
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ClubFeedItemDaoV1. */
+            interface IClubFeedItemDaoV1 {
+
+                /** ClubFeedItemDaoV1 clubId */
+                clubId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubFeedItemDaoV1 eventId */
+                eventId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubFeedItemDaoV1 userId */
+                userId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubFeedItemDaoV1 timestamp */
+                timestamp?: (google.protobuf.ITimestamp|null);
+
+                /** ClubFeedItemDaoV1 expiry */
+                expiry?: (google.protobuf.ITimestamp|null);
+
+                /** ClubFeedItemDaoV1 session */
+                session?: (LiftLog.Ui.Models.SessionHistoryDao.ISessionDaoV2|null);
+
+                /** ClubFeedItemDaoV1 announcement */
+                announcement?: (LiftLog.Ui.Models.IClubAnnouncementDaoV1|null);
+            }
+
+            /** Represents a ClubFeedItemDaoV1. */
+            class ClubFeedItemDaoV1 implements IClubFeedItemDaoV1 {
+
+                /**
+                 * Constructs a new ClubFeedItemDaoV1.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: LiftLog.Ui.Models.IClubFeedItemDaoV1);
+
+                /** ClubFeedItemDaoV1 clubId. */
+                public clubId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubFeedItemDaoV1 eventId. */
+                public eventId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubFeedItemDaoV1 userId. */
+                public userId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubFeedItemDaoV1 timestamp. */
+                public timestamp?: (google.protobuf.ITimestamp|null);
+
+                /** ClubFeedItemDaoV1 expiry. */
+                public expiry?: (google.protobuf.ITimestamp|null);
+
+                /** ClubFeedItemDaoV1 session. */
+                public session?: (LiftLog.Ui.Models.SessionHistoryDao.ISessionDaoV2|null);
+
+                /** ClubFeedItemDaoV1 announcement. */
+                public announcement?: (LiftLog.Ui.Models.IClubAnnouncementDaoV1|null);
+
+                /** ClubFeedItemDaoV1 payload. */
+                public payload?: ("session"|"announcement");
+
+                /**
+                 * Creates a new ClubFeedItemDaoV1 instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ClubFeedItemDaoV1 instance
+                 */
+                public static create(properties?: LiftLog.Ui.Models.IClubFeedItemDaoV1): LiftLog.Ui.Models.ClubFeedItemDaoV1;
+
+                /**
+                 * Encodes the specified ClubFeedItemDaoV1 message. Does not implicitly {@link LiftLog.Ui.Models.ClubFeedItemDaoV1.verify|verify} messages.
+                 * @param message ClubFeedItemDaoV1 message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: LiftLog.Ui.Models.IClubFeedItemDaoV1, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ClubFeedItemDaoV1 message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubFeedItemDaoV1.verify|verify} messages.
+                 * @param message ClubFeedItemDaoV1 message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: LiftLog.Ui.Models.IClubFeedItemDaoV1, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ClubFeedItemDaoV1 message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ClubFeedItemDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): LiftLog.Ui.Models.ClubFeedItemDaoV1;
+
+                /**
+                 * Decodes a ClubFeedItemDaoV1 message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ClubFeedItemDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): LiftLog.Ui.Models.ClubFeedItemDaoV1;
+
+                /**
+                 * Verifies a ClubFeedItemDaoV1 message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ClubFeedItemDaoV1 message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ClubFeedItemDaoV1
+                 */
+                public static fromObject(object: { [k: string]: any }): LiftLog.Ui.Models.ClubFeedItemDaoV1;
+
+                /**
+                 * Creates a plain object from a ClubFeedItemDaoV1 message. Also converts values to other types if specified.
+                 * @param message ClubFeedItemDaoV1
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: LiftLog.Ui.Models.ClubFeedItemDaoV1, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ClubFeedItemDaoV1 to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ClubFeedItemDaoV1
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ClubAnnouncementDaoV1. */
+            interface IClubAnnouncementDaoV1 {
+
+                /** ClubAnnouncementDaoV1 announcementText */
+                announcementText?: (string|null);
+            }
+
+            /** Represents a ClubAnnouncementDaoV1. */
+            class ClubAnnouncementDaoV1 implements IClubAnnouncementDaoV1 {
+
+                /**
+                 * Constructs a new ClubAnnouncementDaoV1.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: LiftLog.Ui.Models.IClubAnnouncementDaoV1);
+
+                /** ClubAnnouncementDaoV1 announcementText. */
+                public announcementText: string;
+
+                /**
+                 * Creates a new ClubAnnouncementDaoV1 instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ClubAnnouncementDaoV1 instance
+                 */
+                public static create(properties?: LiftLog.Ui.Models.IClubAnnouncementDaoV1): LiftLog.Ui.Models.ClubAnnouncementDaoV1;
+
+                /**
+                 * Encodes the specified ClubAnnouncementDaoV1 message. Does not implicitly {@link LiftLog.Ui.Models.ClubAnnouncementDaoV1.verify|verify} messages.
+                 * @param message ClubAnnouncementDaoV1 message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: LiftLog.Ui.Models.IClubAnnouncementDaoV1, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ClubAnnouncementDaoV1 message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubAnnouncementDaoV1.verify|verify} messages.
+                 * @param message ClubAnnouncementDaoV1 message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: LiftLog.Ui.Models.IClubAnnouncementDaoV1, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ClubAnnouncementDaoV1 message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ClubAnnouncementDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): LiftLog.Ui.Models.ClubAnnouncementDaoV1;
+
+                /**
+                 * Decodes a ClubAnnouncementDaoV1 message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ClubAnnouncementDaoV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): LiftLog.Ui.Models.ClubAnnouncementDaoV1;
+
+                /**
+                 * Verifies a ClubAnnouncementDaoV1 message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ClubAnnouncementDaoV1 message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ClubAnnouncementDaoV1
+                 */
+                public static fromObject(object: { [k: string]: any }): LiftLog.Ui.Models.ClubAnnouncementDaoV1;
+
+                /**
+                 * Creates a plain object from a ClubAnnouncementDaoV1 message. Also converts values to other types if specified.
+                 * @param message ClubAnnouncementDaoV1
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: LiftLog.Ui.Models.ClubAnnouncementDaoV1, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ClubAnnouncementDaoV1 to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ClubAnnouncementDaoV1
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ClubJoinRequestDao. */
+            interface IClubJoinRequestDao {
+
+                /** ClubJoinRequestDao clubId */
+                clubId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubJoinRequestDao fromUserId */
+                fromUserId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubJoinRequestDao fromUserName */
+                fromUserName?: (google.protobuf.IStringValue|null);
+            }
+
+            /** Represents a ClubJoinRequestDao. */
+            class ClubJoinRequestDao implements IClubJoinRequestDao {
+
+                /**
+                 * Constructs a new ClubJoinRequestDao.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: LiftLog.Ui.Models.IClubJoinRequestDao);
+
+                /** ClubJoinRequestDao clubId. */
+                public clubId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubJoinRequestDao fromUserId. */
+                public fromUserId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubJoinRequestDao fromUserName. */
+                public fromUserName?: (google.protobuf.IStringValue|null);
+
+                /** ClubJoinRequestDao _fromUserName. */
+                public _fromUserName?: "fromUserName";
+
+                /**
+                 * Creates a new ClubJoinRequestDao instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ClubJoinRequestDao instance
+                 */
+                public static create(properties?: LiftLog.Ui.Models.IClubJoinRequestDao): LiftLog.Ui.Models.ClubJoinRequestDao;
+
+                /**
+                 * Encodes the specified ClubJoinRequestDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinRequestDao.verify|verify} messages.
+                 * @param message ClubJoinRequestDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: LiftLog.Ui.Models.IClubJoinRequestDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ClubJoinRequestDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinRequestDao.verify|verify} messages.
+                 * @param message ClubJoinRequestDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: LiftLog.Ui.Models.IClubJoinRequestDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ClubJoinRequestDao message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ClubJoinRequestDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): LiftLog.Ui.Models.ClubJoinRequestDao;
+
+                /**
+                 * Decodes a ClubJoinRequestDao message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ClubJoinRequestDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): LiftLog.Ui.Models.ClubJoinRequestDao;
+
+                /**
+                 * Verifies a ClubJoinRequestDao message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ClubJoinRequestDao message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ClubJoinRequestDao
+                 */
+                public static fromObject(object: { [k: string]: any }): LiftLog.Ui.Models.ClubJoinRequestDao;
+
+                /**
+                 * Creates a plain object from a ClubJoinRequestDao message. Also converts values to other types if specified.
+                 * @param message ClubJoinRequestDao
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: LiftLog.Ui.Models.ClubJoinRequestDao, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ClubJoinRequestDao to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ClubJoinRequestDao
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ClubJoinResponseDao. */
+            interface IClubJoinResponseDao {
+
+                /** ClubJoinResponseDao clubId */
+                clubId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubJoinResponseDao accepted */
+                accepted?: (LiftLog.Ui.Models.IClubJoinAcceptedDao|null);
+
+                /** ClubJoinResponseDao rejected */
+                rejected?: (LiftLog.Ui.Models.IClubJoinRejectedDao|null);
+            }
+
+            /** Represents a ClubJoinResponseDao. */
+            class ClubJoinResponseDao implements IClubJoinResponseDao {
+
+                /**
+                 * Constructs a new ClubJoinResponseDao.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: LiftLog.Ui.Models.IClubJoinResponseDao);
+
+                /** ClubJoinResponseDao clubId. */
+                public clubId?: (LiftLog.Ui.Models.IUuidDao|null);
+
+                /** ClubJoinResponseDao accepted. */
+                public accepted?: (LiftLog.Ui.Models.IClubJoinAcceptedDao|null);
+
+                /** ClubJoinResponseDao rejected. */
+                public rejected?: (LiftLog.Ui.Models.IClubJoinRejectedDao|null);
+
+                /** ClubJoinResponseDao responsePayload. */
+                public responsePayload?: ("accepted"|"rejected");
+
+                /**
+                 * Creates a new ClubJoinResponseDao instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ClubJoinResponseDao instance
+                 */
+                public static create(properties?: LiftLog.Ui.Models.IClubJoinResponseDao): LiftLog.Ui.Models.ClubJoinResponseDao;
+
+                /**
+                 * Encodes the specified ClubJoinResponseDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinResponseDao.verify|verify} messages.
+                 * @param message ClubJoinResponseDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: LiftLog.Ui.Models.IClubJoinResponseDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ClubJoinResponseDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinResponseDao.verify|verify} messages.
+                 * @param message ClubJoinResponseDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: LiftLog.Ui.Models.IClubJoinResponseDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ClubJoinResponseDao message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ClubJoinResponseDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): LiftLog.Ui.Models.ClubJoinResponseDao;
+
+                /**
+                 * Decodes a ClubJoinResponseDao message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ClubJoinResponseDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): LiftLog.Ui.Models.ClubJoinResponseDao;
+
+                /**
+                 * Verifies a ClubJoinResponseDao message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ClubJoinResponseDao message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ClubJoinResponseDao
+                 */
+                public static fromObject(object: { [k: string]: any }): LiftLog.Ui.Models.ClubJoinResponseDao;
+
+                /**
+                 * Creates a plain object from a ClubJoinResponseDao message. Also converts values to other types if specified.
+                 * @param message ClubJoinResponseDao
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: LiftLog.Ui.Models.ClubJoinResponseDao, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ClubJoinResponseDao to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ClubJoinResponseDao
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ClubJoinAcceptedDao. */
+            interface IClubJoinAcceptedDao {
+
+                /** ClubJoinAcceptedDao encryptedAesKey */
+                encryptedAesKey?: (Uint8Array|null);
+
+                /** ClubJoinAcceptedDao assignedRole */
+                assignedRole?: (LiftLog.Ui.Models.ClubRole|null);
+            }
+
+            /** Represents a ClubJoinAcceptedDao. */
+            class ClubJoinAcceptedDao implements IClubJoinAcceptedDao {
+
+                /**
+                 * Constructs a new ClubJoinAcceptedDao.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: LiftLog.Ui.Models.IClubJoinAcceptedDao);
+
+                /** ClubJoinAcceptedDao encryptedAesKey. */
+                public encryptedAesKey: Uint8Array;
+
+                /** ClubJoinAcceptedDao assignedRole. */
+                public assignedRole: LiftLog.Ui.Models.ClubRole;
+
+                /**
+                 * Creates a new ClubJoinAcceptedDao instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ClubJoinAcceptedDao instance
+                 */
+                public static create(properties?: LiftLog.Ui.Models.IClubJoinAcceptedDao): LiftLog.Ui.Models.ClubJoinAcceptedDao;
+
+                /**
+                 * Encodes the specified ClubJoinAcceptedDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinAcceptedDao.verify|verify} messages.
+                 * @param message ClubJoinAcceptedDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: LiftLog.Ui.Models.IClubJoinAcceptedDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ClubJoinAcceptedDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinAcceptedDao.verify|verify} messages.
+                 * @param message ClubJoinAcceptedDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: LiftLog.Ui.Models.IClubJoinAcceptedDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ClubJoinAcceptedDao message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ClubJoinAcceptedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): LiftLog.Ui.Models.ClubJoinAcceptedDao;
+
+                /**
+                 * Decodes a ClubJoinAcceptedDao message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ClubJoinAcceptedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): LiftLog.Ui.Models.ClubJoinAcceptedDao;
+
+                /**
+                 * Verifies a ClubJoinAcceptedDao message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ClubJoinAcceptedDao message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ClubJoinAcceptedDao
+                 */
+                public static fromObject(object: { [k: string]: any }): LiftLog.Ui.Models.ClubJoinAcceptedDao;
+
+                /**
+                 * Creates a plain object from a ClubJoinAcceptedDao message. Also converts values to other types if specified.
+                 * @param message ClubJoinAcceptedDao
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: LiftLog.Ui.Models.ClubJoinAcceptedDao, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ClubJoinAcceptedDao to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ClubJoinAcceptedDao
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ClubJoinRejectedDao. */
+            interface IClubJoinRejectedDao {
+
+                /** ClubJoinRejectedDao reason */
+                reason?: (string|null);
+            }
+
+            /** Represents a ClubJoinRejectedDao. */
+            class ClubJoinRejectedDao implements IClubJoinRejectedDao {
+
+                /**
+                 * Constructs a new ClubJoinRejectedDao.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: LiftLog.Ui.Models.IClubJoinRejectedDao);
+
+                /** ClubJoinRejectedDao reason. */
+                public reason?: (string|null);
+
+                /** ClubJoinRejectedDao _reason. */
+                public _reason?: "reason";
+
+                /**
+                 * Creates a new ClubJoinRejectedDao instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ClubJoinRejectedDao instance
+                 */
+                public static create(properties?: LiftLog.Ui.Models.IClubJoinRejectedDao): LiftLog.Ui.Models.ClubJoinRejectedDao;
+
+                /**
+                 * Encodes the specified ClubJoinRejectedDao message. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinRejectedDao.verify|verify} messages.
+                 * @param message ClubJoinRejectedDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: LiftLog.Ui.Models.IClubJoinRejectedDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ClubJoinRejectedDao message, length delimited. Does not implicitly {@link LiftLog.Ui.Models.ClubJoinRejectedDao.verify|verify} messages.
+                 * @param message ClubJoinRejectedDao message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: LiftLog.Ui.Models.IClubJoinRejectedDao, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ClubJoinRejectedDao message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ClubJoinRejectedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): LiftLog.Ui.Models.ClubJoinRejectedDao;
+
+                /**
+                 * Decodes a ClubJoinRejectedDao message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ClubJoinRejectedDao
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): LiftLog.Ui.Models.ClubJoinRejectedDao;
+
+                /**
+                 * Verifies a ClubJoinRejectedDao message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ClubJoinRejectedDao message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ClubJoinRejectedDao
+                 */
+                public static fromObject(object: { [k: string]: any }): LiftLog.Ui.Models.ClubJoinRejectedDao;
+
+                /**
+                 * Creates a plain object from a ClubJoinRejectedDao message. Also converts values to other types if specified.
+                 * @param message ClubJoinRejectedDao
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: LiftLog.Ui.Models.ClubJoinRejectedDao, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ClubJoinRejectedDao to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ClubJoinRejectedDao
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */

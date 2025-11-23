@@ -7,6 +7,7 @@ import "Utils.proto";
 import "SessionHistoryDao/SessionHistoryDaoV2.proto";
 import "SessionBlueprintDao/SessionBlueprintDaoV2.proto";
 import "UserEvent.proto";
+import "ClubDao.proto";
 
 message FeedIdentityDaoV1 {
     LiftLog.Ui.Models.UuidDao id = 1;
@@ -59,4 +60,7 @@ message FeedStateDaoV1 {
     repeated LiftLog.Ui.Models.FeedUserDaoV1 followers = 5;
     repeated LiftLog.Ui.Models.UuidDao unpublished_session_ids = 6;
     reserved 7; // published rsa key
+    repeated LiftLog.Ui.Models.ClubDaoV1 clubs = 8;
+    repeated LiftLog.Ui.Models.ClubMemberDaoV1 club_memberships = 9;
+    repeated LiftLog.Ui.Models.ClubFeedItemDaoV1 club_feed_items = 10;
 }

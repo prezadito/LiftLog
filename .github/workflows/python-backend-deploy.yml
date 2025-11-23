@@ -1,0 +1,130 @@
+name: Python Backend Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+      version:
+        description: 'Docker image tag to deploy (default: latest)'
+        required: false
+        default: 'latest'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}/python-backend
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for GCR
+        run: gcloud auth configure-docker ${{ env.REGISTRY }}
+
+      - name: Deploy to Cloud Run (Staging)
+        if: inputs.environment == 'staging'
+        run: |
+          gcloud run deploy liftlog-python-backend-staging \
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.version }} \
+            --platform managed \
+            --region us-central1 \
+            --allow-unauthenticated \
+            --set-env-vars DATABASE_URL=${{ secrets.STAGING_DATABASE_URL }} \
+            --set-env-vars RATE_LIMIT_DATABASE_URL=${{ secrets.STAGING_RATE_LIMIT_DATABASE_URL }} \
+            --set-secrets OPENAI_API_KEY=openai-api-key:latest \
+            --set-secrets WEB_AUTH_API_KEY=web-auth-api-key:latest \
+            --set-secrets GOOGLE_PLAY_SERVICE_ACCOUNT_EMAIL=google-play-email:latest \
+            --set-secrets GOOGLE_PLAY_SERVICE_ACCOUNT_KEY_BASE64=google-play-key:latest \
+            --set-env-vars TEST_MODE=false \
+            --set-env-vars LOG_LEVEL=INFO \
+            --cpu 1 \
+            --memory 2Gi \
+            --min-instances 0 \
+            --max-instances 10 \
+            --timeout 60 \
+            --concurrency 80
+
+      - name: Deploy to Cloud Run (Production)
+        if: inputs.environment == 'production'
+        run: |
+          gcloud run deploy liftlog-python-backend \
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.version }} \
+            --platform managed \
+            --region us-central1 \
+            --allow-unauthenticated \
+            --set-env-vars DATABASE_URL=${{ secrets.PROD_DATABASE_URL }} \
+            --set-env-vars RATE_LIMIT_DATABASE_URL=${{ secrets.PROD_RATE_LIMIT_DATABASE_URL }} \
+            --set-secrets OPENAI_API_KEY=openai-api-key:latest \
+            --set-secrets WEB_AUTH_API_KEY=web-auth-api-key:latest \
+            --set-secrets GOOGLE_PLAY_SERVICE_ACCOUNT_EMAIL=google-play-email:latest \
+            --set-secrets GOOGLE_PLAY_SERVICE_ACCOUNT_KEY_BASE64=google-play-key:latest \
+            --set-env-vars TEST_MODE=false \
+            --set-env-vars LOG_LEVEL=WARNING \
+            --cpu 2 \
+            --memory 4Gi \
+            --min-instances 1 \
+            --max-instances 50 \
+            --timeout 60 \
+            --concurrency 80
+
+      - name: Run database migrations
+        run: |
+          # Get the Cloud Run service URL
+          SERVICE_URL=$(gcloud run services describe liftlog-python-backend-${{ inputs.environment == 'production' && '' || 'staging' }} \
+            --platform managed \
+            --region us-central1 \
+            --format 'value(status.url)')
+
+          echo "Deployed to: $SERVICE_URL"
+
+          # Run migrations via Cloud Run Jobs (recommended approach)
+          # Note: This requires setting up a Cloud Run Job for migrations
+          echo "⚠️  Remember to run database migrations manually or via Cloud Run Jobs"
+
+      - name: Smoke test
+        run: |
+          SERVICE_URL=$(gcloud run services describe liftlog-python-backend-${{ inputs.environment == 'production' && '' || 'staging' }} \
+            --platform managed \
+            --region us-central1 \
+            --format 'value(status.url)')
+
+          # Test health endpoint
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" $SERVICE_URL/health)
+
+          if [ $HTTP_STATUS -eq 200 ]; then
+            echo "✅ Health check passed"
+          else
+            echo "❌ Health check failed with status $HTTP_STATUS"
+            exit 1
+          fi
+
+      - name: Deployment summary
+        run: |
+          SERVICE_URL=$(gcloud run services describe liftlog-python-backend-${{ inputs.environment == 'production' && '' || 'staging' }} \
+            --platform managed \
+            --region us-central1 \
+            --format 'value(status.url)')
+
+          echo "## Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Environment:** ${{ inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Image:** ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Service URL:** $SERVICE_URL" >> $GITHUB_STEP_SUMMARY
+          echo "- **Health Check:** ✅ Passed" >> $GITHUB_STEP_SUMMARY

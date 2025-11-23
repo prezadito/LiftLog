@@ -7,7 +7,7 @@ from sqlmodel import SQLModel
 
 from app.core.config import settings
 from app.db.session import user_data_engine, rate_limit_engine
-from app.api.routes import users, health
+from app.api.routes import users, events, follow, inbox, shared, health
 
 
 @asynccontextmanager
@@ -50,6 +50,10 @@ app.add_middleware(
 
 # Include API routers
 app.include_router(users.router, prefix="/v2")
+app.include_router(events.router, prefix="/v2")
+app.include_router(follow.router, prefix="/v2")
+app.include_router(inbox.router, prefix="/v2")
+app.include_router(shared.router, prefix="/v2")
 app.include_router(health.router)
 
 
